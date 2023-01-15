@@ -22,7 +22,7 @@
         }
         
         function getCategories() {
-            $sth = $this->conn()->prepare("SELECT * FROM categories");
+            $sth = $this->conn()->prepare("SELECT categorie_name FROM categories");
             $sth->execute();
             if(!empty($sth)) {
                 $categories = $sth->fetchAll(PDO::FETCH_ASSOC);

@@ -8,6 +8,8 @@
         session_destroy();
         header("location: ../index.php");
     }
+    include "connexion_categories.php";
+    $conn = new connexion();
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
@@ -72,13 +74,18 @@
 
                 <div class="sidebar">
                     <div class="row categories flex-c">
-                        <h2>Category</h2>
+                        <h2>Categories</h2>
                         <ul class="flex-c">
-                            <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>bloger</span></a></li>
-                            <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>youtube</span></a></li>
-                            <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>tutorials</span></a></li>
-                            <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>android</span></a></li>
-                            <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>informatique</span></a></li>
+                            <?php 
+                            $categories = $conn->getCategories();
+                                for($i=0; isset($categories[$i]); $i++) {
+                                    foreach($categories[$i] as $value) {
+                                        echo "
+                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                        ";
+                                    }
+                                }
+                            ?>
                         </ul>
                     </div>
                     <div class="row last-posts flex-c">

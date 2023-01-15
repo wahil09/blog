@@ -1,5 +1,8 @@
 <?php 
     session_start();
+    include "connexion_categories.php";
+    $conn = new connexion();
+    
     if(!isset($_SESSION["user"])) {
         header("location: ../index.php");
     }
@@ -26,10 +29,8 @@
     }
 
     if(isset($_POST["categorie"])) {
-        include "connexion_categories.php";
         $categorie_name = $_POST["categorie"];
-        $new_conn = new connexion();
-        $new_conn->setCategories($categorie_name);
+        $conn->setCategories($categorie_name);
     }
 ?>
 <!DOCTYPE html>
@@ -46,14 +47,19 @@
             </form>
             <div class="sidebar">
                 <div class="row categories flex-c">
-                    <h2>Category</h2>
+                    <h2>Categories</h2>
                     <ul class="flex-c">
-                        <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>bloger</span></a></li>
-                        <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>youtube</span></a></li>
-                        <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>tutorials</span></a></li>
-                        <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>android</span></a></li>
-                        <li><a href="#"><span><i class="fa-sharp fa-solid fa-tags"></i>informatique</span></a></li>
-                    </ul>
+                        <?php 
+                            $categories = $conn->getCategories();
+                                for($i=0; isset($categories[$i]); $i++) {
+                                    foreach($categories[$i] as $value) {
+                                        echo "
+                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                        ";
+                                    }
+                                }
+                            ?>
+                        </ul>
                 </div>
             </div>
         </div>
