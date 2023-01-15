@@ -1,0 +1,973 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Roboto;
+}
+
+.return-acceuil {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.return-acceuil a {
+    display: block;
+    padding: 20px 25px;
+    background-color: #333;
+    color: white;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.return-acceuil a:hover {
+    background-color: #c239da;
+}
+
+.afficher-login-box {
+    display: block !important;
+}
+
+/* ---- For All Title ---- */
+.main-heading {
+    width: 100%;
+    text-align: center;
+}
+
+.main-heading h2 {
+    position: relative;
+    font-weight: normal;
+    font-size: 40px;
+    text-transform: uppercase;
+    color:#000;
+    padding-bottom: 12px;
+}
+
+.main-heading h2:before {
+    position: absolute;
+    content: '';
+    border-bottom: 3px solid #000;
+    width: 120px;
+    bottom: 0;
+}
+
+.main-heading h2::after {
+    position: absolute;
+    content: '';
+    width: 13px;
+    height: 13px;
+    background-color: #fff;
+    border: 2px solid black;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    bottom: -8px;
+}
+
+.main-heading p {
+    padding-top: 40px;
+    max-width: 550px;
+    color: #777;
+    line-height: 2;
+}
+
+:root {
+    /* --- background color --- */
+    --bg-primary: ;
+    --bg-secondary: ;
+    --bg-sidebar: #695544;
+    --bg-sidebar2: rgb(151, 112, 112);
+    /* --- color --- */
+    --color-primary: ;
+    --color-secondary: ;
+    --btn-color: #19c8fa;
+
+    /* --- font --- */
+    --font-primary: 1.2em;
+    --font-secondary: 1.1em;
+}
+
+.c-black {
+    color: rgb(0, 0, 0) !important;
+}
+
+.flex-r {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flex-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* --- Container For All --- */
+.container {
+    width: 1140px;
+    padding: 0 10px;
+    margin: auto;
+}
+
+/* ------ Start Header Style ------ */
+header {
+    height: 80px;
+    background: #333;
+    color: white;
+}
+
+header .container {
+    justify-content: space-between;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+/* --- Start Logo Style --- */
+header .container .logo-box {
+    height: 100%;
+    line-height: 80px;
+}
+
+header .container .logo-box h1 {
+    text-transform: capitalize;
+}
+/* --- End Logo Style --- */
+
+
+/* --- Start Navigation Grand Ecran Style --- */
+header .container .menu {
+    height: 100%;
+    line-height: 80px;
+}
+
+header .container li a {
+    color: white;
+    margin: 10px 20px;
+    font-weight: bold;
+    font-size: var(--font-primary);
+}
+
+header .container li a:hover {
+    color: #EC0DFD;
+}
+
+header .container .li-article {
+    position: relative;
+    color: white;
+    font-weight: bold;
+    font-size: var(--font-primary);
+}
+
+header .container .li-article {
+    cursor: pointer;
+    margin: 0px 20px;
+
+}
+
+header .container .li-article:hover .last-ul {
+    display: block;
+}
+
+header .container .li-article span:hover {
+    color: #EC0DFD;
+}
+
+header .container .li-article .last-ul {
+    display: none;
+    position: absolute;
+    top: 99%;
+    right: 0%;
+    width: 130px;
+    background-color: #000000;
+    line-height: 1.6;
+}
+
+header .container .li-article .last-ul .last-li a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0;
+    font-size: .9em;
+}
+
+/* --- End Navigation Grand Ecran Style --- */
+
+/* --- Start Phone Navigation Style --- */
+header .container .nav-bar-phone {
+    display: none;
+}
+
+.afficher {
+    display: flex !important;
+}
+
+/* --- Start Style Bars menu phone --- */
+header .container .nav-bar-phone .bars {
+    width: 28px;
+    height: 24px;
+    justify-content: space-between;
+    position: relative;
+}
+
+header .container .nav-bar-phone .bars:hover {
+    cursor: pointer;
+}
+
+header .container .nav-bar-phone .bars .bar {
+    width: 100%;
+    height: 3px;
+    background: rgb(253, 253, 253);
+    border-radius: 10%;
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 10%;
+    -ms-border-radius: 10%;
+    -o-border-radius: 10%;
+}
+
+/* --- Start Style menu phone --- */
+header .container .nav-bar-phone .menu-phone {
+    display: none;
+    background-color: aquamarine;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-right: 10px;
+    align-items: flex-start;
+    z-index: 999;
+}
+
+header .container .nav-bar-phone .menu-phone li {
+    width: 100%;
+    background-color: black;
+}
+
+header .container .nav-bar-phone .menu-phone a {
+    display: block;
+    margin: 0;
+    padding: 10px 40px 10px 20px;
+    width: 100%;
+    height: 100%;
+}
+
+header .container .nav-bar-phone .menu-phone a:hover {
+    animation: trans_right .2s linear forwards ;
+    -webkit-animation: trans_right .2s linear forwards ;
+}
+
+@keyframes trans_right {
+    0% {
+        translate: 0 0;
+    } 100% {
+        translate: 5px 0;
+    }
+}
+
+/* --- Start Style  menu phone --- */
+
+/* --- End Style Bars menu phone --- */
+
+/* --- End Phone Navigation Grand Ecran Style --- */
+
+/* ------ End Header Style ------ */
+
+
+/* ---------- Start Présentation Style ----------- */
+main {
+    min-height: calc(100vh - 80px - 100px - 50px); /* -- 80px de header, 100px de footer, 50px de margin de container de présentation -- */
+}
+.presentation .container {
+    gap: 50px;
+    margin: 50px auto;
+}
+
+.presentation .container h2 {
+    text-align: center;
+    font-size: calc(var(--font-primary) + 15px);
+}
+
+.presentation .container .content {
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px;
+}
+
+.presentation .container .img-box {
+    width: 400px;
+}
+
+.presentation .container .img-box img {
+    width: 100%;
+}
+
+.presentation .container .info-box {
+    width: 600px;
+    gap: 20px;
+    align-items: flex-start;
+    line-height: 1.6;
+    font-size: var(--font-secondary);
+}
+
+.presentation .container .info-box h3 {
+    font-size: calc(var(--font-secondary) + 5px);
+}
+
+/* ---------- End Présentation Style ----------- */
+
+
+/* ---------- Start Footer Style ----------- */
+footer {
+    height: 100px;
+    background-color: #333;
+}
+
+footer .container {
+    height: 100%;
+    color: white;
+    font-size: var(--font-secondary);
+}
+
+footer .container ul {
+    gap: 20px;
+}
+
+footer .container ul a {
+    color: white;
+}
+
+footer .container ul a:hover {
+    color: #EC0DFD;
+}
+
+footer .container ul a i {
+    padding-right: 10px;
+    color: white;
+}
+
+/* ---------- End Footer Style ----------- */
+
+
+
+/* ---------------------- Start Style Login Page ----------------------- */
+.login-body {
+    width: 100%;
+    height: 100vh;
+    background-image: url("assets/img/bg-01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.login {
+    background-color: white;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    width: clamp(500px, 4vh, 680px);
+    height: clamp(550px, 80vh, 694px);
+    margin: 20px;
+}
+
+.login .container-login {
+    width: 80%;
+    gap: clamp(25px, 4vh, 55px);
+    margin: 20px 0;
+}
+
+.login .container-login h1 {
+    color: #555555;
+    font-size: clamp(1.3em, 3.5vh, 2.5em);
+    font-weight: normal;
+    letter-spacing: 1.5px;
+}
+
+.login .container-login .row-box {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.login .container-login .row-box li {
+    width: 48%;
+    height: clamp(40px, 7vh, 60px);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
+.login .container-login .row-box li a {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: clamp(1em, 2.5vh, 1.2em);
+    color: white;
+    z-index: 1111;
+    transition: all .4s;
+    -webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    -ms-transition: all .4s;
+    -o-transition: all .4s;
+}
+
+.login .container-login .row-box li a:hover::after {
+    background: linear-gradient(45deg,#00dbde,#fc00ff);
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    animation: opacityTop .4s linear forwards;
+    -webkit-animation: opacityTop .4s linear forwards;
+}
+@keyframes opacityTop {
+    0% {
+        opacity: 0;
+    } 100% {
+        opacity: 1;
+    }
+}
+
+.login .container-login .row-box li:first-child {
+    background-color: #3B5998;
+    color: #ffffff;
+}
+
+.login .container-login .row-box li:last-child {
+    background-color: rgb(255, 255, 255);
+    color: #555555;
+}
+
+.login .container-login .row-box li:last-child a {
+    color: #555555;
+}
+
+.login .container-login .row-box li:last-child a:hover {
+    color: #ffffff;
+}
+
+.login .container-login .row-box img {
+    width: clamp(20px, 4vh, 30px);
+    translate: -15px 0;
+}
+
+
+/* ----- Start Style Form ----- */
+.login .container-login .row-box .inp-box {
+    width: 100%;
+    font-size: var(--font-secondary);
+    color: #555555;
+}
+
+.login .container-login .row-box .inp-box label {
+    display: block;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 5px 0;
+    font-size: clamp(.9em, 2.5vh, 1.2em);
+}
+
+.login .container-login .row-box .inp-box .inp {
+    height: clamp(40px, 7vh, 60px);
+    width: 100%;
+    outline: none;
+    border: 1px solid #e6e6e6;
+    background-color: #F7F7F7;
+    margin: 10px 0;
+    padding: 10px 20px;
+    font-size: var(--font-secondary);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.login .container-login .row-box .inp-box #submit {
+    background-color: #333333;
+    color: white;
+    z-index: 11111;
+    overflow: hidden;
+}
+
+.login .container-login .row-box .inp-box #submit:hover {
+    cursor: pointer;
+    background: linear-gradient(45deg,#00dbde,#fc00ff);
+}
+/* ----- End Style Form ----- */
+
+.login .container-login p {
+    color: #999;
+    font-size: 15px;
+}
+
+.login .container-login p a {
+    color: #999;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.login .container-login a:hover {
+    color: #DB1EFB;
+}
+
+
+/* ------- Start Style Error Login -------- */
+body .error-login-box {
+    position: absolute;
+    display: none;
+    background-color: rgb(139 0 0 / 85%);
+    color: white;
+    left: calc(50% - 250px);
+    top: calc(50% - 100px);
+    width: 500px;
+    height: 200px;
+    padding: 10px 20px;
+}
+
+body .error-login-box .row-1 {
+    justify-content: space-between;
+    padding: 10px 0
+}
+
+body .error-login-box .row-1 span {
+    cursor: pointer;
+}
+
+body .error-login-box .row-1 span i {
+    font-size: 1.5em;
+}
+
+body .error-login-box .row-2 {
+    height: 70%;
+}
+
+body .error-login-box .row-2 {
+    font-size: 1.2em;
+}
+
+/* ------- End Style Error Login -------- */
+
+/* ---------------------- End Style Login Page ----------------------- */
+
+
+
+/* ---------------------- Start Style Register Page ----------------------- */
+.register-body {
+    width: 100%;
+    height: 100vh;
+    background: #f2d6eb;
+}
+
+.register-body .register {
+    width: 445px;
+    min-height: 694px;
+    height: auto;
+    background: #3C3D47;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin: 0 15px;
+}
+
+.register-body .register .container-register {
+    width: 80%;
+    gap: 20px;
+    color: white;
+    padding: 0;
+}
+
+.register-body .register .container-register img {
+    width: 100px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.register-body .register .container-register h3 {
+    font-weight: 100;
+    font-size: 25px;
+}
+
+.register-body .register .container-register .register-form {
+    width: 100%;
+}
+
+.register-body .register .container-register .register-form .form-group {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.register-body .register .container-register .register-form .form-group label {
+    display: block;
+    margin: 13px 0;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.register-body .register .container-register .register-form .form-group input {
+    width: 100%;
+    height: 52px;
+    padding: 10px 20px;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    background: #3C3D47;
+    font-size: 16px;
+    color: white;
+}
+
+.register-body .register .container-register .register-form .form-group input[type="submit"] {
+    background-color: #01D28E;
+    cursor: pointer;
+}
+
+.register-body .register .container-register p {
+    font-size: 15px;
+    color: #8a8a8f;
+}
+
+.register-body .register .container-register p a {
+    color: #01D28E;
+    font-size: 15px;
+}
+/* ---------------------- End Style Register Page ----------------------- */
+
+
+
+
+/* ---------------------- Start Style users table admin page Page ----------------------- */
+.user-table-box {
+    background-color: #ffffff;
+    width: 100%;
+    min-height: calc(100vh - 80px - 100px);
+    background-image: linear-gradient(to right top, #6C56CB, #B952C2);
+}
+
+.user-table-box .container {
+    height: auto;
+    padding: 70px 10px;
+    gap: 30px;
+    overflow: hidden;
+}
+
+.user-table-box .container h2 {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: clamp(1.2em, 2.5vh, 1.8em);
+}
+
+.user-table-box .container .table-users {
+    width: 100%;
+    border-spacing: 0;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    color: black;
+}
+
+.user-table-box .container .table-users thead {
+    background-color: #362F4B;
+    text-transform: capitalize;
+    color: white;
+    width: 100%;
+}
+
+.user-table-box .container .table-users tbody {
+    width: 100%;
+}
+
+.user-table-box .container .table-users td {
+    padding: 15px 20px;
+}
+
+.user-table-box .container .table-users .delete-user-box a {
+    color: rgb(0, 0, 0);
+}
+
+.user-table-box .container .table-users .delete-user-box a:hover {
+    color: red;
+}
+
+/* --------------------- End Style users table admin page ---------------------- */
+
+
+
+/* ---------------------- Start Style Contact page ----------------------- */
+main .contact {
+    width: 100%;
+}
+
+main .contact .container {
+    max-width: 100%;
+    width: 1170px;
+    padding: 100px 0;
+    margin: 0 auto;
+}
+
+main .contact .container .main-heading {
+    margin-bottom: 100px;
+}
+
+main .contact .container .main-heading h2 {
+    padding-bottom: 30px;
+}
+
+main .contact .container .content {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+main .contact .container .content .form {
+    width: 60%;
+    row-gap: 30px;
+    align-items: flex-end;
+}
+
+main .contact .container .content .form input, .txtarea  {
+    width: 100%;
+    padding: 19px;
+    outline: none;
+    border: 1px solid#ccc;
+    font-size: 100%;
+}
+
+main .contact .container .content .form .txtarea {
+    
+}
+
+main .contact .container .content .form input[type='submit'] {
+    width: 157px;
+    background-color: var(--btn-color);
+    color: white;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+main .contact .container .content .info {
+    color: #777;
+    row-gap: 80px;
+    align-items: flex-start;
+    line-height: 2;
+    width: 20%;
+}
+
+main .contact .container .content .info h4 {
+    text-transform: uppercase;
+    font-weight: normal;
+    margin-bottom: 30px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    line-height: 1;
+
+}
+
+main .contact .container .content .info .phone span {
+    display: block;
+}
+/* ---------------------- End Style Contact page ----------------------- */
+
+
+
+/* --------------------- Start Style Posts page --------------------- */
+.posts-content {
+    background-color: #f9f9f9;
+    letter-spacing: .5px;
+    line-height: 1.5;
+}
+
+.posts-content .container {
+    padding: 70px 10px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas: "posts posts posts posts posts posts posts posts posts sidebar sidebar sidebar";
+    gap: 30px;
+}
+
+/* ------ Start Post Style ------ */
+.posts-content .container .posts {
+    grid-area: posts;
+}
+
+.posts-content .container .posts .post {
+    background: rgb(255, 255, 255);
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.posts-content .container .posts .post .post-image {
+    width: 100%;
+}
+
+.posts-content .container .posts .post .post-image img {
+    width: 100%;
+    height: 100%;
+    max-height: 370px;
+}
+
+.posts-content .container .posts .post .post-title {
+    margin: 7px 0;
+}
+
+.posts-content .container .posts .post .post-details .post-info span {
+    margin: 0 10px;
+}
+
+.posts-content .container .posts .post .post-details .post-info span i {
+    margin-right: 3px;
+    color: blue;
+}
+
+.posts-content .container .posts .post .post-details .post-description {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.posts-content .container .posts .post .post-details .btn-custom {
+    background-color: #000;
+    color: white;
+    display: inline-block;
+    width: 110px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.posts-content .container .posts .post .post-details .btn-custom:hover {
+    background-color: rgb(209, 136, 136);
+    font-weight: bold;
+}
+/* ------ End Post Style ------ */
+
+/* ------ Start SideBar Style ------ */
+.posts-content .container .sidebar {
+    grid-area: sidebar;
+}
+
+.posts-content .container .sidebar .row {
+    padding: 20px 10px;
+    background-color: white;
+    gap: 10px;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.posts-content .container .sidebar .row h2 {
+    border-bottom: 1px solid var(--bg-sidebar2);
+    text-align: center;
+    width: 100%;
+    padding-bottom: 7px;
+}
+/* --- start category style --- */
+.posts-content .container .sidebar .categories ul {
+    width: 100%;
+    gap: 5px;
+}
+
+.posts-content .container .sidebar .categories ul li {
+    width: 100%;
+}
+
+.posts-content .container .sidebar .categories ul li a {
+    display: block;
+    width: 100%;
+    background-color: var(--bg-sidebar);
+    color: white;
+    padding: 9px 10px;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+
+.posts-content .container .sidebar .categories ul li a:hover {
+    background-color: #ac8a8a;
+}
+
+.posts-content .container .sidebar .categories ul li a i {
+    margin-right: 5px;
+}
+/* --- End category style --- */
+
+/* --- Start last-Posts style --- */
+.posts-content .container .sidebar .last-posts {
+    text-align: center;
+}
+
+.posts-content .container .sidebar .last-posts .last-post {
+    color: #000;
+    border-bottom: 1px solid var(--bg-sidebar2);
+    margin-bottom: 15px;
+    padding-bottom: 7px;
+}    
+
+.posts-content .container .sidebar .last-post span {
+    display: block;
+}    
+
+.posts-content .container .sidebar .last-post:hover {
+    opacity: .9;
+}    
+
+.posts-content .container .sidebar .last-posts .last-post .img-last-post img {
+    width: 100%;
+}
+
+
+/* --- End last-Posts style --- */
+/* ------ End SideBar Style ------ */
+/* --------------------- End Style Posts page --------------------- */
+
