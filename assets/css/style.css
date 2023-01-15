@@ -243,18 +243,18 @@ header .container .nav-bar-phone .bars .bar {
 /* --- Start Style menu phone --- */
 header .container .nav-bar-phone .menu-phone {
     display: none;
-    background-color: aquamarine;
+    background-color: rgb(0, 0, 0);
     position: absolute;
     top: 100%;
     right: 0;
     margin-right: 10px;
     align-items: flex-start;
     z-index: 999;
+    width: 175px;
 }
 
 header .container .nav-bar-phone .menu-phone li {
     width: 100%;
-    background-color: black;
 }
 
 header .container .nav-bar-phone .menu-phone a {
@@ -272,9 +272,9 @@ header .container .nav-bar-phone .menu-phone a:hover {
 
 @keyframes trans_right {
     0% {
-        translate: 0 0;
+        padding: 10px 40px 10px 20px;
     } 100% {
-        translate: 5px 0;
+        padding: 10px 40px 10px 30px;
     }
 }
 
@@ -809,26 +809,26 @@ main .contact .container .content .info .phone span {
 
 
 /* --------------------- Start Style Posts page --------------------- */
-.posts-content {
+.content {
     background-color: #f9f9f9;
     letter-spacing: .5px;
     line-height: 1.5;
 }
 
-.posts-content .container {
+.content .container {
     padding: 70px 10px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-areas: "posts posts posts posts posts posts posts posts posts sidebar sidebar sidebar";
+    grid-template-areas: "content content content content content content content content content sidebar sidebar sidebar";
     gap: 30px;
 }
 
 /* ------ Start Post Style ------ */
-.posts-content .container .posts {
-    grid-area: posts;
+.content .container .posts {
+    grid-area: content;
 }
 
-.posts-content .container .posts .post {
+.content .container .posts .post {
     background: rgb(255, 255, 255);
     width: 100%;
     padding: 20px;
@@ -837,35 +837,35 @@ main .contact .container .content .info .phone span {
     border-bottom: 1px solid #eaeaea;
 }
 
-.posts-content .container .posts .post .post-image {
+.content .container .posts .post .post-image {
     width: 100%;
 }
 
-.posts-content .container .posts .post .post-image img {
+.content .container .posts .post .post-image img {
     width: 100%;
     height: 100%;
     max-height: 370px;
 }
 
-.posts-content .container .posts .post .post-title {
+.content .container .posts .post .post-title {
     margin: 7px 0;
 }
 
-.posts-content .container .posts .post .post-details .post-info span {
+.content .container .posts .post .post-details .post-info span {
     margin: 0 10px;
 }
 
-.posts-content .container .posts .post .post-details .post-info span i {
+.content .container .posts .post .post-details .post-info span i {
     margin-right: 3px;
     color: blue;
 }
 
-.posts-content .container .posts .post .post-details .post-description {
+.content .container .posts .post .post-details .post-description {
     margin: 10px 0;
     line-height: 1.5;
 }
 
-.posts-content .container .posts .post .post-details .btn-custom {
+.content .container .posts .post .post-details .btn-custom {
     background-color: #000;
     color: white;
     display: inline-block;
@@ -879,18 +879,18 @@ main .contact .container .content .info .phone span {
     -o-border-radius: 5px;
 }
 
-.posts-content .container .posts .post .post-details .btn-custom:hover {
+.content .container .posts .post .post-details .btn-custom:hover {
     background-color: rgb(209, 136, 136);
     font-weight: bold;
 }
 /* ------ End Post Style ------ */
 
 /* ------ Start SideBar Style ------ */
-.posts-content .container .sidebar {
+.content .container .sidebar {
     grid-area: sidebar;
 }
 
-.posts-content .container .sidebar .row {
+.content .container .sidebar .row {
     padding: 20px 10px;
     background-color: white;
     gap: 10px;
@@ -899,23 +899,23 @@ main .contact .container .content .info .phone span {
     border-bottom: 1px solid #eaeaea;
 }
 
-.posts-content .container .sidebar .row h2 {
+.content .container .sidebar .row h2 {
     border-bottom: 1px solid var(--bg-sidebar2);
     text-align: center;
     width: 100%;
     padding-bottom: 7px;
 }
 /* --- start category style --- */
-.posts-content .container .sidebar .categories ul {
+.content .container .sidebar .categories ul {
     width: 100%;
     gap: 5px;
 }
 
-.posts-content .container .sidebar .categories ul li {
+.content .container .sidebar .categories ul li {
     width: 100%;
 }
 
-.posts-content .container .sidebar .categories ul li a {
+.content .container .sidebar .categories ul li a {
     display: block;
     width: 100%;
     background-color: var(--bg-sidebar);
@@ -933,41 +933,87 @@ main .contact .container .content .info .phone span {
     -o-border-radius: 3px;
 }
 
-.posts-content .container .sidebar .categories ul li a:hover {
+.content .container .sidebar .categories ul li a:hover {
     background-color: #ac8a8a;
 }
 
-.posts-content .container .sidebar .categories ul li a i {
+.content .container .sidebar .categories ul li a i {
     margin-right: 5px;
 }
 /* --- End category style --- */
 
 /* --- Start last-Posts style --- */
-.posts-content .container .sidebar .last-posts {
+.content .container .sidebar .last-posts {
     text-align: center;
 }
 
-.posts-content .container .sidebar .last-posts .last-post {
+.content .container .sidebar .last-posts .last-post {
     color: #000;
     border-bottom: 1px solid var(--bg-sidebar2);
     margin-bottom: 15px;
     padding-bottom: 7px;
 }    
 
-.posts-content .container .sidebar .last-post span {
+.content .container .sidebar .last-post span {
     display: block;
 }    
 
-.posts-content .container .sidebar .last-post:hover {
+.content .container .sidebar .last-post:hover {
     opacity: .9;
 }    
 
-.posts-content .container .sidebar .last-posts .last-post .img-last-post img {
+.content .container .sidebar .last-posts .last-post .img-last-post img {
     width: 100%;
 }
 
 
 /* --- End last-Posts style --- */
 /* ------ End SideBar Style ------ */
-/* --------------------- End Style Posts page --------------------- */
+/* ------------------- End Style Posts page --------------------- */
+
+
+/* ------------------- Start Style Categories page --------------------- */
+.content {
+    min-height: calc(100vh - 80px - 100px);
+}
+
+.content .container {
+    padding: 50px;
+}
+
+.content .container .form-categorie {
+    width: 100%;
+    font-size: clamp(1em, 2.5vw, 1.2em);
+    grid-area: content;
+}
+
+.content .container .form-categorie input {
+    padding: 10px;
+    margin: 10px 0;
+    outline: none;
+    font-size: clamp(.9em, 2.5vw, .5em);
+}
+
+.content .container .form-categorie input[type="text"] {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 15px 0;
+}
+
+.content .container .form-categorie input[type="submit"] {
+    width: 150px;
+    cursor: pointer;
+}
+
+.content .container .form-categorie input[type="submit"]:hover {
+    background-color: var(--bg-sidebar);
+    color: white;
+    border: none;
+}
+
+
+/* ------------------- End Style Categories page --------------------- */
+
+
+
 

@@ -13,7 +13,7 @@
     <?php include "head.php" ?>
     <body id="body">
         <?php include "header.php" ?>
-        <main class="posts-content">
+        <main class="content">
             <div class="container">
                 <section class='posts'>
                     <article class="post">

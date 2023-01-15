@@ -57,6 +57,10 @@
         top: 0;
     }
 
+    header .container .li-article .last-ul .last-li a:hover {
+        padding: 10px 0 !important;
+    }
+
     /* ---- End Header Style ---- */
 
     /* ---- Start Présentation Style ---- */
@@ -180,25 +184,26 @@
     /* -------------- End style Contact -------------- */
 
     /* -------------- Start style Articles Page -------------- */
-    .posts-content .container {
+    .content .container {
         padding: 70px 10px;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: repeat(2, auto);
         grid-template-areas: "sidebar sidebar sidebar  sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar"
-        "posts posts posts posts posts posts posts posts posts  posts posts posts";
+        "content content content content content content content content content content content content";
         gap: 30px;
     }
 
-    .posts-content .container .sidebar .last-posts ul {
+    .content .container .sidebar .last-posts ul {
         flex-direction: row;
         gap: 20px;
     }
 
-    .posts-content .container .sidebar .last-posts .last-post {
+    .content .container .sidebar .last-posts .last-post {
         width: 32%;
     }
-    .posts-content .container .sidebar .last-post span {
+
+    .content .container .sidebar .last-post span {
         font-size: clamp(.9em, 40%, 1.1em);
     }
     /* -------------- End style Articles Page -------------- */

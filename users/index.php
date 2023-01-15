@@ -14,7 +14,7 @@
     <?php include "head.php" ?>
 <body id="body">
     <?php include "header.php" ?>
-    <main class="posts-content">
+    <main class="content">
             <div class="container">
                 <section class='posts'>
                     <article class="post">
@@ -86,7 +86,7 @@
                         <ul class="flex-c">
                             <li class="last-post">
                                 <a href="#" class="last-post">
-                                    <span class="img-last-post"><img src="assets/img/image1.jpg" alt=""></span>
+                                    <span class="img-last-post"><img src="assets/img/image-1.jpg" alt=""></span>
                                     <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, culpa!</span>
                                 </a>
                             </li>

@@ -16,6 +16,7 @@
                     </ul>
                 </li>
                 <li><a href="profile.php">Profile</a></li>
+                <li><a href="categories.php">Categories</a></li>
                 <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
             </ul>
         </nav>
@@ -35,6 +36,8 @@
                     </ul>
                 </li>
                 <li><a href="profile.php">Profile</a></li>
+                <li><a href="categories.php">Categories</a></li>
+
                 <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
             </ul>
         </div>
