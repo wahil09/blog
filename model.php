@@ -1,5 +1,5 @@
 <?php
-    class connexion {
+    class Connexion {
         public $severname;
         public $user;
         public $pass;
@@ -21,16 +21,18 @@
                 echo $e->getMessage();
             }
         }
-        
+
+
+    }
+
+    class ModelUser extends Connexion {
         function getUsers() {
             $sth = $this->conn()->prepare("SELECT id, date_creation, username, email FROM users WHERE role != 'admin'");
             $sth->execute();
             if(!empty($sth)) {
                 $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
                 return $categories;
-            } else {
-                echo "Users table vide";
-            }
+            } 
         }
 
         function setUser($username, $email, $password) {
@@ -51,7 +53,36 @@
             // On ferme la connexion
             $conn = null;
         }
-
     }
 
+    class ModelCategories extends Connexion {
+        function getCategories() {
+            $sth = $this->conn()->prepare("SELECT categorie_name FROM categories");
+            $sth->execute();
+            if(!empty($sth)) {
+                $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
+                return $categories;
+            } else {
+                echo "categories table vide";
+            }
+        }
+
+        function setCategories($categorie_name) {
+            $sth = $this->conn()->prepare("SELECT * FROM categories WHERE categorie_name = :categorie_name");
+            $sth->bindValue("categorie_name", $categorie_name);
+            $sth->execute();
+            // check if categorie exist
+            if(empty($sth->fetch())) {
+                $new_categorie = "INSERT INTO categories(categorie_name) VALUES('$categorie_name')";
+                $this->conn()->exec($new_categorie);
+                // pour afficher un message sur categories.php qui dit "categorie ajouter !"
+                $_SESSION['categorie_ajouter'] = $categorie_name;
+                header("location: categories.php");
+            } else {
+                $_SESSION["categorie_exist"] = $categorie_name;
+                header("location: categories.php");
+            }
+            
+        }
+    }
 ?>

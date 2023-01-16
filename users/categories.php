@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    include "connexion_categories.php";
-    $conn = new connexion();
+    include "../model.php";
+    $conn = new ModelCategories();
     
     if(!isset($_SESSION["user"])) {
         header("location: ../index.php");

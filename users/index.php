@@ -1,5 +1,7 @@
 <?php 
     session_start();
+    include "../model.php";
+    $conn = new ModelCategories();
     if(!isset($_SESSION["user"])) {
         header("location: ../index.php");
     }
@@ -8,8 +10,7 @@
         session_destroy();
         header("location: ../index.php");
     }
-    include "connexion_categories.php";
-    $conn = new connexion();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">

@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    include "users/connexion_categories.php";
-    $conn = new connexion();
+    include "model.php";
+    $conn = new ModelCategories();
     if(isset($_SESSION["user"], $_SESSION["role"])) {
         if($_SESSION["role"] == "user") {
             header("location: users/index.php");

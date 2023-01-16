@@ -1,7 +1,7 @@
 <?php 
     session_start();
     include "../model.php";
-    $conn = new connexion();
+    $conn = new ModelUser();
     if(!isset($_SESSION["user"], $_SESSION["role"])) {
         header("location: ../login.php");
     } else {
