@@ -1,5 +1,7 @@
 <?php 
     session_start();
+    include "../model.php";
+    $conn = new connexion();
     if(!isset($_SESSION["user"], $_SESSION["role"])) {
         header("location: ../login.php");
     } else {
@@ -11,29 +13,6 @@
     if(isset($_GET["logout"])) {
         session_destroy();
         header("location: ../index.php");
-    }
-
-    // requete sql
-    include "requete.php";
-
-    try {
-        function getUsers() {
-            $sth = sqlRequet()->prepare("SELECT id, date_creation, username, email FROM users WHERE role != 'admin'");
-            $sth->execute();
-            $users = $sth->fetchAll(PDO::FETCH_ASSOC);
-            return $users;
-        }
-
-        // delete user
-        if(isset($_GET["delete"])) {
-            $id = $_GET["delete"];
-            $sth = sqlRequet()->prepare("DELETE FROM users WHERE id='$id'");
-            $sth->execute();
-            getUsers();
-        }
-        
-    } catch(PDOException $e) {
-        echo $e->getMessage();
     }
 ?>
 <!DOCTYPE html>
@@ -90,17 +69,17 @@
                                 $width_screen = $_COOKIE['sw'];
                             }
 
-                            if(isset(getUsers()[0])) {
+                            if(isset($conn->getUsers()[0])) {
                                 if($width_screen > 768) {
-                                    foreach(getUsers()[0] as $key => $value) {
+                                    foreach($conn->getUsers()[0] as $key => $value) {
                                         echo "
                                                 <td>$key</td>
                                             ";
                                     }
                                     echo "<td>option</td>";
                                 } else {
-                                    for($i=0; isset(getUsers()[$i]); $i++) { 
-                                        foreach(getUsers()[0] as $key => $value) {
+                                    for($i=0; isset($conn->getUsers()[$i]); $i++) { 
+                                        foreach($conn->getUsers()[0] as $key => $value) {
                                             echo "
                                                     <td>$key</td>
                                                 ";
@@ -116,11 +95,11 @@
                     </thead>
                     <tbody>
                         <?php 
-                            for($i=0; isset(getUsers()[$i]); $i++) {
+                            for($i=0; isset($conn->getUsers()[$i]); $i++) {
                                 echo "<tr>";
                                 $user_id = 0;
-                                foreach(getUsers()[$i] as $key => $value) {
-                                    $user_id = getUsers()[$i]['id'];
+                                foreach($conn->getUsers()[$i] as $key => $value) {
+                                    $user_id = $conn->getUsers()[$i]['id'];
                                     echo "
                                             <td>$value</td>
                                         ";
