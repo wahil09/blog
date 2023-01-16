@@ -38,15 +38,15 @@
             <form method="post" class="register-form">
                 <div class="form-group">
                     <label for="username">FULL NAME</label>
-                    <input type="text" id="username" name="username" placeholder="Wahil Ch">
+                    <input type="text" id="username" name="username" placeholder="Wahil Ch" required>
                 </div>
                 <div class="form-group">
                     <label for="Email">EMAIL ADDRESS</label>
-                    <input type="email" id="email" name="email" placeholder="wahilchettouf@gmail.com">
+                    <input type="email" id="email" name="email" placeholder="wahilchettouf@gmail.com" required>
                 </div>
                 <div class="form-group">
                     <label for="password">PASSWORD</label>
-                    <input type="password" id="password" name="password" placeholder="Password">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
                 </div>
                 <div class="form-group">
                     <input type="submit" id="submit" value="Sign Up">

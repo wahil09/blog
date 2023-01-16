@@ -50,11 +50,11 @@
                 <form action="connexion.php" method="post" class="row-box flex-c">
                     <div class="inp-box">
                         <label for="email">Email</label>
-                        <input class="inp" type="email" name="email" id="email">
+                        <input class="inp" type="email" name="email" id="email" required>
                     </div>
                     <div class="inp-box">
                         <label for="password">Password</label><!-- <a href="#">Forgot?</a> -->
-                        <input class="inp" type="password" name="password" id="password">
+                        <input class="inp" type="password" name="password" id="password" required>
                     </div>
                     <div class="inp-box">
                         <input class="inp" type="submit" value="Sign In" name="submit" id="submit">

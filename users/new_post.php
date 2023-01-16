@@ -11,6 +11,8 @@
         header("location: ../index.php");
     }
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
@@ -21,27 +23,35 @@
             <div class="container">
                 <section class='new-post'>
                     <h2>Nouveau Article :</h2>
-                    <form method="post" class="flex-c form-new-post">
+                    <form enctype="multipart/form-data" action="upload_image.php" method="post" class="flex-c form-new-post">
                         <div class="inp-box">
                             <label for="title">Article name : </label>
-                            <input type="text" name="title" id="title">
+                            <input type="text" name="title" id="title" required>
                         </div>
                         <div class="inp-box">
                             <label for="Categories">Categories : </label>
-                            <select name="Categories" id="Categories">
+                            <select name="Categories" id="Categories" required>
                                 <option value="">Choisir un categorie ...</option>
-                                <option value="bloger">Bloger</option>
+                                <?php
+                                    for($i=0; isset($conn->getCategories()[$i]); $i++) {
+                                        foreach($conn->getCategories()[$i] as $value) {
+                                            echo "
+                                            <option value='$value'>$value</option>
+                                            ";
+                                        }
+                                    }
+                                ?>
                             </select>
                         </div>
                         <div class="inp-box">
-                            <label for="image">Article image : </label>
-                            <input type="file" name="image" id="image">
+                            <label for="fileToUpload">Article image : </label>
+                            <input type="file" name="fileToUpload" id="fileToUpload" required>
                         </div>
                         <div class="inp-box">
-                            <textarea name="post-text" id="post-text" cols="90" rows="10"></textarea>
+                            <textarea name="post-text" id="post-text" cols="90" rows="10" required></textarea>
                         </div>
                         <div class="inp-box">
-                            <input type="submit" value="Ajouter">
+                            <input type="submit" value="upload">
                         </div>
                     </form>
                 </section>

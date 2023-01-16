@@ -83,4 +83,16 @@
             
         }
     }
+
+    class ModelPosts extends Connexion {
+
+        function getPosts() {
+            $sth = $this->conn()->prepare("SELECT * FROM posts");
+            $sth->execute();
+            if(!empty($sth)) {
+                $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
+                return $posts;
+            }
+        }
+    }
 ?>
