@@ -11,7 +11,7 @@
                 <li><a href="contact.php">Contact</a></li>
                 <li class="li-article"><span>Articles</span>
                     <ul class="last-ul">
-                        <li class="last-li"><a href="#">New Article</a></li>
+                        <li class="last-li"><a href="new_post.php">new post</a></li>
                         <li class="last-li"><a href="#">All Articles</a></li>
                     </ul>
                 </li>
@@ -31,7 +31,7 @@
                 <li><a href="contact.php">Contact</a></li>
                 <li class="li-article"><span>Articles</span>
                     <ul class="last-ul">
-                        <li class="last-li"><a href="#">New Article</a></li>
+                        <li class="last-li"><a href="new_post.php">new post</a></li>
                         <li class="last-li"><a href="#">All Articles</a></li>
                     </ul>
                 </li>

@@ -1010,9 +1010,70 @@ main .contact .container .content .info .phone span {
     color: white;
     border: none;
 }
-
-
 /* ------------------- End Style Categories page --------------------- */
+
+
+/* ------------------- Start Style new-post page --------------------- */
+.post-categorie .content .container .new-post {
+    grid-area: content;
+}
+
+.post-categorie .content .container .new-post .form-new-post {
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.post-categorie .content .container .new-post h2 {
+    margin-bottom: 10px;
+}
+
+.post-categorie .content .container .new-post .form-new-post label {
+    display: block;
+    margin: 10px 0;
+}
+
+.post-categorie .content .container .new-post .form-new-post .inp-box {
+    width: 100%;
+}
+
+:is(.form-new-post .inp-box) :is(input, select) {
+    height: clamp(40px, 7vh, 60px);
+    width: 100%;
+    outline: none;
+    border: 1px solid #7e7b7b;
+    background-color: #F7F7F7;
+    padding: 10px 20px;
+    font-size: clamp(1em, 2.5vw, 1em);
+}
+
+.post-categorie .content .container .new-post .form-new-post .inp-box input[type="file"] {
+    padding: 10px 0;
+}
+
+.post-categorie .content .container .new-post .form-new-post .inp-box select {
+    padding: 0 10px;
+}
+
+.post-categorie .content .container .new-post .form-new-post .inp-box input[type="submit"] {
+    padding: 0;
+    width: 130px;
+    float: right;
+    color: white;
+    background-color: var(--bg-sidebar);
+    cursor: pointer;
+}
+.post-categorie .content .container .new-post .form-new-post .inp-box input[type="submit"]:hover {
+    background-color: var(--bg-sidebar2);
+}
+
+.post-categorie .content .container .new-post .form-new-post .inp-box textarea {
+    outline: none;
+    padding: 20px;
+    width: 100%;
+    font-size: clamp(1em, 2.5vw, 1.1em);
+/* ------------------- End Style new-post page --------------------- */
+}
+/* ------------------- End Style new-post page --------------------- */
 
 
 
