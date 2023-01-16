@@ -1,7 +1,7 @@
 <?php 
     session_start();
     include "../model.php";
-    $conn = new ModelUser();
+    $conn = new ModelUsers();
     if(!isset($_SESSION["user"], $_SESSION["role"])) {
         header("location: ../login.php");
     } else {
@@ -106,6 +106,8 @@
                                 }
                                 echo "<td class='delete-user-box'><a href='?delete=$user_id' name='delete'>Delete</a></td>";
                             }
+                            // On ferme la connexion
+                            $conn = null;
                         ?>
                     </tbody>
                 </table>

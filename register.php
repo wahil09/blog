@@ -1,7 +1,7 @@
 <?php 
     session_start();
     include "model.php";
-    $conn = new connexion();
+    $conn = new ModelUsers();
     if(isset($_SESSION['user'])) {
         header('location: index.php');
     }

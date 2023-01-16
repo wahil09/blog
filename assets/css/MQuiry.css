@@ -184,7 +184,7 @@
     /* -------------- End style Contact -------------- */
 
     /* -------------- Start style Articles Page -------------- */
-    .content .container {
+    .post-categorie .content .container {
         padding: 70px 10px;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
@@ -194,16 +194,16 @@
         gap: 30px;
     }
 
-    .content .container .sidebar .last-posts ul {
+    .post-categorie .content .container .sidebar .last-posts ul {
         flex-direction: row;
         gap: 20px;
     }
 
-    .content .container .sidebar .last-posts .last-post {
+    .post-categorie .content .container .sidebar .last-posts .last-post {
         width: 32%;
     }
 
-    .content .container .sidebar .last-post span {
+    .post-categorie .content .container .sidebar .last-post span {
         font-size: clamp(.9em, 40%, 1.1em);
     }
     /* -------------- End style Articles Page -------------- */

@@ -21,11 +21,9 @@
                 echo $e->getMessage();
             }
         }
-
-
     }
 
-    class ModelUser extends Connexion {
+    class ModelUsers extends Connexion {
         function getUsers() {
             $sth = $this->conn()->prepare("SELECT id, date_creation, username, email FROM users WHERE role != 'admin'");
             $sth->execute();

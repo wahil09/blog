@@ -36,7 +36,7 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
     <?php include "head.php" ?>
-<body id="body">
+<body id="body" class="post-categorie">
     <?php include "header.php" ?>
     <main class="content">
         <div class="container">
@@ -54,10 +54,12 @@
                                 for($i=0; isset($categories[$i]); $i++) {
                                     foreach($categories[$i] as $value) {
                                         echo "
-                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                        <li><a href='posts_categorie.php?$value'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
                                         ";
                                     }
                                 }
+                            // On ferme la connexion
+                            $conn = null;
                             ?>
                         </ul>
                 </div>
