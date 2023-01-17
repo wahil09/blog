@@ -37,7 +37,7 @@
                                     <span><i class='fa-solid fa-calendar-days'></i><?php echo $posts[$i]['postDate'] ?></span>
                                     <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo $posts[$i]['postCat'] ?></span>
                                 </p>
-                                <p class='post-description'><?php echo substr($posts[$i]['postContent'], 0,300) ?> ...</p>
+                                <p class='post-description'><?php echo substr($posts[$i]['postContent'], 0, 300) ?> ...</p>
                                 <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='btn-custom' >Lire Plus</a>
                             </div>
                         </article>

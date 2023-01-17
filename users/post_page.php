@@ -4,7 +4,7 @@
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     if(!isset($_SESSION["user"])) {
-        header("location: ../index.php");
+        header("location: ../login.php");
     }
 
     if(isset($_GET["logout"])) {
@@ -45,7 +45,7 @@
                                 <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo $post['postCat'] ?></span>
                             </p>
                             <p class='post-description'><?php echo $post['postContent'] ?></p>
-                            <a href='page_post?<?php echo $post['id'] ?>' class='btn-custom' >Lire Plus</a>
+                            <a href="#" class='btn-custom'>Lire Plus</a>
                         </div>
                     </article>
                 </section>

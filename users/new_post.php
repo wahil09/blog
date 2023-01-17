@@ -14,7 +14,7 @@
 
     if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
         $postTitle = $_POST["postTitle"];
-        $postContent = $_POST["postContent"];
+        $postContent = strval($_POST["postContent"]);
         $postUserId = $_SESSION["userId"];
         if($posts->isExist($postTitle, $postUserId, $postContent)) {
             echo "post exist";
@@ -22,7 +22,7 @@
             include "upload_image.php";
             if(isset($_SESSION['postValider'])) {
                 if($_SESSION['postValider']) {
-                    $postCat = $_P["Categories"];
+                    $postCat = $_POST["Categories"];
                     $postAuthor = $_SESSION["user"];
                     $postImage = $_SESSION["imageName"];
                     $posts->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
@@ -34,27 +34,8 @@
             }
         }
     }
-    unset($_SESSION["postValider"], );
-    
-    // if(isset($_SESSION["postValider"])) {
-    //     if($_SESSION["postValider"]) {
-    //         $postTitle = $_SESSION["postTitle"];
-    //         $postCat = $_SESSION["Categories"];
-    //         $postContent = $_SESSION["postContent"];
-    //         $postAuthor = $_SESSION["user"];
-    //         $postUserId = $_SESSION["userId"];
-    //         $posts->setPost($postTitle, $postCat, $postContent, $postAuthor, $postUserId);
-    //     } else {
-    //         echo 'post n"est pas ajouter';
-    //     }
-    //     unset($_SESSION["postValider"]);
-    // }
-
-    // if(isset($_SESSION["postExist"])) {
-    //     echo "Post exist";
-    // }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr-FR">
     <?php include "head.php" ?>
@@ -116,24 +97,16 @@
                     <div class="row last-posts flex-c">
                         <h2>dernier posts</h2>
                         <ul class="flex-c">
-                            <li class="last-post">
-                                <a href="#" class="last-post">
-                                    <span class="img-last-post"><img src="assets/img/image-1.jpg" alt=""></span>
-                                    <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, culpa!</span>
-                                </a>
-                            </li>
-                            <li class="last-post">
-                                <a href="#" class="last-post">
-                                    <span class="img-last-post"><img src="assets/img/image-2.jpg" alt=""></span>
-                                    <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, culpa!</span>
-                                </a>
-                            </li>
-                            <li class="last-post">
-                                <a href="#" class="last-post">
-                                    <span class="img-last-post"><img src="assets/img/image-3.jpg" alt=""></span>
-                                    <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, culpa!</span>
-                                </a>
-                            </li>
+                        <?php
+                            $posts = $postsModel->getPosts();;
+                            for($i=0; isset($posts[$i]); $i++) : ?>
+                                <li class='last-post'>
+                                    <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
+                                        <span class='img-last-post'><img src='assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
+                                        <span><?php echo $posts[$i]['postTitle'] ?></span>
+                                    </a>
+                                </li>
+                            <?php endfor; ?>
                         </ul>
                     </div>
                 </div>
