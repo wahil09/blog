@@ -94,7 +94,14 @@
             
             return !empty($check->fetch());
         }
+
+        public function tableIsEmpty() {
+            $sth = $this->conn()->prepare("SELECT * FROM posts");
+            $sth->execute();
+            return !empty($sth);
+        }
         
+        // ------------ Getters --------------
         function getPosts() {
             $sth = $this->conn()->prepare("SELECT * FROM posts");
             $sth->execute();
@@ -104,8 +111,20 @@
             }
         }
 
-        public function setPost($postTitle, $postCat, $postContent, $postAuthor, $postUserId) {
-            $newPost = "INSERT INTO posts(postTitle, postCat, postContent, postAuthor, userId) VALUES('$postTitle', '$postCat', '$postContent', '$postAuthor', '$postUserId')";
+        public function getPostSelected($postId) {
+            if($this->tableIsEmpty()) {
+                $postSelected = $this->conn()->prepare("SELECT * FROM posts WHERE id= :postID");
+                $postSelected->bindValue("postID", $postId);
+                $postSelected->execute();
+                if(!empty($postSelected)) {
+                    return $postSelected->fetch();
+                }
+            }
+        }
+
+        // ------------- Setters ------------- 
+        public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId) {
+            $newPost = "INSERT INTO posts(postTitle, postCat, postImage, postContent, postAuthor, userId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId')";
             $this->conn()->exec($newPost);
         } 
     }

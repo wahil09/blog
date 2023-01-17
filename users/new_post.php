@@ -1,7 +1,7 @@
 <?php 
     session_start();
     include "../model.php";
-    $categories = new ModelCategories();
+    $categoriesModel = new ModelCategories();
     $posts = new ModelPosts();
     if(!isset($_SESSION["user"])) {
         header("location: ../index.php");
@@ -22,7 +22,7 @@
             include "upload_image.php";
             if(isset($_SESSION['postValider'])) {
                 if($_SESSION['postValider']) {
-                    $postCat = $_SESSION["Categories"];
+                    $postCat = $_P["Categories"];
                     $postAuthor = $_SESSION["user"];
                     $postImage = $_SESSION["imageName"];
                     $posts->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
@@ -74,8 +74,8 @@
                             <select name="Categories" id="Categories" required>
                                 <option value="">Choisir un categorie ...</option>
                                 <?php
-                                    for($i=0; isset($categories->getCategories()[$i]); $i++) {
-                                        foreach($categories->getCategories()[$i] as $value) {
+                                    for($i=0; isset($categoriesModel->getCategories()[$i]); $i++) {
+                                        foreach($categoriesModel->getCategories()[$i] as $value) {
                                             echo "
                                             <option value='$value'>$value</option>
                                             ";
@@ -98,6 +98,21 @@
                 </section>
 
                 <div class="sidebar">
+                    <div class="row categories flex-c">
+                        <h2>Categories</h2>
+                        <ul class="flex-c">
+                            <?php 
+                            $categories = $categoriesModel->getCategories();
+                                for($i=0; isset($categories[$i]); $i++) {
+                                    foreach($categories[$i] as $value) {
+                                        echo "
+                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                        ";
+                                    }
+                                }
+                            ?>
+                        </ul>
+                    </div>
                     <div class="row last-posts flex-c">
                         <h2>dernier posts</h2>
                         <ul class="flex-c">
