@@ -55,7 +55,7 @@
 
     class ModelCategories extends Connexion {
         function getCategories() {
-            $sth = $this->conn()->prepare("SELECT categorie_name FROM categories");
+            $sth = $this->conn()->prepare("SELECT categoryName FROM categories");
             $sth->execute();
             if(!empty($sth)) {
                 $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -66,12 +66,12 @@
         }
 
         function setCategories($categorie_name) {
-            $sth = $this->conn()->prepare("SELECT * FROM categories WHERE categorie_name = :categorie_name");
-            $sth->bindValue("categorie_name", $categorie_name);
+            $sth = $this->conn()->prepare("SELECT * FROM categories WHERE categoryName = :categoryName");
+            $sth->bindValue("categoryName", $categorie_name);
             $sth->execute();
             // check if categorie exist
             if(empty($sth->fetch())) {
-                $new_categorie = "INSERT INTO categories(categorie_name) VALUES('$categorie_name')";
+                $new_categorie = "INSERT INTO categories(categoryName) VALUES('$categorie_name')";
                 $this->conn()->exec($new_categorie);
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
                 $_SESSION['categorie_ajouter'] = $categorie_name;
@@ -85,7 +85,16 @@
     }
 
     class ModelPosts extends Connexion {
-
+        public function isExist($postTitle, $postUserId, $postContent) {
+            $check = $this->conn()->prepare("SELECT * FROM posts WHERE userId=:userId && postTitle=:postTitle && postContent=:postContent");
+            $check->bindValue("postTitle", $postTitle);
+            $check->bindValue("postContent", $postContent);
+            $check->bindValue("userId", $postUserId);
+            $check->execute();
+            
+            return !empty($check->fetch());
+        }
+        
         function getPosts() {
             $sth = $this->conn()->prepare("SELECT * FROM posts");
             $sth->execute();
@@ -94,5 +103,10 @@
                 return $posts;
             }
         }
+
+        public function setPost($postTitle, $postCat, $postContent, $postAuthor, $postUserId) {
+            $newPost = "INSERT INTO posts(postTitle, postCat, postContent, postAuthor, userId) VALUES('$postTitle', '$postCat', '$postContent', '$postAuthor', '$postUserId')";
+            $this->conn()->exec($newPost);
+        } 
     }
 ?>

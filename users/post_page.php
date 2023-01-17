@@ -1,21 +1,27 @@
 <?php 
     session_start();
-    include "model.php";
-    $categoriesModel = new ModelCategories();
-    if(isset($_SESSION["user"], $_SESSION["role"])) {
-        if($_SESSION["role"] == "user") {
-            header("location: users/index.php");
-        } else {
-            header("location: admin/index.php");
-        }
+    include "../model.php";
+    $conn = new ModelCategories();
+    if(!isset($_SESSION["user"])) {
+        header("location: ../index.php");
     }
+
+    if(isset($_GET["logout"])) {
+        session_destroy();
+        header("location: ../index.php");
+    }
+
+    if(isset($_SESSION["postExist"])) {
+        header("location: new_post.php");
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
     <?php include "head.php" ?>
-    <body id="body" class="post-categorie">
-        <?php include "header.php" ?>
-        <main class="content">
+<body id="body" class="post-categorie">
+    <?php include "header.php" ?>
+    <main class="content">
             <div class="container">
                 <section class='posts'>
                     <article class="post">
@@ -42,7 +48,7 @@
                         <h2>Categories</h2>
                         <ul class="flex-c">
                             <?php 
-                                $categories = $categoriesModel->getCategories();
+                            $categories = $conn->getCategories();
                                 for($i=0; isset($categories[$i]); $i++) {
                                     foreach($categories[$i] as $value) {
                                         echo "
@@ -79,7 +85,7 @@
                 </div>
             </div>
         </main>
-        <?php include "footer.php" ?>
-        <script src="assets/js/script.js"></script>
-    </body>
+    <?php include "footer.php" ?>
+    <script src="../assets/js/script.js"></script>
+</body>
 </html>

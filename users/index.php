@@ -1,7 +1,8 @@
 <?php 
     session_start();
     include "../model.php";
-    $conn = new ModelCategories();
+    $categoriesModel = new ModelCategories();
+    $postsModel = new ModelPosts();
     if(!isset($_SESSION["user"])) {
         header("location: ../index.php");
     }
@@ -20,57 +21,35 @@
     <main class="content">
             <div class="container">
                 <section class='posts'>
-                    <article class="post">
-                        <div class="post-image">
-                            <img src="assets/img/image-1.jpg" alt=''>
-                        </div>
-                        <div class="post-title">
-                            <h3>Post Title</h3>
-                        </div>
-                        <div class="post-details">
-                            <p class="post-info">
-                                <span><i class="fa-solid fa-user"></i>Wahil Chettouf</span>
-                                <span><i class="fa-solid fa-calendar-days"></i>14/01/2023</span>
-                                <span><i class="fa-sharp fa-solid fa-tags"></i>Blog</span>
-                            </p>
-                            <p class="post-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque ad ducimus tenetur officiis nulla? Neque sapiente distinctio exercitationem. Sint laborum consequatur, temporibus obcaecati architecto incidunt delectus a fugit quis minima.</p>
-                            <a href="?plus-info" class="btn-custom" >Lire Plus</a>
-                        </div>
-                    </article>
-                    <article class="post">
-                        <div class="post-image">
-                            <img src="assets/img/image-2.jpg" alt=''>
-                        </div>
-                        <div class="post-title">
-                            <h3>Post Title</h3>
-                        </div>
-                        <div class="post-details">
-                            <p class="post-info">
-                                <span><i class="fa-solid fa-user"></i>Wahil Chettouf</span>
-                                <span><i class="fa-solid fa-calendar-days"></i>14/01/2023</span>
-                                <span><i class="fa-sharp fa-solid fa-tags"></i>Blog</span>
-                            </p>
-                            <p class="post-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque ad ducimus tenetur officiis nulla? Neque sapiente distinctio exercitationem. Sint laborum consequatur, temporibus obcaecati architecto incidunt delectus a fugit quis minima.</p>
-                            <a href="?plus-info" class="btn-custom" >Lire Plus</a>
-                        </div>
-                    </article>
-                    <article class="post">
-                        <div class="post-image">
-                            <img src="assets/img/image-3.jpg" alt=''>
-                        </div>
-                        <div class="post-title">
-                            <h3>Post Title</h3>
-                        </div>
-                        <div class="post-details">
-                            <p class="post-info">
-                                <span><i class="fa-solid fa-user"></i>Wahil Chettouf</span>
-                                <span><i class="fa-solid fa-calendar-days"></i>14/01/2023</span>
-                                <span><i class="fa-sharp fa-solid fa-tags"></i>Blog</span>
-                            </p>
-                            <p class="post-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque ad ducimus tenetur officiis nulla? Neque sapiente distinctio exercitationem. Sint laborum consequatur, temporibus obcaecati architecto incidunt delectus a fugit quis minima.</p>
-                            <a href="?plus-info" class="btn-custom" >Lire Plus</a>
-                        </div>
-                    </article>
+                    <?php 
+                    $posts = $postsModel->getPosts();
+                    for($i=0; isset($posts[$i]); $i++) {
+                        echo $i;
+                        foreach($posts[$i] as $key => $value) {
+                            
+                            echo "
+                                <article class='post'>
+                                    <div class='post-image'>
+                                        <img src='assets/img/image-3.jpg' alt=''>
+                                    </div>
+                                    <div class='post-title'>
+                                        <h3>Post Title</h3>
+                                    </div>
+                                    <div class='post-details'>
+                                        <p class='post-info'>
+                                            <span><i class='fa-solid fa-user'></i>Wahil Chettouf</span>
+                                            <span><i class='fa-solid fa-calendar-days'></i>14/01/2023</span>
+                                            <span><i class='fa-sharp fa-solid fa-tags'></i>Blog</span>
+                                        </p>
+                                        <p class='post-description'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque ad ducimus tenetur officiis nulla? Neque sapiente distinctio exercitationem. Sint laborum consequatur, temporibus obcaecati architecto incidunt delectus a fugit quis minima.</p>
+                                        <a href='?plus-info' class='btn-custom' >Lire Plus</a>
+                                    </div>
+                                </article>
+                                ";
+                        }
+                    }
+                    
+                    ?>
                 </section>
 
                 <div class="sidebar">
@@ -78,7 +57,7 @@
                         <h2>Categories</h2>
                         <ul class="flex-c">
                             <?php 
-                            $categories = $conn->getCategories();
+                            $categories = $categoriesModel->getCategories();
                                 for($i=0; isset($categories[$i]); $i++) {
                                     foreach($categories[$i] as $value) {
                                         echo "

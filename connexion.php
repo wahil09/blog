@@ -23,12 +23,12 @@
                         if($response->role == "user") {
                             $_SESSION["user"] = $response->username;
                             $_SESSION["role"] = $response->role;
+                            $_SESSION["userId"] = $response->id;
                             header("location: users/index.php");
                         } elseif($response->role == "admin") {
                             $_SESSION["user"] = $response->username;
                             $_SESSION["role"] = $response->role;
-                            $_SESSION["role"] = $response->role;
-                            $_SESSION["id"] = $response->id;
+                            $_SESSION["adminId"] = $response->id;
                             header("location: admin/index.php");
                         }
                     } else {
