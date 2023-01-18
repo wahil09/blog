@@ -71,15 +71,22 @@
             return empty($sth->fetch());
         }
 
+        public function tableIsEmpty() {
+            $sth = $this->db->query("SELECT categoryName FROM categories");
+            return empty($sth->fetch());
+        }
         // ------------ Getters -------------
         function getCategories() {
+
             $sth = $this->db->prepare("SELECT categoryName FROM categories");
             $sth->execute();
-            if(!empty($sth)) {
+            if(!$this->tableIsEmpty()) {
+                $_SESSION["categories_empty"] = $this->tableIsEmpty();
                 $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
+                $_SESSION["categories_empty"] = false;
                 return $categories;
             } else {
-                echo "categories table vide";
+                $_SESSION["categories_empty"] = true;
             }
         }
 

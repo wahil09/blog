@@ -89,7 +89,11 @@
                 </div>
             </div>
         </main>
-    <?php include "footer.php" ?>
+    <?php 
+        include "footer.php";
+        include "../afficher_mess_categories_empty.php";
+    ?>
     <script src="../assets/js/script.js"></script>
+    
 </body>
 </html>

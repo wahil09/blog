@@ -7,13 +7,14 @@
         header("location: ../index.php");
         exit();
     } else {
+
         if(isset($_GET["logout"])) {
             session_unset();
             session_destroy();
             header("location: ../index.php");
             exit();
         }
-    
+
         if (isset($_SESSION["category_ajouter"])) {
             $category_ajouter = $_SESSION["category_ajouter"];
             echo "<script>
@@ -23,7 +24,7 @@
         };
     
         if(isset($_SESSION["category_exist"])) {
-            $category_exist = $_SESSION["categorie_exist"];
+            $category_exist = $_SESSION["category_exist"];
             echo "<script>
                 alert('Désoli! ce categorie: \"$category_exist\" est déja Ajouter ? !');
             </script>";
@@ -65,11 +66,15 @@
                                 $categoriesModel->closeConnection();
                             ?>
                         </ul>
+                        <p id="paraEmptyCategories" class=''>aucune categorie existe !</p>
                     </div>
                 </div>
             </div>
         </main>
-        <?php include "footer.php" ?>
+        <?php
+            include "footer.php";
+            include "../afficher_mess_categories_empty.php";
+        ?>
         <script src="../assets/js/script.js"></script>
     </body>
 </html>

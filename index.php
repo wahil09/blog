@@ -60,6 +60,7 @@
                                 }
                             ?>
                         </ul>
+                        <p id="paraEmptyCategories" class=''>aucune categorie existe !</p>
                     </div>
                     <div class="row last-posts flex-c">
                         <h2>dernier posts</h2>
@@ -84,7 +85,10 @@
                 </div>
             </div>
         </main>
-        <?php include "footer.php" ?>
+        <?php
+            include "footer.php";
+            include "afficher_mess_categories_empty.php";
+        ?>
         <script src="assets/js/script.js"></script>
     </body>
 </html>

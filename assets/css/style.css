@@ -805,6 +805,9 @@ main .contact .container .content .info .phone span {
 
 
 /* --------------------- Start Style Posts page --------------------- */
+#paraEmptyCategories {
+    display: none;
+}
 .post-categorie .content {
     background-color: #f9f9f9;
     letter-spacing: .5px;
