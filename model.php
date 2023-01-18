@@ -1,5 +1,5 @@
 <?php
-    class Connexion {
+    class Connection {
         public $severname;
         public $user;
         public $pass;
@@ -26,7 +26,7 @@
         }
     }
 
-    class ModelUsers extends Connexion {
+    class ModelUsers extends Connection {
         // ------------ Getters ------------
         function getUsers() {
             $sth = $this->db->prepare("SELECT id, inscriptionDate, username, email FROM users WHERE role != 'admin'");
@@ -59,7 +59,7 @@
         }
     }
 
-    class ModelCategories extends Connexion {
+    class ModelCategories extends Connection {
         // ------------ Getters -------------
         function getCategories() {
             $sth = $this->db->prepare("SELECT categoryName FROM categories");
@@ -94,7 +94,7 @@
         }
     }
 
-    class ModelPosts extends Connexion {
+    class ModelPosts extends Connection {
         public function isExist($postTitle, $postUserId, $postContent) {
             $check = $this->db->prepare("SELECT * FROM posts WHERE userId=:userId && postTitle=:postTitle && postContent=:postContent");
             $check->bindValue("postTitle", $postTitle);
