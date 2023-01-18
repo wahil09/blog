@@ -44,7 +44,7 @@
         <div class="container">
             <form method="post" class="form-categorie">
                 <label for="categorie">Nouveau Catégories :</label>
-                <input type="text" name="categorie" id="categorie">
+                <input type="text" name="categorie" id="categorie" required>
                 <input type="submit" value="Ajouter">
             </form>
             <div class="sidebar">

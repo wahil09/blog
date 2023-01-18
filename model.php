@@ -85,11 +85,8 @@
 
         // ------------- Setters ------------- 
         function setCategories($categorie_name) {
-            $sth = $this->db->prepare("SELECT * FROM categories WHERE categoryName = :categoryName");
-            $sth->bindValue("categoryName", $categorie_name);
-            $sth->execute();
             // check if categorie exist
-            if(empty($sth->fetch())) {
+            if($this->isExist($categorie_name)) {
                 $categorie_name = $this->replaceSingleQuote($categorie_name);
                 $new_categorie = "INSERT INTO categories(categoryName) VALUES('$categorie_name')";
                 $this->db->exec($new_categorie);
@@ -98,7 +95,7 @@
                 header("location: categories.php");
                 exit();
             } else {
-                $_SESSION["categorie_exist"] = $categorie_name;
+                $_SESSION["categorie_exist"] = $this->replaceSingleQuote($categorie_name);
                 header("location: categories.php");
                 exit();
             }
