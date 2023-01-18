@@ -24,8 +24,9 @@
     }
 
     class ModelUsers extends Connexion {
+        // ------------ Getters ------------
         function getUsers() {
-            $sth = $this->conn()->prepare("SELECT id, date_creation, username, email FROM users WHERE role != 'admin'");
+            $sth = $this->conn()->prepare("SELECT id, inscriptionDate, username, email FROM users WHERE role != 'admin'");
             $sth->execute();
             if(!empty($sth)) {
                 $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -33,6 +34,7 @@
             } 
         }
 
+        // ------------- Setters ------------- -
         function setUser($username, $email, $password) {
             $sth = $this->conn()->prepare("SELECT * FROM users WHERE email = :email");
             $sth->bindValue("email", $email);
@@ -54,6 +56,7 @@
     }
 
     class ModelCategories extends Connexion {
+        // ------------ Getters -------------
         function getCategories() {
             $sth = $this->conn()->prepare("SELECT categoryName FROM categories");
             $sth->execute();
@@ -65,6 +68,7 @@
             }
         }
 
+        // ------------- Setters ------------- 
         function setCategories($categorie_name) {
             $sth = $this->conn()->prepare("SELECT * FROM categories WHERE categoryName = :categoryName");
             $sth->bindValue("categoryName", $categorie_name);

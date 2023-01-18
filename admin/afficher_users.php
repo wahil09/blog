@@ -67,8 +67,8 @@
                             $height_screen = 0;
                             if(isset($_COOKIE['sw'])) {
                                 $width_screen = $_COOKIE['sw'];
-                            }
-
+                            } 
+                            
                             if(isset($conn->getUsers()[0])) {
                                 if($width_screen > 768) {
                                     foreach($conn->getUsers()[0] as $key => $value) {
