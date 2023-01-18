@@ -3,8 +3,10 @@
     if(isset($_SESSION["user"], $_SESSION["role"])) {
         if($_SESSION["role"] == "user") {
             header("location: users/index.php");
+            exit();
         } else {
             header("location: admin/index.php");
+            exit();
         }
     }
     if(isset($_GET["plus-info"])) {

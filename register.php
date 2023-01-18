@@ -4,6 +4,7 @@
     $conn = new ModelUsers();
     if(isset($_SESSION['user'])) {
         header('location: index.php');
+        exit();
     }
 
     if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {

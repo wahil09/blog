@@ -4,15 +4,18 @@
     $conn = new ModelUsers();
     if(!isset($_SESSION["user"], $_SESSION["role"])) {
         header("location: ../login.php");
+        exit();
     } else {
         if($_SESSION['role'] != "admin") {
             header("location: ../users/index.php");
+            exit();
         }
     }
 
     if(isset($_GET["logout"])) {
         session_destroy();
         header("location: ../index.php");
+        exit();
     }
 ?>
 <!DOCTYPE html>

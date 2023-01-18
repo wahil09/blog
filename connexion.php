@@ -25,15 +25,18 @@
                             $_SESSION["role"] = $response->role;
                             $_SESSION["userId"] = $response->id;
                             header("location: users/index.php");
+                            exit();
                         } elseif($response->role == "admin") {
                             $_SESSION["user"] = $response->username;
                             $_SESSION["role"] = $response->role;
                             $_SESSION["adminId"] = $response->id;
                             header("location: admin/index.php");
+                            exit();
                         }
                     } else {
-                        header("location: login.php");
                         $_SESSION["error_login_user"] = $email;
+                        header("location: login.php");
+                        exit();
                     }
 
                     // foreach($sth->fetch() as $row) {

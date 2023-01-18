@@ -2,7 +2,7 @@
     session_start();
     include "../model.php";
     $categoriesModel = new ModelCategories();
-    $posts = new ModelPosts();
+    $postsModel = new ModelPosts();
     if(!isset($_SESSION["user"])) {
         header("location: ../index.php");
     }
@@ -16,7 +16,7 @@
         $postTitle = $_POST["postTitle"];
         $postContent = strval($_POST["postContent"]);
         $postUserId = $_SESSION["userId"];
-        if($posts->isExist($postTitle, $postUserId, $postContent)) {
+        if($postsModel->isExist($postTitle, $postUserId, $postContent)) {
             echo "post exist";
         } else {
             include "upload_image.php";
@@ -25,7 +25,7 @@
                     $postCat = $_POST["Categories"];
                     $postAuthor = $_SESSION["user"];
                     $postImage = $_SESSION["imageName"];
-                    $posts->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
+                    $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
                 } else {
                     echo "post n'est pas valide / image exist";
                 }
@@ -99,7 +99,7 @@
                         <ul class="flex-c">
                         <?php
                             $posts = $postsModel->getPosts();;
-                            for($i=0; isset($posts[$i]); $i++) : ?>
+                            for($i=0; isset($posts[$i])&&$i <3 ; $i++) : ?>
                                 <li class='last-post'>
                                     <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
                                         <span class='img-last-post'><img src='assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>

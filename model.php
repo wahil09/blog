@@ -46,9 +46,11 @@
                 // pour afficher un message sur login.php qui dit "categorie ajouter !"
                 $_SESSION['user_inscrit'] = $username;
                 header("location: login.php");
+                exit();
             } else {
                 $_SESSION["user_exist"] = $email;
                 header("location: login.php");
+                exit();
             }
             // On ferme la connexion
             $conn = null;
@@ -80,9 +82,11 @@
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
                 $_SESSION['categorie_ajouter'] = $categorie_name;
                 header("location: categories.php");
+                exit();
             } else {
                 $_SESSION["categorie_exist"] = $categorie_name;
                 header("location: categories.php");
+                exit();
             }
             
         }
