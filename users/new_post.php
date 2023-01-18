@@ -110,7 +110,7 @@
                             <?php
                                 endfor; 
                                 // On ferme la connexion
-                                $categorieModel->closeConnection();
+                                $categoriesModel->closeConnection();
                                 $postsModel->closeConnection();
                             ?>
                         </ul>

@@ -65,7 +65,7 @@
                         <ul class="flex-c">
                             <?php
                                 $posts = $postsModel->getPosts();;
-                                for($i=0; isset($posts[$i]); $i++) : ?>
+                                for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
                                         <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
                                             <span class='img-last-post'><img src='assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
@@ -75,7 +75,7 @@
                             <?php
                                 endfor; 
                                 // On ferme la connexion
-                                $categorieModel->closeConnection();
+                                $categoriesModel->closeConnection();
                                 $postsModel->closeConnection();
                             ?>
                         </ul>
