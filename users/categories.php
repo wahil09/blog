@@ -30,8 +30,10 @@
 
     if(isset($_POST["categorie"])) {
         $categorie_name = $_POST["categorie"];
-        $categorieModel->setCategories($categorie_name);
+        $categoriesModel->setCategories($categorie_name);
+        echo $categoriesModel->isExist($categorie_name);
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">

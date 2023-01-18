@@ -17,7 +17,11 @@
         $postContent = strval($_POST["postContent"]);
         $postUserId = $_SESSION["userId"];
         if($postsModel->isExist($postTitle, $postUserId, $postContent)) {
-            echo "post exist";
+            $_SESSION["post-partager"] = false;
+            echo "<script>
+                    alert('Post Exist !');
+                </script>";
+            unset($_SESSION["post-partager"]);
         } else {
             include "upload_image.php";
             if(isset($_SESSION['postValider'])) {
@@ -26,12 +30,14 @@
                     $postAuthor = $_SESSION["user"];
                     $postImage = $_SESSION["imageName"];
                     $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
-                    
+                    echo "<script>
+                            alert('Post Partager !');
+                        </script>";
                 } else {
-                    echo "post n'est pas valide / image exist";
+                    echo "post n'est pas valider / image exist";
                 }
             } else {
-                echo "post n'est pas valide / image exist";
+                echo "post n'est pas valider / image exist";
             }
         }
     }

@@ -11,7 +11,7 @@
             $this->pass = "";
             $this->dbname = "wahil";
             try {
-                $this->db = new PDO("mysql:host=".$this->severname."; dbname=".$this->dbname,$this->user, $this->pass);
+                $this->db = new PDO("mysql:host=".$this->severname."; dbname=".$this->dbname."; charset=utf8",$this->user, $this->pass);
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $this->db;
             } catch(PDOException $e) {
@@ -23,6 +23,10 @@
             // On ferme la connexion
             $this->db = null;
             return $this->db;
+        }
+
+        public function replaceSingleQuote($text) {
+            return str_replace("'", "\'", $text);
         }
     }
 
@@ -60,6 +64,13 @@
     }
 
     class ModelCategories extends Connection {
+        public function isExist($categorie_name) {
+            $sth = $this->db->prepare("SELECT * FROM categories WHERE categoryName = :categoryName");
+            $sth->bindValue("categoryName", $categorie_name);
+            $sth->execute();
+            return empty($sth->fetch());
+        }
+
         // ------------ Getters -------------
         function getCategories() {
             $sth = $this->db->prepare("SELECT categoryName FROM categories");
@@ -79,6 +90,7 @@
             $sth->execute();
             // check if categorie exist
             if(empty($sth->fetch())) {
+                $categorie_name = $this->replaceSingleQuote($categorie_name);
                 $new_categorie = "INSERT INTO categories(categoryName) VALUES('$categorie_name')";
                 $this->db->exec($new_categorie);
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
@@ -101,7 +113,6 @@
             $check->bindValue("postContent", $postContent);
             $check->bindValue("userId", $postUserId);
             $check->execute();
-            
             return !empty($check->fetch());
         }
 
@@ -134,6 +145,13 @@
 
         // ------------- Setters ------------- 
         public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId) {
+            // replace all single with \' a cause d'error if insert ex: $postContent -> j'habite ici user l'insert '$postContent' => 'j'habite' <- error
+            $postTitle = $this->replaceSingleQuote($postTitle);
+            $postCat = $this->replaceSingleQuote($postCat);
+            $postImage = $this->replaceSingleQuote($postImage);
+            $postContent = $this->replaceSingleQuote($postContent);
+            $postAuthor = $this->replaceSingleQuote($postAuthor);
+
             $newPost = "INSERT INTO posts(postTitle, postCat, postImage, postContent, postAuthor, userId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId')";
             $this->db->exec($newPost);
         } 
