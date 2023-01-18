@@ -771,10 +771,6 @@ main .contact .container .content .form input, .txtarea  {
     font-size: 100%;
 }
 
-main .contact .container .content .form .txtarea {
-    
-}
-
 main .contact .container .content .form input[type='submit'] {
     width: 157px;
     background-color: var(--btn-color);

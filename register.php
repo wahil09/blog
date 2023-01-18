@@ -1,7 +1,7 @@
 <?php 
     session_start();
     include "model.php";
-    $conn = new ModelUsers();
+    $usersModel = new ModelUsers();
     if(isset($_SESSION['user'])) {
         header('location: index.php');
         exit();
@@ -12,17 +12,11 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
         if(!empty($username) && !empty($email) && !empty($password)) {
-            $server_name = "localhost";
-            $user = 'root';
-            $passw = '';
-            $dbname = "wahil";
-
-            $conn->setUser($username, $email, $password);
-            
-            // On ferme la connexion
-            $conn = null;
+            $usersModel->setUser($username, $email, $password);
         }
     }
+    // On ferme la connexion
+    $usersModel->closeConnection();
 ?>
 
 <!DOCTYPE html>
