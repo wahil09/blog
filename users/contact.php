@@ -1,12 +1,15 @@
 <?php 
     session_start();
     if(!isset($_SESSION["user"])) {
-        
+        header("location: ../index.php");
+        exit();
     }
 
     if(isset($_GET["logout"])) {
+        session_unset();
         session_destroy();
         header("location: ../index.php");
+        exit();
     }
 ?>
 <!DOCTYPE html>

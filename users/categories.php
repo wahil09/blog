@@ -5,34 +5,36 @@
 
     if(!isset($_SESSION["user"])) {
         header("location: ../index.php");
-    }
-
-    if(isset($_GET["logout"])) {
-        session_destroy();
-        header("location: ../index.php");
-    }
-
-    if (isset($_SESSION["category_ajouter"])) {
-        $category_ajouter = $_SESSION["category_ajouter"];
-        echo "<script>
-                alert('$category_ajouter est bien ajouter !');
+        exit();
+    } else {
+        if(isset($_GET["logout"])) {
+            session_unset();
+            session_destroy();
+            header("location: ../index.php");
+            exit();
+        }
+    
+        if (isset($_SESSION["category_ajouter"])) {
+            $category_ajouter = $_SESSION["category_ajouter"];
+            echo "<script>
+                    alert('$category_ajouter est bien ajouter !');
+                </script>";
+            unset($_SESSION['category_ajouter']);
+        };
+    
+        if(isset($_SESSION["category_exist"])) {
+            $category_exist = $_SESSION["categorie_exist"];
+            echo "<script>
+                alert('Désoli! ce categorie: \"$category_exist\" est déja Ajouter ? !');
             </script>";
-        unset($_SESSION['category_ajouter']);
-    };
-
-    if(isset($_SESSION["category_exist"])) {
-        $category_exist = $_SESSION["categorie_exist"];
-        echo "<script>
-            alert('Désoli! ce categorie: \"$category_exist\" est déja Ajouter ? !');
-        </script>";
-        unset($_SESSION["category_exist"]);
+            unset($_SESSION["category_exist"]);
+        }
+    
+        if(isset($_POST["category"])) {
+            $category_name = $_POST["category"];
+            $categoriesModel->setCategories($category_name);
+        }
     }
-
-    if(isset($_POST["category"])) {
-        $category_name = $_POST["category"];
-        $categoriesModel->setCategories($category_name);
-    }
-
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
@@ -61,8 +63,8 @@
                                     }
                                 // On ferme la connexion
                                 $categoriesModel->closeConnection();
-                                ?>
-                            </ul>
+                            ?>
+                        </ul>
                     </div>
                 </div>
             </div>
