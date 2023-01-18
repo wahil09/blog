@@ -12,63 +12,62 @@
         header("location: ../index.php");
     }
 
-    if (isset($_SESSION["categorie_ajouter"])) {
-        $categorie_ajouter = $_SESSION["categorie_ajouter"];
+    if (isset($_SESSION["category_ajouter"])) {
+        $category_ajouter = $_SESSION["category_ajouter"];
         echo "<script>
-                alert('$categorie_ajouter est bien ajouter !');
+                alert('$category_ajouter est bien ajouter !');
             </script>";
-        unset($_SESSION['categorie_ajouter']);
+        unset($_SESSION['category_ajouter']);
     };
 
-    if(isset($_SESSION["categorie_exist"])) {
-        $categorie_exist = $_SESSION["categorie_exist"];
+    if(isset($_SESSION["category_exist"])) {
+        $category_exist = $_SESSION["categorie_exist"];
         echo "<script>
-            alert('Désoli! ce categorie: \"$categorie_exist\" est déja Ajouter ? !');
+            alert('Désoli! ce categorie: \"$category_exist\" est déja Ajouter ? !');
         </script>";
-        unset($_SESSION["categorie_exist"]);
+        unset($_SESSION["category_exist"]);
     }
 
-    if(isset($_POST["categorie"])) {
-        $categorie_name = $_POST["categorie"];
-        $categoriesModel->setCategories($categorie_name);
-        echo $categoriesModel->isExist($categorie_name);
+    if(isset($_POST["category"])) {
+        $category_name = $_POST["category"];
+        $categoriesModel->setCategories($category_name);
     }
 
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
     <?php include "head.php" ?>
-<body id="body" class="post-categorie">
-    <?php include "header.php" ?>
-    <main class="content">
-        <div class="container">
-            <form method="post" class="form-categorie">
-                <label for="categorie">Nouveau Catégories :</label>
-                <input type="text" name="categorie" id="categorie" required>
-                <input type="submit" value="Ajouter">
-            </form>
-            <div class="sidebar">
-                <div class="row categories flex-c">
-                    <h2>Categories</h2>
-                    <ul class="flex-c">
-                        <?php 
-                            $categories = $categoriesModel->getCategories();
-                                for($i=0; isset($categories[$i]); $i++) {
-                                    foreach($categories[$i] as $value) {
-                                        echo "
-                                        <li><a href='posts_categorie.php?$value'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
-                                        ";
+    <body id="body" class="post-categorie">
+        <?php include "header.php" ?>
+        <main class="content">
+            <div class="container">
+                <form method="post" class="form-categorie">
+                    <label for="category">New Category :</label>
+                    <input type="text" name="category" id="category" required>
+                    <input type="submit" value="Ajouter">
+                </form>
+                <div class="sidebar">
+                    <div class="row categories flex-c">
+                        <h2>Categories</h2>
+                        <ul class="flex-c">
+                            <?php 
+                                $categories = $categoriesModel->getCategories();
+                                    for($i=0; isset($categories[$i]); $i++) {
+                                        foreach($categories[$i] as $value) {
+                                            echo "
+                                            <li><a href='posts_categorie.php?$value'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                            ";
+                                        }
                                     }
-                                }
-                            // On ferme la connexion
-                            $categoriesModel->closeConnection();
-                            ?>
-                        </ul>
+                                // On ferme la connexion
+                                $categoriesModel->closeConnection();
+                                ?>
+                            </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
-<?php include "footer.php" ?>
-    <script src="../assets/js/script.js"></script>
-</body>
+        </main>
+        <?php include "footer.php" ?>
+        <script src="../assets/js/script.js"></script>
+    </body>
 </html>

@@ -64,9 +64,9 @@
     }
 
     class ModelCategories extends Connection {
-        public function isExist($categorie_name) {
+        public function isExist($category_name) {
             $sth = $this->db->prepare("SELECT * FROM categories WHERE categoryName = :categoryName");
-            $sth->bindValue("categoryName", $categorie_name);
+            $sth->bindValue("categoryName", $category_name);
             $sth->execute();
             return empty($sth->fetch());
         }
@@ -84,18 +84,18 @@
         }
 
         // ------------- Setters ------------- 
-        function setCategories($categorie_name) {
+        function setCategories($category_name) {
             // check if categorie exist
-            if($this->isExist($categorie_name)) {
-                $categorie_name = $this->replaceSingleQuote($categorie_name);
-                $new_categorie = "INSERT INTO categories(categoryName) VALUES('$categorie_name')";
-                $this->db->exec($new_categorie);
+            if($this->isExist($category_name)) {
+                $category_name = $this->replaceSingleQuote($category_name);
+                $new_category = "INSERT INTO categories(categoryName) VALUES('$category_name')";
+                $this->db->exec($new_category);
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
-                $_SESSION['categorie_ajouter'] = $categorie_name;
+                $_SESSION['category_ajouter'] = $category_name;
                 header("location: categories.php");
                 exit();
             } else {
-                $_SESSION["categorie_exist"] = $this->replaceSingleQuote($categorie_name);
+                $_SESSION["category_exist"] = $this->replaceSingleQuote($category_name);
                 header("location: categories.php");
                 exit();
             }
