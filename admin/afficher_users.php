@@ -1,7 +1,8 @@
 <?php 
     session_start();
     include "../model.php";
-    $conn = new ModelUsers();
+    
+    $usersModel = new ModelUsers();
     if(!isset($_SESSION["user"], $_SESSION["role"])) {
         header("location: ../login.php");
         exit();
@@ -72,17 +73,17 @@
                                 $width_screen = $_COOKIE['sw'];
                             } 
                             
-                            if(isset($conn->getUsers()[0])) {
+                            if(isset($usersModel->getUsers()[0])) {
                                 if($width_screen > 768) {
-                                    foreach($conn->getUsers()[0] as $key => $value) {
+                                    foreach($usersModel->getUsers()[0] as $key => $value) {
                                         echo "
                                                 <td>$key</td>
                                             ";
                                     }
                                     echo "<td>option</td>";
                                 } else {
-                                    for($i=0; isset($conn->getUsers()[$i]); $i++) { 
-                                        foreach($conn->getUsers()[0] as $key => $value) {
+                                    for($i=0; isset($usersModel->getUsers()[$i]); $i++) { 
+                                        foreach($usersModel->getUsers()[0] as $key => $value) {
                                             echo "
                                                     <td>$key</td>
                                                 ";
@@ -98,11 +99,11 @@
                     </thead>
                     <tbody>
                         <?php 
-                            for($i=0; isset($conn->getUsers()[$i]); $i++) {
+                            for($i=0; isset($usersModel->getUsers()[$i]); $i++) {
                                 echo "<tr>";
                                 $user_id = 0;
-                                foreach($conn->getUsers()[$i] as $key => $value) {
-                                    $user_id = $conn->getUsers()[$i]['id'];
+                                foreach($usersModel->getUsers()[$i] as $key => $value) {
+                                    $user_id = $usersModel->getUsers()[$i]['id'];
                                     echo "
                                             <td>$value</td>
                                         ";
@@ -110,7 +111,7 @@
                                 echo "<td class='delete-user-box'><a href='?delete=$user_id' name='delete'>Delete</a></td>";
                             }
                             // On ferme la connexion
-                            $conn = null;
+                            $usersModel->closeConnection();
                         ?>
                     </tbody>
                 </table>

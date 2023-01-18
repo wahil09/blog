@@ -73,7 +73,12 @@
                                             <span><?php echo $posts[$i]['postTitle'] ?></span>
                                         </a>
                                     </li>
-                            <?php endfor; ?>
+                            <?php
+                                endfor; 
+                                // On ferme la connexion
+                                $categorieModel->closeConnection();
+                                $postsModel->closeConnection();
+                            ?>
                         </ul>
                     </div>
                 </div>

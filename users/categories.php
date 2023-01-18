@@ -1,8 +1,8 @@
 <?php 
     session_start();
     include "../model.php";
-    $conn = new ModelCategories();
-    
+    $categorieModel = new ModelCategories();
+
     if(!isset($_SESSION["user"])) {
         header("location: ../index.php");
     }
@@ -30,7 +30,7 @@
 
     if(isset($_POST["categorie"])) {
         $categorie_name = $_POST["categorie"];
-        $conn->setCategories($categorie_name);
+        $categorieModel->setCategories($categorie_name);
     }
 ?>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@
                     <h2>Categories</h2>
                     <ul class="flex-c">
                         <?php 
-                            $categories = $conn->getCategories();
+                            $categories = $categorieModel->getCategories();
                                 for($i=0; isset($categories[$i]); $i++) {
                                     foreach($categories[$i] as $value) {
                                         echo "
@@ -59,7 +59,7 @@
                                     }
                                 }
                             // On ferme la connexion
-                            $conn = null;
+                            $categorieModel->closeConnection();
                             ?>
                         </ul>
                 </div>

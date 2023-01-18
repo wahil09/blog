@@ -26,6 +26,7 @@
                     $postAuthor = $_SESSION["user"];
                     $postImage = $_SESSION["imageName"];
                     $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
+                    
                 } else {
                     echo "post n'est pas valide / image exist";
                 }
@@ -106,7 +107,12 @@
                                         <span><?php echo $posts[$i]['postTitle'] ?></span>
                                     </a>
                                 </li>
-                            <?php endfor; ?>
+                            <?php
+                                endfor; 
+                                // On ferme la connexion
+                                $categorieModel->closeConnection();
+                                $postsModel->closeConnection();
+                            ?>
                         </ul>
                     </div>
                 </div>
