@@ -27,7 +27,7 @@
                     for($i=0; isset($posts[$i]); $i++) : ?>
                         <article class='post'>
                             <div class='post-image'>
-                                <img src='users/assets/img/<?php echo $posts[$i]['postImage'] ?>' alt=''>
+                                <img src='users/assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'>
                             </div>
                             <div class='post-title'>
                                 <h3><?php echo $posts[$i]['postTitle'] ?></h3>
@@ -70,7 +70,10 @@
                                 for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
                                         <a href='users/post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
-                                            <span class='img-last-post'><img src='users/assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
+                                            <span class='img-last-post'>
+                                                <img src='users/assets/img/<?php echo $posts[$i]['postImage'] ?>'
+                                                alt='<?php echo $posts[$i]['postImage'] ?>'>
+                                            </span>
                                             <span><?php echo $posts[$i]['postTitle'] ?></span>
                                         </a>
                                     </li>

@@ -26,7 +26,7 @@
                     for($i=0; isset($posts[$i]); $i++) : ?>
                         <article class='post'>
                             <div class='post-image'>
-                                <img src='assets/img/<?php echo $posts[$i]['postImage'] ?>' alt=''>
+                                <img src='assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'>
                             </div>
                             <div class='post-title'>
                                 <h3><?php echo $posts[$i]['postTitle'] ?></h3>
