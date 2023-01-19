@@ -89,12 +89,19 @@
             }
         }
 
+        public function getCategoryId($categoryName) {
+            $sth = $this->db->prepare("SELECT id FROM categories WHERE categoryName= :categoryName");
+            $sth->bindValue("categoryName", $categoryName);
+            $sth->execute();
+            return $sth->fetchObject()->id;
+        }
+
         // ------------- Setters ------------- 
-        function setCategories($category_name) {
+        function setCategories($category_name, $userId) {
             // check if categorie exist
             if($this->isExist($category_name)) {
                 $category_name = $this->replaceSingleQuote($category_name);
-                $new_category = "INSERT INTO categories(categoryName) VALUES('$category_name')";
+                $new_category = "INSERT INTO categories(categoryName, userId) VALUES('$category_name', '$userId')";
                 $this->db->exec($new_category);
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
                 $_SESSION['category_ajouter'] = $category_name;
@@ -153,8 +160,12 @@
             }
         }
 
+        public function getMyPosts() {
+
+        }
+
         // ------------- Setters ------------- 
-        public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId) {
+        public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId, $postCategoryId) {
             if(!$this->isExist($postTitle, $postUserId, $postContent)) {
                 // replace all single with \' a cause d'error if insert ex: $postContent -> j'habite ici user l'insert '$postContent' => 'j'habite' <- error
                 $postTitle = $this->replaceSingleQuote($postTitle);
@@ -162,8 +173,7 @@
                 $postImage = $this->replaceSingleQuote($postImage);
                 $postContent = $this->replaceSingleQuote($postContent);
                 $postAuthor = $this->replaceSingleQuote($postAuthor);
-    
-                $newPost = "INSERT INTO posts(postTitle, postCat, postImage, postContent, postAuthor, userId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId')";
+                $newPost = "INSERT INTO posts(postTitle, postCat, postImage, postContent, postAuthor, userId, categoryId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId', '$postCategoryId')";
                 $this->db->exec($newPost);
                 $_SESSION["post-partager"] = true;
             } else {

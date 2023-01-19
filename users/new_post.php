@@ -25,7 +25,8 @@
                     alert('image existe, change le nom de l\'image !');
                 </script>";
         } else {
-            $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
+            $postCategoryId = $categoriesModel->getCategoryId($postCat);
+            $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId, $postCategoryId);
             if(isset($_SESSION['post-partager'])) {
                 if($_SESSION["post-partager"]) {
                     echo "<script>
@@ -33,7 +34,7 @@
                     </script>";
                     include "upload_image.php";
                     unset($_SESSION["post-partager"]);
-                    header("location: ". "index.php");
+                    header("location: ". "index.php"); // changer ca en refresh
                     exit();
                 } else {
                     echo "<script>

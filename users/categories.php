@@ -35,7 +35,7 @@
     
         if(isset($_POST["category"])) {
             $category_name = $_POST["category"];
-            $categoriesModel->setCategories($category_name);
+            $categoriesModel->setCategories($category_name, $_SESSION["userId"]);
         }
     }
 ?>
