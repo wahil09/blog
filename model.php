@@ -158,9 +158,9 @@
     
                 $newPost = "INSERT INTO posts(postTitle, postCat, postImage, postContent, postAuthor, userId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId')";
                 $this->db->exec($newPost);
-                $_SESSION["post-partager"] = true;
+                $_SESSION["post-partager"] = "no-exist";
             } else {
-                $_SESSION["post-partager"] = false;
+                $_SESSION["post-partager"] = "exist";
             }
         }
     }
