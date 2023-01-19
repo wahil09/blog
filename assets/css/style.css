@@ -6,6 +6,12 @@
     font-family: Roboto;
 }
 
+.title {
+    margin-bottom: 15px;
+    font-size: clamp(1.5em, 2.5vw, 1.8em);
+    border-bottom: 2px solid var(--bg-sidebar);
+}
+
 .return-acceuil {
     position: absolute;
     top: 20px;
