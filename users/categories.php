@@ -7,7 +7,6 @@
         header("location: ../index.php");
         exit();
     } else {
-
         if(isset($_GET["logout"])) {
             session_unset();
             session_destroy();
@@ -21,6 +20,9 @@
                     alert('$category_ajouter est bien ajouter !');
                 </script>";
             unset($_SESSION['category_ajouter']);
+            // header("location: new_post.php");
+            header('refresh: 0.5; URL=new_post.php');
+            exit();
         };
     
         if(isset($_SESSION["category_exist"])) {
