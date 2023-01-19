@@ -77,7 +77,6 @@
         }
         // ------------ Getters -------------
         function getCategories() {
-
             $sth = $this->db->prepare("SELECT categoryName FROM categories");
             $sth->execute();
             if(!$this->tableIsEmpty()) {
@@ -99,7 +98,7 @@
                 $this->db->exec($new_category);
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
                 $_SESSION['category_ajouter'] = $category_name;
-                header("location: categories.php");
+                header("location: new_post.php");
                 exit();
             } else {
                 $_SESSION["category_exist"] = $this->replaceSingleQuote($category_name);

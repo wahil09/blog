@@ -5,7 +5,6 @@
                     var paraEmptyCategories = document.querySelector('#paraEmptyCategories');
                     paraEmptyCategories.classList.add('afficher');
                 </script>";
-
         } else {
             echo "<script>
                     var paraEmptyCategories = document.querySelector('#paraEmptyCategories');

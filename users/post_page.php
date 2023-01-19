@@ -91,7 +91,7 @@
         </main>
     <?php 
         include "footer.php";
-        include "../afficher_mess_categories_empty.php";
+        include "../aff_tableau_vide.php";
     ?>
     <script src="../assets/js/script.js"></script>
     
