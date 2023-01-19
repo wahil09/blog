@@ -119,6 +119,13 @@
             return !empty($check->fetch());
         }
 
+        public function imageExist($postImage) {
+            $check = $this->db->prepare("SELECT postImage FROM posts WHERE postImage=:postImage");
+            $check->bindValue("postImage", $postImage);
+            $check->execute();
+            return !empty($check->fetch());
+        }
+
         public function tableIsEmpty() {
             $sth = $this->db->prepare("SELECT * FROM posts");
             $sth->execute();

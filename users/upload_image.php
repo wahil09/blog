@@ -44,7 +44,7 @@
         // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["imageToUpload"]["tmp_name"], $target_file)) {
-            //echo "The file " . basename($_FILES["imageToUpload"]["name"]) . " has been uploaded.";
+            // echo "The file " . basename($_FILES["imageToUpload"]["name"]) . " has been uploaded.";
             $_SESSION["imageName"] = $_FILES["imageToUpload"]["name"];
             $_SESSION['postValider'] = true;
 
