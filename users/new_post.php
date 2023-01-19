@@ -13,32 +13,31 @@
     }
 
     if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
-        $postTitle = $_POST["postTitle"];
-        $postContent = strval($_POST["postContent"]);
-        $postUserId = $_SESSION["userId"];
-        if($postsModel->isExist($postTitle, $postUserId, $postContent)) {
-            $_SESSION["post-partager"] = false;
-            echo "<script>
-                    alert('Post Exist !');
-                </script>";
-            unset($_SESSION["post-partager"]);
-        } else {
-            include "upload_image.php";
-            if(isset($_SESSION['postValider'])) {
-                if($_SESSION['postValider']) {
-                    $postCat = $_POST["Categories"];
-                    $postAuthor = $_SESSION["user"];
-                    $postImage = $_SESSION["imageName"];
-                    $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
-                    echo "<script>
+        include "upload_image.php";
+        if(isset($_SESSION['postValider'])) {
+            if($_SESSION['postValider']) {
+                $postTitle = $_POST["postTitle"];
+                $postContent = $_POST["postContent"];
+                $postUserId = $_SESSION["userId"];
+                $postCat = $_POST["Categories"];
+                $postAuthor = $_SESSION["user"];
+                $postImage = $_SESSION["imageName"];
+                $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
+                if(isset($_SESSION['post-partager'])) {
+                    if($_SESSION["post-partager"]) {
+                        echo "<script>
                             alert('Post Partager !');
                         </script>";
-                } else {
-                    echo "post n'est pas valider / image exist";
+                        unset($_SESSION["post-partager"]);
+                        header("location: ". "index.php");
+                    } else {
+                        echo "<script>
+                            alert('Post no partager / Exist déja !');
+                        </script>";
+                        unset($_SESSION["post-partager"]);
+                    }
                 }
-            } else {
-                echo "post n'est pas valider / image exist";
-            }
+            } 
         }
     }
 ?>

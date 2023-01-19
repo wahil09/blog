@@ -148,15 +148,20 @@
 
         // ------------- Setters ------------- 
         public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId) {
-            // replace all single with \' a cause d'error if insert ex: $postContent -> j'habite ici user l'insert '$postContent' => 'j'habite' <- error
-            $postTitle = $this->replaceSingleQuote($postTitle);
-            $postCat = $this->replaceSingleQuote($postCat);
-            $postImage = $this->replaceSingleQuote($postImage);
-            $postContent = $this->replaceSingleQuote($postContent);
-            $postAuthor = $this->replaceSingleQuote($postAuthor);
-
-            $newPost = "INSERT INTO posts(postTitle, postCat, postImage, postContent, postAuthor, userId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId')";
-            $this->db->exec($newPost);
-        } 
+            if(!$this->isExist($postTitle, $postUserId, $postContent)) {
+                // replace all single with \' a cause d'error if insert ex: $postContent -> j'habite ici user l'insert '$postContent' => 'j'habite' <- error
+                $postTitle = $this->replaceSingleQuote($postTitle);
+                $postCat = $this->replaceSingleQuote($postCat);
+                $postImage = $this->replaceSingleQuote($postImage);
+                $postContent = $this->replaceSingleQuote($postContent);
+                $postAuthor = $this->replaceSingleQuote($postAuthor);
+    
+                $newPost = "INSERT INTO posts(postTitle, postCat, postImage, postContent, postAuthor, userId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId')";
+                $this->db->exec($newPost);
+                $_SESSION["post-partager"] = true;
+            } else {
+                $_SESSION["post-partager"] = false;
+            }
+        }
     }
 ?>
