@@ -13,6 +13,7 @@
     }
 
     if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
+<<<<<<< HEAD
         include "upload_image.php";
         $postTitle = $_POST["postTitle"];
         $postContent = $_POST["postContent"];
@@ -66,6 +67,39 @@
             // unset($_SESSION["post-partager"]);
 
         }
+=======
+                $postTitle = $_POST["postTitle"];
+                $postContent = $_POST["postContent"];
+                $postUserId = $_SESSION["userId"];
+                $postCat = $_POST["Categories"];
+                $postAuthor = $_SESSION["user"];
+                $postImage = $_FILES["imageToUpload"]["name"];
+                if($postsModel->imageExist($postImage)) {
+                    echo 
+                        "<script>
+                            alert('image existe, change le nom de l\'image !');
+                        </script>";
+                } else {
+                    
+                    $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
+                    if(isset($_SESSION['post-partager'])) {
+                        if($_SESSION["post-partager"]) {
+                            echo "<script>
+                                alert('Post Partager !');
+                            </script>";
+                            include "upload_image.php";
+                            unset($_SESSION["post-partager"]);
+                            header("location: ". "index.php");
+                        } else {
+                            echo "<script>
+                                alert('Post no partager / Exist déja !');
+                            </script>";
+                            unset($_SESSION["post-partager"]);
+                        }
+                    }
+                }
+                
+>>>>>>> 674ac950f1579f17a7fa368c6a67782a12b4c9ee
     }
 ?>
 
