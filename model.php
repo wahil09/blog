@@ -98,7 +98,7 @@
                 $this->db->exec($new_category);
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
                 $_SESSION['category_ajouter'] = $category_name;
-                header("location: new_post.php");
+                header("location: categories.php");
                 exit();
             } else {
                 $_SESSION["category_exist"] = $this->replaceSingleQuote($category_name);
