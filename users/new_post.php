@@ -13,59 +13,36 @@
     }
 
     if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
-        include "upload_image.php";
         $postTitle = $_POST["postTitle"];
         $postContent = $_POST["postContent"];
-        $postCat = $_POST["Categories"];
-        $postImage = $_SESSION["imageName"] = $_FILES["imageToUpload"]["name"];
         $postUserId = $_SESSION["userId"];
+        $postCat = $_POST["Categories"];
         $postAuthor = $_SESSION["user"];
-
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            // echo "Sorry, your file was not uploaded.";
-            echo "<script>
-                alert('Sorry, your file was not uploaded.');
-            </script>";
-            $_SESSION['imageIsUpload'] = false;
-            $_SESSION["post-partager"] = 'image-exist';
-
-        // if everything is ok, try to upload file
+        $postImage = $_FILES["imageToUpload"]["name"];
+        if($postsModel->imageExist($postImage)) {
+            echo 
+                "<script>
+                    alert('image existe, change le nom de l\'image !');
+                </script>";
         } else {
+
             $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postUserId);
             if(isset($_SESSION['post-partager'])) {
-                if($_SESSION['post-partager'] == "exist") {
-                    if (move_uploaded_file($_FILES["imageToUpload"]["tmp_name"], $target_file)) {
-                        //echo "The file " . basename($_FILES["imageToUpload"]["name"]) . " has been uploaded.";
-                        $_SESSION['imageIsUpload'] = true;
-                        
-                    } else {
-                        $_SESSION["post-partager"] = 'image-error';
-                        echo "<script>
-                            alert('Sorry, your file was not uploaded1.');
-                        </script>";
-                        $_SESSION['imageIsUpload'] = false;
-                        // echo "Sorry, there was an error uploading your file.";
-                    }
+                if($_SESSION["post-partager"]) {
+                    echo "<script>
+                        alert('Post Partager !');
+                    </script>";
+                    include "upload_image.php";
+                    unset($_SESSION["post-partager"]);
+                    header("location: ". "index.php");
+                } else {
+                    echo "<script>
+                        alert('Post no partager / Exist déja !');
+                    </script>";
+                    unset($_SESSION["post-partager"]);
                 }
             }
-        } 
-    }
-    if(isset($_SESSION['post-partager'])) {
-        if($_SESSION["post-partager"] == "exist") {
-            echo "<script>
-                alert('Post no partager / Exist déja !');
-            </script>";
-            unset($_SESSION["post-partager"]);
-            unset($_SESSION["imageIsUpload"]);
-            
-        } elseif($_SESSION["post-partager"] == "image-exist") {
-            // echo "<script>
-            //     alert('Post Partager !');
-            // </script>";
-            // unset($_SESSION["post-partager"]);
-
-        }
+        }     
     }
 ?>
 
