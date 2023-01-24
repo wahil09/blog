@@ -23,7 +23,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "head.php" ?>
+    <?php include "../head.php" ?>
 <body id="body">
     <?php include "header.php" ?>
     <main>

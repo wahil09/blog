@@ -160,8 +160,8 @@
             }
         }
 
-        public function getMyPosts() {
-
+        public function getMyPosts($userId) {
+            $sth = $this->db->prepare("SELECT * FROM posts WHERE id= :userId");
         }
 
         // ------------- Setters ------------- 

@@ -21,7 +21,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "head.php" ?>
+    <?php include "../head.php" ?>
     <head>
         <style>
             header .container .menu a:hover {
