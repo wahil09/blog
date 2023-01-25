@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../assets/css/all.css">
     <style>
         <?php include "../assets/css/style.css" ?>
-        <?php include "../assets/css/MQury.css" ?>
+        <?php include "../assets/css/MQuiry.css" ?>
     </style>
     <title><?php echo $_SESSION['role']?></title>
 

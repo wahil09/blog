@@ -43,7 +43,7 @@
 <html lang="fr-FR">
     <?php include "../head.php" ?>
     <body id="body" class="post-categorie">
-        <?php include "header.php" ?>
+        <?php include "../header.php" ?>
         <main class="content">
             <div class="container">
                 <form method="post" class="form-categorie">

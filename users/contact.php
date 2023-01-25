@@ -16,7 +16,7 @@
 <html lang="fr-FR">
     <?php include "../head.php" ?>
     <body id="body">
-        <?php include "header.php" ?>
+        <?php include "../header.php" ?>
         <main>
             <!-- ***** Contact Us ***** -->
             <section class="contact" id="contact">
