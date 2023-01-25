@@ -13,6 +13,9 @@
         $password = $_POST["password"];
         if(!empty($username) && !empty($email) && !empty($password)) {
             $usersModel->setUser($username, $email, $password);
+        } else {
+            // il faut remplire toutes la formulaire 
+            // créer un session['erreur'] pour afficher la fenêtre errorLoginBox comme sur la page login quand on enlève le required sur l'html
         }
     }
     // On ferme la connexion

@@ -6,25 +6,21 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
         if(!empty($email) && !empty($password)) {
-            $userAlreadyRegistered = $usersModel->userAlreadyRegistered($email, $password);
-            if($userAlreadyRegistered) {
-                $_SESSION["role"] = $userAlreadyRegistered->role;
-                if($userAlreadyRegistered->role == "user") {
-                    $_SESSION["user"] = $userAlreadyRegistered->username;
-                    $_SESSION["userId"] = $userAlreadyRegistered->id;
-                    header("location: users/index.php");
-                    exit();
-                } elseif($userAlreadyRegistered->role == "admin") {
-                    $_SESSION["user"] = $userAlreadyRegistered->username;
-                    $_SESSION["adminId"] = $userAlreadyRegistered->id;
-                    header("location: admin/index.php");
-                    exit();
+            $userObject = $usersModel->userAlreadyRegistered($email, $password);
+            if($userObject) {
+                $_SESSION["role"] = $userObject->role;
+                if($userObject->role == "user") {
+                    $_SESSION["user"] = $userObject->username;
+                    $_SESSION["userId"] = $userObject->id;
+                } elseif($userObject->role == "admin") {
+                    $_SESSION["user"] = $userObject->username;
+                    $_SESSION["adminId"] = $userObject->id;
                 }
             } else {
                 $_SESSION["error_login_user"] = $email;
-                header("location: login.php");
-                exit();
             }
+        } else {
+            $_SESSION["error"] = true;
         }
         $usersModel->closeConnection();
     }
@@ -49,17 +45,17 @@
 
     if(isset($_SESSION['error_login_user'])) {
         $user_veut_connecter = $_SESSION['error_login_user'];
-        echo "<script>
-                alert('$user_veut_connecter votre identifiant n\'est pas valide !');
-            </script>";
+        echo '<script>
+                alert("'.$user_veut_connecter.' votre identifiant n\'est pas valide !");
+            </script>';
         unset($_SESSION['error_login_user']);
     }
 
     if(isset($_SESSION["user_exist"])) {
         $user_exist = $_SESSION["user_exist"];
-        echo "<script>
-            alert('Désoli! ce email: \"$user_exist\" est déja utiliser ? !');
-        </script>";
+        echo '<script>
+            alert("Désoli! cette email : '.$user_exist.' est déja utiliser ? !")
+        </script>';
         unset($_SESSION["user_exist"]);
     }
 ?>

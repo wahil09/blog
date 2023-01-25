@@ -25,8 +25,10 @@
             return $this->db;
         }
 
-        public function replaceSingleQuote($text) {
-            return str_replace("'", "\'", $text);
+        public function replaceQuote($text) {
+            $singleQuote = str_replace("'", "\'", $text);
+            $result = str_replace('"', '\"', $singleQuote);
+            return $result;
         }
     }
 
@@ -57,6 +59,9 @@
             $sth->execute();
             // check if categorie exist
             if(empty($sth->fetch())) {
+                $username = $this->replaceQuote($username);
+                $email = $this->replaceQuote($email);
+                $password = $this->replaceQuote($password);
                 $newUser = "INSERT INTO users(username, email, password, role) VALUES('$username', '$email', '$password', 'user') ";
                 $this->db->exec($newUser);
                 // pour afficher un message sur login.php qui dit "categorie ajouter !"
@@ -108,7 +113,7 @@
         function setCategories($category_name, $userId) {
             // check if categorie exist
             if($this->isExist($category_name)) {
-                $category_name = $this->replaceSingleQuote($category_name);
+                $category_name = $this->replaceQuote($category_name);
                 $new_category = "INSERT INTO categories(categoryName, userId) VALUES('$category_name', '$userId')";
                 $this->db->exec($new_category);
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
@@ -116,7 +121,7 @@
                 header("location: categories.php");
                 exit();
             } else {
-                $_SESSION["category_exist"] = $this->replaceSingleQuote($category_name);
+                $_SESSION["category_exist"] = $this->replaceQuote($category_name);
                 header("location: categories.php");
                 exit();
             }
@@ -176,11 +181,11 @@
         public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId, $postCategoryId) {
             if(!$this->isExist($postTitle, $postUserId, $postContent)) {
                 // replace all single with \' a cause d'error if insert ex: $postContent -> j'habite ici user l'insert '$postContent' => 'j'habite' <- error
-                $postTitle = $this->replaceSingleQuote($postTitle);
-                $postCat = $this->replaceSingleQuote($postCat);
-                $postImage = $this->replaceSingleQuote($postImage);
-                $postContent = $this->replaceSingleQuote($postContent);
-                $postAuthor = $this->replaceSingleQuote($postAuthor);
+                $postTitle = $this->replaceQuote($postTitle);
+                $postCat = $this->replaceQuote($postCat);
+                $postImage = $this->replaceQuote($postImage);
+                $postContent = $this->replaceQuote($postContent);
+                $postAuthor = $this->replaceQuote($postAuthor);
                 $newPost = "INSERT INTO posts(postTitle, postCat, postImage, postContent, postAuthor, userId, categoryId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId', '$postCategoryId')";
                 $this->db->exec($newPost);
                 $_SESSION["post-partager"] = true;
