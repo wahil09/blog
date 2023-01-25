@@ -32,21 +32,25 @@
             <div class="container">
                 <section class='posts'>
                     <article class='post'>
-                        <div class='post-image'>
-                            <img src='assets/img/<?php echo $post['postImage'] ?>' alt=''>
-                        </div>
-                        <div class='post-title'>
-                            <h3><?php echo htmlspecialchars($post['postTitle']) ?></h3>
-                        </div>
-                        <div class='post-details'>
-                            <p class='post-info'>
-                                <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($post['postAuthor']) ?></span>
-                                <span><i class='fa-solid fa-calendar-days'></i><?php echo htmlspecialchars($post['postDate']) ?></span>
-                                <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($post['postCat']) ?></span>
-                            </p>
-                            <p class='post-description'><?php echo htmlspecialchars($post['postContent']) ?></p>
-                            <a href="#" class='btn-custom'>Lire Plus</a>
-                        </div>
+                        <?php if(!empty($post)) :?>
+                            <div class='post-image'>
+                                <img src='assets/img/<?php echo $post['postImage'] ?>' alt=''>
+                            </div>
+                            <div class='post-title'>
+                                <h3><?php echo htmlspecialchars($post['postTitle']) ?></h3>
+                            </div>
+                            <div class='post-details'>
+                                <p class='post-info'>
+                                    <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($post['postAuthor']) ?></span>
+                                    <span><i class='fa-solid fa-calendar-days'></i><?php echo htmlspecialchars($post['postDate']) ?></span>
+                                    <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($post['postCat']) ?></span>
+                                </p>
+                                <p class='post-description'><?php echo htmlspecialchars($post['postContent']) ?></p>
+                                <a href="#" class='btn-custom'>Lire Plus</a>
+                            </div>
+                        <?php else :?>
+                            <h3>Post supprimer</h3>
+                        <?php endif ?>
                     </article>
                 </section>
 
