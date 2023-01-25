@@ -56,26 +56,25 @@
                         <h2>Categories</h2>
                         <ul class="flex-c">
                             <?php 
-                                $categories = $categoriesModel->getCategories();
-                                    for($i=0; isset($categories[$i]); $i++) {
-                                        foreach($categories[$i] as $value) {
-                                            echo "
-                                            <li><a href='posts_categorie.php?$value'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
-                                            ";
-                                        }
+                            $categories = $categoriesModel->getCategories();
+                            if(!empty($categories)) :?>
+                                <?php for($i=0; isset($categories[$i]); $i++) {
+                                    foreach($categories[$i] as $value) {
+                                        echo "
+                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
+                                        ";
                                     }
-                                // On ferme la connexion
-                                $categoriesModel->closeConnection();
-                            ?>
+                                }?>
+                            <?php else :?>
+                                <p>aucune categorie existe !</p>
+                            <?php endif ?>
                         </ul>
-                        <p id="paraEmptyCategories" class=''>aucune categorie existe !</p>
                     </div>
                 </div>
             </div>
         </main>
         <?php
             include "../footer.php";
-            include "../aff_tableau_vide.php";
         ?>
         <script src="../assets/js/script.js"></script>
     </body>

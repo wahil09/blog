@@ -92,14 +92,7 @@
         function getCategories() {
             $sth = $this->db->prepare("SELECT categoryName FROM categories");
             $sth->execute();
-            if(!$this->tableIsEmpty()) {
-                $_SESSION["categories_empty"] = $this->tableIsEmpty();
-                $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
-                $_SESSION["categories_empty"] = false;
-                return $categories;
-            } else {
-                $_SESSION["categories_empty"] = true;
-            }
+            return $sth->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function getCategoryId($categoryName) {
@@ -156,10 +149,8 @@
         function getPosts() {
             $sth = $this->db->prepare("SELECT * FROM posts");
             $sth->execute();
-            if(!empty($sth)) {
-                $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
-                return $posts;
-            }
+            $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
+            return $posts;
         }
 
         public function getPostSelected($postId) {
