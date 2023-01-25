@@ -26,7 +26,7 @@
         unset($_SESSION['error_login_user']);
     }
 
-    if(isset($_SESSION["categorie_exist"])) {
+    if(isset($_SESSION["user_exist"])) {
         $user_exist = $_SESSION["user_exist"];
         echo "<script>
             alert('Désoli! ce email: \"$user_exist\" est déja utiliser ? !');
