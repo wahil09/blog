@@ -2,7 +2,7 @@
     <div class="container flex-r">
         <?php if(isset($_SESSION["role"])) :?>
             <div class="logo-box">
-                <h1><?php echo $_SESSION['user'] ?></h1>
+                <h1><?php echo htmlspecialchars($_SESSION['user']) ?></h1>
             </div>
             <!-- Config de l'admin -->
             <?php if($_SESSION["role"] == "admin") :?>

@@ -60,7 +60,7 @@
                                     for($i=0; isset($categories[$i]); $i++) {
                                         foreach($categories[$i] as $value) {
                                             echo "
-                                            <li><a href='posts_categorie.php?$value'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                            <li><a href='posts_categorie.php?$value'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
                                             ";
                                         }
                                     }

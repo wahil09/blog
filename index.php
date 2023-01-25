@@ -31,15 +31,15 @@
                                 <img src='users/assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'>
                             </div>
                             <div class='post-title'>
-                                <h3><?php echo $posts[$i]['postTitle'] ?></h3>
+                                <h3><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></h3>
                             </div>
                             <div class='post-details'>
                                 <p class='post-info'>
-                                    <span><i class='fa-solid fa-user'></i><?php echo $posts[$i]['postAuthor'] ?></span>
-                                    <span><i class='fa-solid fa-calendar-days'></i><?php echo $posts[$i]['postDate'] ?></span>
-                                    <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo $posts[$i]['postCat'] ?></span>
+                                    <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($posts[$i]['postAuthor']) ?></span>
+                                    <span><i class='fa-solid fa-calendar-days'></i><?php echo htmlspecialchars($posts[$i]['postDate']) ?></span>
+                                    <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($posts[$i]['postCat']) ?></span>
                                 </p>
-                                <p class='post-description'><?php echo substr($posts[$i]['postContent'], 0, 300) ?> ...</p>
+                                <p class='post-description'><?php echo htmlspecialchars(substr($posts[$i]['postContent'], 0, 300)) ?> ...</p>
                                 <a href='users/post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='btn-custom' >Lire Plus</a>
                             </div>
                         </article>
@@ -55,7 +55,7 @@
                                 for($i=0; isset($categories[$i]); $i++) {
                                     foreach($categories[$i] as $value) {
                                         echo "
-                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
                                         ";
                                     }
                                 }
@@ -75,7 +75,7 @@
                                                 <img src='users/assets/img/<?php echo $posts[$i]['postImage'] ?>'
                                                 alt='<?php echo $posts[$i]['postImage'] ?>'>
                                             </span>
-                                            <span><?php echo $posts[$i]['postTitle'] ?></span>
+                                            <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                         </a>
                                     </li>
                             <?php

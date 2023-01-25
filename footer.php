@@ -3,8 +3,8 @@
         <p>&copy; All rights reserved </p>
         <?php if(isset($_SESSION["role"])) :?>
             <ul class="flex-r">
-                <li><a href="#"><i class="fa-brands fa-github"></i><?php echo $_SESSION['user'] ?>-github</a></li>
-                <li><a href="#"><i class="fa-brands fa-linkedin"></i><?php echo $_SESSION['user'] ?>-linkedin</a></li>
+                <li><a href="#"><i class="fa-brands fa-github"></i><?php echo htmlspecialchars($_SESSION['user']) ?>-github</a></li>
+                <li><a href="#"><i class="fa-brands fa-linkedin"></i><?php echo htmlspecialchars($_SESSION['user']) ?>-linkedin</a></li>
             </ul>
             <!-- Config de l'admin -->
             <?php if($_SESSION["role"] == "admin") :?>

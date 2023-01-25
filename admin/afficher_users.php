@@ -53,7 +53,7 @@
                                 if($width_screen > 768) {
                                     foreach($usersModel->getUsers()[0] as $key => $value) {
                                         echo "
-                                                <td>$key</td>
+                                                <td>".htmlspecialchars($key)."</td>
                                             ";
                                     }
                                     echo "<td>option</td>";
@@ -61,7 +61,7 @@
                                     for($i=0; isset($usersModel->getUsers()[$i]); $i++) { 
                                         foreach($usersModel->getUsers()[0] as $key => $value) {
                                             echo "
-                                                    <td>$key</td>
+                                                    <td>".htmlspecialchars($key)."</td>
                                                 ";
                                         }
                                         echo "<td>option</td>";
@@ -81,7 +81,7 @@
                                 foreach($usersModel->getUsers()[$i] as $key => $value) {
                                     $user_id = $usersModel->getUsers()[$i]['id'];
                                     echo "
-                                            <td>$value</td>
+                                            <td>".htmlspecialchars($value)."</td>
                                         ";
                                 }
                                 echo "<td class='delete-user-box'><a href='?delete=$user_id' name='delete'>Delete</a></td>";

@@ -36,15 +36,15 @@
                             <img src='assets/img/<?php echo $post['postImage'] ?>' alt=''>
                         </div>
                         <div class='post-title'>
-                            <h3><?php echo $post['postTitle'] ?></h3>
+                            <h3><?php echo htmlspecialchars($post['postTitle']) ?></h3>
                         </div>
                         <div class='post-details'>
                             <p class='post-info'>
-                                <span><i class='fa-solid fa-user'></i><?php echo $post['postAuthor'] ?></span>
-                                <span><i class='fa-solid fa-calendar-days'></i><?php echo $post['postDate'] ?></span>
-                                <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo $post['postCat'] ?></span>
+                                <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($post['postAuthor']) ?></span>
+                                <span><i class='fa-solid fa-calendar-days'></i><?php echo htmlspecialchars($post['postDate']) ?></span>
+                                <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($post['postCat']) ?></span>
                             </p>
-                            <p class='post-description'><?php echo $post['postContent'] ?></p>
+                            <p class='post-description'><?php echo htmlspecialchars($post['postContent']) ?></p>
                             <a href="#" class='btn-custom'>Lire Plus</a>
                         </div>
                     </article>
@@ -59,7 +59,7 @@
                                 for($i=0; isset($categories[$i]); $i++) {
                                     foreach($categories[$i] as $value) {
                                         echo "
-                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
                                         ";
                                     }
                                 }

@@ -69,7 +69,7 @@
                                     for($i=0; isset($categoriesModel->getCategories()[$i]); $i++) {
                                         foreach($categoriesModel->getCategories()[$i] as $value) {
                                             echo "
-                                            <option value='$value'>$value</option>
+                                            <option value='".htmlspecialchars($value)."'>".htmlspecialchars($value)."</option>
                                             ";
                                         }
                                     }
@@ -98,7 +98,7 @@
                                 for($i=0; isset($categories[$i]); $i++) {
                                     foreach($categories[$i] as $value) {
                                         echo "
-                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>$value</span></a></li>
+                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
                                         ";
                                     }
                                 }
@@ -115,7 +115,7 @@
                                 <li class='last-post'>
                                     <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
                                         <span class='img-last-post'><img src='assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
-                                        <span><?php echo $posts[$i]['postTitle'] ?></span>
+                                        <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                     </a>
                                 </li>
                             <?php
