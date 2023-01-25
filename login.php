@@ -1,5 +1,34 @@
 <?php 
+    include "model.php";
+    $usersModel = new ModelUsers();
     session_start();
+    if(isset($_POST["email"]) && isset($_POST["password"])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        if(!empty($email) && !empty($password)) {
+            $userAlreadyRegistered = $usersModel->userAlreadyRegistered($email, $password);
+            if($userAlreadyRegistered) {
+                $_SESSION["role"] = $userAlreadyRegistered->role;
+                if($userAlreadyRegistered->role == "user") {
+                    $_SESSION["user"] = $userAlreadyRegistered->username;
+                    $_SESSION["userId"] = $userAlreadyRegistered->id;
+                    header("location: users/index.php");
+                    exit();
+                } elseif($userAlreadyRegistered->role == "admin") {
+                    $_SESSION["user"] = $userAlreadyRegistered->username;
+                    $_SESSION["adminId"] = $userAlreadyRegistered->id;
+                    header("location: admin/index.php");
+                    exit();
+                }
+            } else {
+                $_SESSION["error_login_user"] = $email;
+                header("location: login.php");
+                exit();
+            }
+        }
+        $usersModel->closeConnection();
+    }
+
     if(isset($_SESSION["user"], $_SESSION["role"])) {
         if($_SESSION["role"] == "user") {
             header("location: users/index.php");
@@ -49,7 +78,7 @@
                     </a></li>
                     <li><a class="flex-r" href="#"><img src="assets/img/icon-google.png">Google</a></li>
                 </ul>
-                <form action="connexion.php" method="post" class="row-box flex-c">
+                <form action="" method="post" class="row-box flex-c">
                     <div class="inp-box">
                         <label for="email">Email</label>
                         <input class="inp" type="email" name="email" id="email" required>

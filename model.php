@@ -31,6 +31,14 @@
     }
 
     class ModelUsers extends Connection {
+        public function userAlreadyRegistered($email, $password) {
+            $request = $this->db->prepare("SELECT * FROM users WHERE password=:password &&email=:email");
+            $request->bindValue("email", $email);
+            $request->bindValue("password", $password);
+            $request->execute();
+            return $request->fetchObject(); // return un object s'il exist ou rien s'il n'est pas inscrit déja
+        }   
+
         // ------------ Getters ------------
         function getUsers() {
             $sth = $this->db->prepare("SELECT id, inscriptionDate, username, email FROM users WHERE role != 'admin'");
