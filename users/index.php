@@ -69,7 +69,7 @@
                                 for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
                                         <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
-                                            <span class='img-last-post'><img src='assets/img/<?php echo htmlspecialchars($posts[$i]['postImage']) ?>' alt='<?php echo htmlspecialchars($posts[$i]['postImage']) ?>'></span>
+                                            <span class='img-last-post'><img src='assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
                                             <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                         </a>
                                     </li>
