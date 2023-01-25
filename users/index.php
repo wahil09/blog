@@ -86,7 +86,7 @@
             </div>
         </main>
     <?php
-        include "footer.php";
+        include "../footer.php";
         include "../aff_tableau_vide.php"
     ?>
     <script src="../assets/js/script.js"></script>
