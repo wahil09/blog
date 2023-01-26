@@ -168,6 +168,11 @@
             $sth = $this->db->prepare("SELECT * FROM posts WHERE id= :userId");
         }
 
+        public function getLastPosts() {
+            $request = $this->db->prepare("SELECT * FROM posts ORDER BY postDate DESC");
+            $request->execute();
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        }
         // ------------- Setters ------------- 
         public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId, $postCategoryId) {
             if(!$this->isExist($postTitle, $postUserId, $postContent)) {

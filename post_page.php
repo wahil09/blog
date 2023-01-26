@@ -76,7 +76,7 @@
                     <h2>dernier posts</h2>
                         <ul class="flex-c">
                             <?php
-                            $posts = $postsModel->getPosts();;
+                            $posts = $postsModel->getLastPosts();;
                             if($posts) : ?>
                                 <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
