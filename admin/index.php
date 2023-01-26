@@ -1,5 +1,9 @@
 <?php 
     session_start();
+    include "../model.php";
+    $categoriesModel = new ModelCategories();
+    $postsModel = new ModelPosts();
+
     if(!isset($_SESSION["user"], $_SESSION["role"])) {
         header("location: ../index.php");
         exit();
@@ -16,29 +20,92 @@
         exit();
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr-FR">
     <?php include "../head.php" ?>
-<body id="body">
+<body id="body" class="post-categorie">
     <?php include "../header.php" ?>
-    <main>
-        <section class="presentation">
-            <div class="container flex-c">
-                <h2>Présentation</h2>
-                <article class="content flex-r">
-                    <div class="img-box">
-                        <img src="../assets/img/image.jpg" alt="image">
-                    </div>
-                    <div class="info-box flex-c">
-                        <h3><?php echo htmlspecialchars($_SESSION['user']) ?> welcome to your profile</h3>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam alias eius dolorem earum eaque blanditiis? Tenetur voluptatibus commodi quod in?</p>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam alias eius dolorem earum eaque blanditiis? Tenetur voluptatibus commodi quod in? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo obcaecati totam fuga numquam? Minus accusantium facilis quidem, quod aperiam aliquam.</p>
-                    </div>
-                </article>
+    <main class="content">
+        <div class="container">
+            <section class='posts'>
+                <h2 class="title">Articles :</h2>
+                <?php 
+                $posts = $postsModel->getPosts();
+                if(!empty($posts)) : ?>
+                    <?php for($i=0; isset($posts[$i]); $i++) : ?>
+                        <article class='post'>
+                            <div class='post-image'>
+                                <img src='../assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'>
+                            </div>
+                            <div class='post-title'>
+                                <h3><?php echo $posts[$i]['postTitle'] ?></h3>
+                            </div>
+                            <div class='post-details'>
+                                <p class='post-info'>
+                                    <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($posts[$i]['postAuthor']) ?></span>
+                                    <span><i class='fa-solid fa-calendar-days'></i><?php echo htmlspecialchars($posts[$i]['postDate']) ?></span>
+                                    <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo $posts[$i]['postCat'] ?></span>
+                                </p>
+                                <p class='post-description'><?php echo htmlspecialchars(substr($posts[$i]['postContent'], 0, 300)) ?> ...</p>
+                                <a href='post_page.php?id=<?php echo htmlspecialchars($posts[$i]['id']) ?>' class='btn-custom' >Lire Plus</a>
+                            </div>
+                        </article>
+                    <?php endfor; ?>
+                <?php else : ?>
+                    <p>aucune Postes publier !</p>
+                <?php endif ?>
+            </section>
+
+            <div class="sidebar">
+                <div class="row categories flex-c">
+                    <h2>Categories</h2>
+                    <ul class="flex-c">
+                        <?php 
+                        $categories = $categoriesModel->getCategories();
+                        if(!empty($categories)) :?>
+                            <?php for($i=0; isset($categories[$i]); $i++) {
+                                foreach($categories[$i] as $value) {
+                                    echo "
+                                    <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
+                                    ";
+                                }
+                            }?>
+                        <?php else :?>
+                            <p>aucune categorie existe !</p>
+                        <?php endif ?>
+                    </ul>
+                </div>
+                <div class="row last-posts flex-c">
+                    <h2>dernier posts</h2>
+                    <ul class="flex-c">
+                        <?php
+                        $posts = $postsModel->getPosts();;
+                        if($posts) : ?>
+                            <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
+                                <li class='last-post'>
+                                    <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
+                                        <span class='img-last-post'><img src='../assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
+                                        <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
+                                    </a>
+                                </li>
+                            <?php endfor; ?>
+                        <?php else : ?>
+                            <p>aucune Postes publier !</p>
+                        <?php endif ?>
+                    </ul>
+                    <?php 
+                        // On ferme la connexion
+                        $categoriesModel->closeConnection();
+                        $postsModel->closeConnection();
+                    ?>
+                </div>
             </div>
-        </section>
+        </div>
     </main>
-    <?php include "../footer.php" ?>
+    <?php
+        include "../footer.php";
+    ?>
     <script src="../assets/js/script.js"></script>
 </body>
 </html>

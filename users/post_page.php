@@ -34,7 +34,7 @@
                     <article class='post'>
                         <?php if(!empty($post)) :?>
                             <div class='post-image'>
-                                <img src='assets/img/<?php echo $post['postImage'] ?>' alt=''>
+                                <img src='../assets/img/posts_images/<?php echo $post['postImage'] ?>' alt=''>
                             </div>
                             <div class='post-title'>
                                 <h3><?php echo htmlspecialchars($post['postTitle']) ?></h3>
@@ -82,7 +82,7 @@
                                 <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
                                         <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
-                                            <span class='img-last-post'><img src='assets/img/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
+                                            <span class='img-last-post'><img src='../assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
                                             <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                         </a>
                                     </li>
