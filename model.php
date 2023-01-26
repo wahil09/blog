@@ -90,7 +90,7 @@
         }
         // ------------ Getters -------------
         function getCategories() {
-            $sth = $this->db->prepare("SELECT categoryName FROM categories");
+            $sth = $this->db->prepare("SELECT id, categoryName FROM categories");
             $sth->execute();
             return $sth->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -173,6 +173,14 @@
             $request->execute();
             return $request->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function getPostsByCategory($categoryId) {
+            $request = $this->db->prepare("SELECT * FROM posts WHERE categoryId = :categoryId");
+            $request->bindValue("categoryId", $categoryId);
+            $request->execute();
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
         // ------------- Setters ------------- 
         public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId, $postCategoryId) {
             if(!$this->isExist($postTitle, $postUserId, $postContent)) {

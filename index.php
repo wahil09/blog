@@ -3,6 +3,7 @@
     include "model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
+    $categories = $categoriesModel->getCategories();
 
     if(isset($_SESSION["user"], $_SESSION["role"])) {
         if($_SESSION["role"] == "user") {
@@ -55,14 +56,11 @@
                         <h2>Categories</h2>
                         <ul class="flex-c">
                             <?php 
-                            $categories = $categoriesModel->getCategories();
                             if(!empty($categories)) :?>
                                 <?php for($i=0; isset($categories[$i]); $i++) {
-                                    foreach($categories[$i] as $value) {
-                                        echo "
-                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
-                                        ";
-                                    }
+                                    echo "
+                                    <li><a href='posts_categories.php?id=".$categories[$i]['id']."'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($categories[$i]['categoryName'])."</span></a></li>
+                                    ";
                                 }?>
                             <?php else :?>
                                 <p>aucune categorie existe !</p>

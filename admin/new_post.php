@@ -3,6 +3,7 @@
     include "../model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
+    $categories = $categoriesModel->getCategories();
     if(!isset($_SESSION["user"], $_SESSION["role"])) {
         header("location: ../index.php");
         exit();
@@ -51,6 +52,7 @@
             }
         }
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -71,15 +73,11 @@
                             <label for="Categories">Categories : </label>
                             <select name="Categories" id="Categories" required>
                                 <option value="">Choisir un categorie ...</option>
-                                <?php
-                                    for($i=0; isset($categoriesModel->getCategories()[$i]); $i++) {
-                                        foreach($categoriesModel->getCategories()[$i] as $value) {
-                                            echo "
-                                            <option value='".htmlspecialchars($value)."'>".htmlspecialchars($value)."</option>
-                                            ";
-                                        }
-                                    }
-                                ?>
+                                <?php if(!empty($categories)) :?>
+                                    <?php for($i=0; isset($categories[$i]); $i++) :?>
+                                        <option value='<?= htmlspecialchars($categories[$i]["categoryName"]) ?>'><?= htmlspecialchars($categories[$i]["categoryName"]) ?></option>
+                                    <?php endfor ?>
+                                <?php endif ?>
                             </select>
                         </div>
                         <div class="inp-box">
@@ -100,14 +98,11 @@
                         <h2>Categories</h2>
                         <ul class="flex-c">
                             <?php 
-                            $categories = $categoriesModel->getCategories();
                             if(!empty($categories)) :?>
                                 <?php for($i=0; isset($categories[$i]); $i++) {
-                                    foreach($categories[$i] as $value) {
-                                        echo "
-                                        <li><a href='#'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($value)."</span></a></li>
-                                        ";
-                                    }
+                                    echo "
+                                    <li><a href='posts_categories.php?id=".$categories[$i]['id']."'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($categories[$i]['categoryName'])."</span></a></li>
+                                    ";
                                 }?>
                             <?php else :?>
                                 <p>aucune categorie existe !</p>

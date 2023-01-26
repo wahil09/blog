@@ -5,9 +5,8 @@
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
-    // condition pour que les utlisateurs peuvent lire tout l'article
     if(!isset($_SESSION["user"], $_SESSION["role"])) {
-        header("location: login.php");
+        header("location: ../index.php");
         exit();
     } else {
         if($_SESSION["role"] != "admin") {
@@ -15,21 +14,18 @@
             exit();
         } else {
             if(isset($_GET["logout"])) {
-                session_unset();
                 session_destroy();
-                header("location: index.php");
+                header("location: ../index.php");
                 exit();
+            }
+
+            if(isset($_GET["id"])) {
+                $categoriesId = $_GET["id"];
+                $posts = $postsModel->getPostsByCategory($categoriesId);
             }
         }
     }
-
-    $post = [];
-    if(isset($_GET["id"])) {
-        $postId = $_GET["id"];
-        $post = $postsModel->getPostSelected($postId);
-    }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr-FR">
     <?php include "../head.php" ?>
@@ -38,27 +34,31 @@
     <main class="content">
             <div class="container">
                 <section class='posts'>
-                    <article class='post'>
-                        <?php if(!empty($post)) :?>
-                            <div class='post-image'>
-                                <img src='../assets/img/posts_images/<?php echo $post['postImage'] ?>' alt=''>
-                            </div>
-                            <div class='post-title'>
-                                <h3><?php echo htmlspecialchars($post['postTitle']) ?></h3>
-                            </div>
-                            <div class='post-details'>
-                                <p class='post-info'>
-                                    <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($post['postAuthor']) ?></span>
-                                    <span><i class='fa-solid fa-calendar-days'></i><?php echo htmlspecialchars($post['postDate']) ?></span>
-                                    <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($post['postCat']) ?></span>
-                                </p>
-                                <p class='post-description'><?php echo htmlspecialchars($post['postContent']) ?></p>
-                                <a href="index.php" class='btn-custom'>Acceuil</a>
-                            </div>
-                        <?php else :?>
-                            <h3>Post supprimer</h3>
-                        <?php endif ?>
-                    </article>
+                    <h2 class="title">Articles :</h2>
+                    <?php 
+                    if(!empty($posts)) : ?>
+                        <?php for($i=0; isset($posts[$i]); $i++) : ?>
+                            <article class='post'>
+                                <div class='post-image'>
+                                    <img src='../assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'>
+                                </div>
+                                <div class='post-title'>
+                                    <h3><?php echo $posts[$i]['postTitle'] ?></h3>
+                                </div>
+                                <div class='post-details'>
+                                    <p class='post-info'>
+                                        <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($posts[$i]['postAuthor']) ?></span>
+                                        <span><i class='fa-solid fa-calendar-days'></i><?php echo htmlspecialchars($posts[$i]['postDate']) ?></span>
+                                        <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo $posts[$i]['postCat'] ?></span>
+                                    </p>
+                                    <p class='post-description'><?php echo htmlspecialchars(substr($posts[$i]['postContent'], 0, 300)) ?> ...</p>
+                                    <a href='post_page.php?id=<?php echo htmlspecialchars($posts[$i]['id']) ?>' class='btn-custom' >Lire Plus</a>
+                                </div>
+                            </article>
+                        <?php endfor; ?>
+                    <?php else : ?>
+                        <p>aucune Postes publier d'apres ce catégories !</p>
+                    <?php endif ?>
                 </section>
 
                 <div class="sidebar">
@@ -78,7 +78,7 @@
                         </ul>
                     </div>
                     <div class="row last-posts flex-c">
-                    <h2>dernier posts</h2>
+                        <h2>dernier posts</h2>
                         <ul class="flex-c">
                             <?php
                             $posts = $postsModel->getLastPosts();;
@@ -104,10 +104,9 @@
                 </div>
             </div>
         </main>
-    <?php 
+    <?php
         include "../footer.php";
     ?>
     <script src="../assets/js/script.js"></script>
-    
 </body>
 </html>
