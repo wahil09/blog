@@ -74,6 +74,16 @@
                 exit();
             }
         }
+
+        // pour modifier le profile
+        public function updateProfile($nouveauNom) {
+            $request = $this->db->prepare("UPDATE users SET userName = :nouveauNom WHERE id= :idUserCurrent");
+            $request->bindValue("nouveauNom", $nouveauNom);
+            $request->bindValue("idUserCurrent", $_SESSION['userId']);
+            $request->execute();
+
+            return $request->fetch();
+        }
     }
 
     class ModelCategories extends Connection {

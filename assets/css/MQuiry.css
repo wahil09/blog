@@ -72,6 +72,11 @@
         width: 100%;
     }
 
+    
+    .edit-profile .container .edit-form  .box-edit-form {
+        width: 45%;
+    }
+
     /* ---- End Présentation Style ---- */
 
 }
@@ -216,6 +221,13 @@
         --font-secondary: 1em;
     }
     
+    
+    /* ---- Start Présentation Style ---- */
+    .edit-profile .container .edit-form  .box-edit-form {
+        width: 100%;
+    }
+
+    /* ---- End Présentation Style ---- */
     /* --------------- Start Style Login Page ------------------ */
     .login .container-login {
         margin: 10px;
