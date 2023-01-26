@@ -9,8 +9,8 @@
         header("location: login.php");
         exit();
     } else {
-        if($_SESSION["role"] != "user") {
-            header("location: ../admin");
+        if($_SESSION["role"] != "admin") {
+            header("location: ../users");
             exit();
         } else {
             if(isset($_GET["logout"])) {

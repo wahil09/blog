@@ -41,7 +41,7 @@
                                         <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($posts[$i]['postCat']) ?></span>
                                     </p>
                                     <p class='post-description'><?php echo htmlspecialchars(substr($posts[$i]['postContent'], 0, 300)) ?> ...</p>
-                                    <a href='users/post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='btn-custom' >Lire Plus</a>
+                                    <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='btn-custom' >Lire Plus</a>
                                 </div>
                             </article>
                         <?php endfor; ?>
@@ -77,7 +77,7 @@
                             if($posts) :?>
                                 <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
-                                        <a href='users/post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
+                                        <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
                                             <span class='img-last-post'>
                                                 <img src='assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>'
                                                 alt='<?php echo $posts[$i]['postImage'] ?>'>
