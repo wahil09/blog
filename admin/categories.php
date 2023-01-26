@@ -3,10 +3,15 @@
     include "../model.php";
     $categoriesModel = new ModelCategories();
 
-    if(!isset($_SESSION["user"])) {
+    if(!isset($_SESSION["user"], $_SESSION["role"])) {
         header("location: ../index.php");
         exit();
     } else {
+        if($_SESSION["user"] != "admin") {
+            header("location: ../users/index.php");
+            exit();
+        }
+
         if(isset($_GET["logout"])) {
             session_unset();
             session_destroy();
@@ -35,7 +40,7 @@
     
         if(isset($_POST["category"])) {
             $category_name = $_POST["category"];
-            $categoriesModel->setCategories($category_name, $_SESSION["userId"]);
+            $categoriesModel->setCategories($category_name, $_SESSION["adminId"]);
         }
     }
 ?>

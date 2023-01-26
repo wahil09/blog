@@ -11,7 +11,8 @@
                 <ul class="menu flex-r">
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="?messages">Messages</a></li>
-                    <li><a href="?users">Users</a></li>
+                    <li><a href="afficher_users.php">Users</a></li>
+                    <li><a href="categories.php">Categories</a></li>
                     <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
                 </ul>
             </nav>
@@ -24,7 +25,8 @@
                 <ul class="menu-phone flex-c" id="menuPhone">
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="?messages">Messages</a></li>
-                    <li><a href="?users">Users</a></li>
+                    <li><a href="afficher_users.php">Users</a></li>
+                    <li><a href="categories.php">Categories</a></li>
                     <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
                 </ul>
             </div>
@@ -42,7 +44,6 @@
                             </ul>
                         </li>
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="categories.php">Categories</a></li>
                         <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
                     </ul>
                 </nav>
@@ -62,8 +63,6 @@
                             </ul>
                         </li>
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="categories.php">Categories</a></li>
-
                         <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
                     </ul>
                 </div>

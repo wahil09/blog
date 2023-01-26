@@ -15,11 +15,6 @@
         header("location: ../index.php");
         exit();
     }
-
-    if(isset($_GET['users'])) {
-        header("location: afficher_users.php");
-        exit();
-    }
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
