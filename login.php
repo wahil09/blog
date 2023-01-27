@@ -10,6 +10,7 @@
             if($userObject) {
                 $_SESSION["role"] = $userObject->role;
                 if($userObject->role == "user") {
+                    $_SESSION["login"] = $userObject;
                     $_SESSION["user"] = $userObject->username;
                     $_SESSION["userId"] = $userObject->id;
                 } elseif($userObject->role == "admin") {

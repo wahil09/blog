@@ -51,6 +51,12 @@
             } 
         }
 
+        function getUserDataById($userId) {
+            $request = $this->db->prepare("SELECT * FROM users WHERE id = $userId");
+            $request->execute();
+            return $request->fetchObject();
+        }
+
 
         // ------------- Setters ------------- -
         function setUser($username, $email, $password) {

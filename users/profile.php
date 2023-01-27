@@ -23,7 +23,7 @@
                 $nouveauPassword = $_POST["nPassword"];
                 // executer la modification
                 $usersModel->updateProfile($nouveauNom);
-                $_SESSION["user"] = $nouveauNom;
+                $_SESSION["login"] = $usersModel->getUserDataById($_SESSION["userId"]);
                 header("refresh:0");
                 exit();
             }
@@ -44,9 +44,8 @@
                         <img src="../assets/img/image.jpg" alt="image">
                     </div>
                     <div class="info-box flex-c">
-                        <h3><?php echo htmlspecialchars($_SESSION['user']) ?> welcome to your profile</h3>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam alias eius dolorem earum eaque blanditiis? Tenetur voluptatibus commodi quod in?</p>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam alias eius dolorem earum eaque blanditiis? Tenetur voluptatibus commodi quod in? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo obcaecati totam fuga numquam? Minus accusantium facilis quidem, quod aperiam aliquam.</p>
+                        <h3><?php echo htmlspecialchars($_SESSION['login']->username) ?> welcome to your profile</h3>
+                        <p><?php print_r($_SESSION['login']->presentation) ?></p>
                     </div>
                 </article>
             </div>
@@ -76,7 +75,7 @@
                     </div>
                     <div class="box-txt-area">
                         <h4>A Propos de moi :</h4>
-                        <textarea name="postContent" id="post-text" cols="90" rows="10" class='inp-edit-form'></textarea>
+                        <textarea name="presentation" id="presentation" cols="90" rows="10" class='inp-edit-form'></textarea>
                     </div>
 
                     <div class='box-btn'>
