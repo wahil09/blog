@@ -14,6 +14,7 @@
                     $_SESSION["user"] = $userObject->username;
                     $_SESSION["userId"] = $userObject->id;
                 } elseif($userObject->role == "admin") {
+                    $_SESSION["login"] = $userObject;
                     $_SESSION["user"] = $userObject->username;
                     $_SESSION["adminId"] = $userObject->id;
                 }
