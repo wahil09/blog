@@ -80,6 +80,8 @@
         </main>
         <?php
             include "../footer.php";
+            // On ferme la connexion
+            $categoriesModel->closeConnection();
         ?>
         <script src="../assets/js/script.js"></script>
     </body>

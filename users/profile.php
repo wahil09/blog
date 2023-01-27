@@ -88,7 +88,10 @@
             </div>
         </section>
     </main>
-    <?php include "../footer.php" ?>
+    <?php include "../footer.php";
+        // on ferme la connexion
+        $usersModel->closeConnection(); 
+    ?>
     <script src="../assets/js/script.js"></script>
 </body>
 </html>

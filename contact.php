@@ -1,3 +1,18 @@
+<?php 
+    session_start();
+    if(isset($_SESSION["login"])) {
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION["login"]->role == "user") {
+                header("location: users/index.php");
+                exit();
+            } else {
+                header("location: admin/index.php");
+                exit();
+            }
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="fr-FR">
     <?php include "head.php" ?>

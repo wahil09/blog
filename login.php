@@ -24,16 +24,19 @@
         } else {
             $_SESSION["error"] = true;
         }
+        // on ferme la connexion
         $usersModel->closeConnection();
     }
 
     if(isset($_SESSION["login"])) {
-        if($_SESSION["login"]->role == "user") {
-            header("location: users/index.php");
-            exit();
-        } else {
-            header("location: admin/index.php");
-            exit();
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION["login"]->role == "user") {
+                header("location: users/index.php");
+                exit();
+            } else {
+                header("location: admin/index.php");
+                exit();
+            }
         }
     }
 

@@ -6,12 +6,14 @@
     $categories = $categoriesModel->getCategories();
     
     if(isset($_SESSION["login"])) {
-        if($_SESSION["login"]->role == "user") {
-            header("location: users");
-            exit();
-        } else {
-            header("location: admin");
-            exit();
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION["login"]->role == "user") {
+                header("location: users");
+                exit();
+            } else {
+                header("location: admin");
+                exit();
+            }
         }
     }
 
