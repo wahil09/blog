@@ -33,7 +33,7 @@
     background-color: #c239da;
 }
 
-.afficher-login-box {
+.afficher-error-box {
     display: block !important;
 }
 
@@ -100,6 +100,10 @@
 
 .c-black {
     color: rgb(0, 0, 0) !important;
+}
+
+.error-msg {
+    color: red !important;
 }
 
 .flex-r {
@@ -610,7 +614,7 @@ footer .container ul a i {
 
 
 /* ------- Start Style Error Login -------- */
-body .error-login-box {
+body .error-box {
     position: absolute;
     display: none;
     background-color: rgb(139 0 0 / 85%);
@@ -622,24 +626,24 @@ body .error-login-box {
     padding: 10px 20px;
 }
 
-body .error-login-box .row-1 {
+body .error-box .row-1 {
     justify-content: space-between;
     padding: 10px 0
 }
 
-body .error-login-box .row-1 span {
+body .error-box .row-1 span {
     cursor: pointer;
 }
 
-body .error-login-box .row-1 span i {
+body .error-box .row-1 span i {
     font-size: 1.5em;
 }
 
-body .error-login-box .row-2 {
+body .error-box .row-2 {
     height: 70%;
 }
 
-body .error-login-box .row-2 {
+body .error-box .row-2 {
     font-size: 1.2em;
 }
 

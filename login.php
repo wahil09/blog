@@ -16,9 +16,11 @@
                 }
             } else {
                 $_SESSION["error_login_user"] = $email;
+                header("refresh:0");
+                exit();
             }
         } else {
-            $_SESSION["error"] = true;
+            $_SESSION["champs-vide"] = true;
         }
         // on ferme la connexion
         $usersModel->closeConnection();
@@ -34,7 +36,7 @@
                 exit();
             }
         }
-    }
+    } 
 
     if (isset($_SESSION["user_inscrit"])) {
         $user_inscrit = $_SESSION["user_inscrit"];
@@ -43,23 +45,8 @@
             </script>";
         unset($_SESSION['user_inscrit']);
     };
-
-    if(isset($_SESSION['error_login_user'])) {
-        $user_veut_connecter = $_SESSION['error_login_user'];
-        echo '<script>
-                alert("'.$user_veut_connecter.' votre identifiant n\'est pas valide !");
-            </script>';
-        unset($_SESSION['error_login_user']);
-    }
-
-    if(isset($_SESSION["user_exist"])) {
-        $user_exist = $_SESSION["user_exist"];
-        echo '<script>
-            alert("Désoli! cette email : '.$user_exist.' est déja utiliser ? !")
-        </script>';
-        unset($_SESSION["user_exist"]);
-    }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr-FR">
     <?php include "head.php" ?>
@@ -76,6 +63,11 @@
                     <li><a class="flex-r" href="#"><img src="assets/img/icon-google.png">Google</a></li>
                 </ul>
                 <form action="" method="post" class="row-box flex-c">
+                    <!-- afficher un paragraph quand les informations entrer pas valide -->
+                    <?php if(isset($_SESSION['error_login_user'])) {
+                        echo "<p class='error-msg'>votre identifiant n'est pas valide !</p>";
+                        unset($_SESSION['error_login_user']);
+                    } ?>
                     <div class="inp-box">
                         <label for="email">Email</label>
                         <input class="inp" type="email" name="email" id="email" required>
@@ -91,32 +83,28 @@
                 <p>Not a member? <a href="register.php">Sign up now</a></p>
             </div>
         </section>
-        <div class="error-login-box" id="errorLoginBox">
+        <div class="error-box" id="errorLoginBox">
             <div class="row-1 flex-r">
                 <h3>Login failed</h3>
                 <span id="supErrorLoginBox"><i class="fa-solid fa-xmark"></i></span>
             </div>
             <hr>
             <div class="row-2 flex-r">
-                <p>Login failed: Remplire le formulaire !</p>
+                <p>Login failed: formulaire Vide !</p>
             </div>
         </div>
         <?php 
-            if(isset($_SESSION['error'])) {
-                echo "
+            if(isset($_SESSION['champs-vide'])) { ?>
                     <script>
                         const errorLoginBox = document.querySelector('#errorLoginBox');
-                        errorLoginBox.classList.add('afficher-login-box');
+                        errorLoginBox.classList.add('afficher-error-box');
 
                         const supErrorLoginBox = document.querySelector('#supErrorLoginBox');
 
                         supErrorLoginBox.addEventListener('click', function() {
-                            errorLoginBox.classList.remove('afficher-login-box');
+                            errorLoginBox.classList.remove('afficher-error-box');
                         })
-                    </script>";
-            }
-            unset($_SESSION['error']);
-        ?>
-
+                    </script>
+            <?php }; unset($_SESSION['champs-vide']); ?>
     </body>
 </html>

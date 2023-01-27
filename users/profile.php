@@ -52,7 +52,7 @@
                         <h3><?php echo htmlspecialchars($_SESSION['login']->username) ?> welcome to your profile</h3>
                         <p><?php echo $_SESSION['login']->presentation ?></p>
                         <p>Métier : <?php echo $_SESSION['login']->job ?></p>
-                        <p>Métier : <?php echo $_SESSION['login']->email ?></p>
+                        <p>Email : <?php echo $_SESSION['login']->email ?></p>
                     </div>
                 </article>
             </div>

@@ -84,7 +84,7 @@
                 exit();
             } else {
                 $_SESSION["user_exist"] = $email;
-                header("location: login.php");
+                header("location: register.php");
                 exit();
             }
         }
