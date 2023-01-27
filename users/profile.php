@@ -6,11 +6,12 @@
         header("location: ../index.php");
         exit();
     } else {
+        
         if(isset($_SESSION["login"]->role)) {
             if($_SESSION["login"]->role != "user") {
                 header("location: ../admin");
                 exit();
-            } else {
+        } else {
                 if(isset($_GET["logout"])) {
                     session_unset();
                     session_destroy();
@@ -51,6 +52,7 @@
                         <h3><?php echo htmlspecialchars($_SESSION['login']->username) ?> welcome to your profile</h3>
                         <p><?php echo $_SESSION['login']->presentation ?></p>
                         <p>Métier : <?php echo $_SESSION['login']->job ?></p>
+                        <p>Métier : <?php echo $_SESSION['login']->email ?></p>
                     </div>
                 </article>
             </div>

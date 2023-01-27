@@ -30,6 +30,14 @@
             $result = str_replace('"', '\"', $singleQuote);
             return $result;
         }
+
+        // return la valeur par défaut si la valeur est vide (update profile)
+        public function isEmpty($val, $valParDefaut) {
+            if(!isset($val) || empty($val)) {
+                return $valParDefaut;
+            }
+            return $val;
+        }
     }
 
     class ModelUsers extends Connection {
@@ -84,15 +92,14 @@
         // pour modifier le profile
         public function updateProfile($nouveauNom, $nouveauEmail, $nouveauPassword, $nouveauMetier, $nouveauPresentation) {
             $request = $this->db->prepare("UPDATE users SET username = :nouveauNom, email = :nouveauEmail, password = :nouveauPassword, job = :nouveauMetier, presentation = :nouveauPresentation WHERE id= :idUserCurrent");
-            $request->bindValue("nouveauNom", $nouveauNom);
-            $request->bindValue("nouveauEmail", $nouveauEmail);
-            $request->bindValue("nouveauPassword", $nouveauPassword);
-            $request->bindValue("nouveauMetier", $nouveauMetier);
-            $request->bindValue("nouveauPresentation", $nouveauPresentation);
+            $request->bindValue("nouveauNom", $this->isEmpty($nouveauNom, $_SESSION['login']->username));
+            $request->bindValue("nouveauEmail", $this->isEmpty($nouveauEmail, $_SESSION['login']->email));
+            $request->bindValue("nouveauPassword", $this->isEmpty($nouveauPassword, $_SESSION['login']->password));
+            $request->bindValue("nouveauMetier", $this->isEmpty($nouveauMetier, $_SESSION['login']->job));
+            $request->bindValue("nouveauPresentation", $this->isEmpty($nouveauPresentation, $_SESSION['login']->presentation));    
 
             $request->bindValue("idUserCurrent", $_SESSION['login']->id);
             $request->execute();
-
             return $request->fetch();
         }
     }
