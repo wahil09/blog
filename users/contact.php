@@ -1,15 +1,22 @@
 <?php 
     session_start();
-    if(!isset($_SESSION["user"])) {
+    if(!isset($_SESSION["login"])) {
         header("location: ../index.php");
         exit();
-    }
-
-    if(isset($_GET["logout"])) {
-        session_unset();
-        session_destroy();
-        header("location: ../index.php");
-        exit();
+    } else {
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION["login"]->role != "user") {
+                header("location: ../admin");
+                exit();
+            } else {
+                if(isset($_GET["logout"])) {
+                    session_unset();
+                    session_destroy();
+                    header("location: ../index.php");
+                    exit();
+                }
+            }
+        }
     }
 ?>
 <!DOCTYPE html>

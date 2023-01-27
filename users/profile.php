@@ -2,31 +2,33 @@
     session_start();
     include "../model.php";
     $usersModel = new ModelUsers();
-    if(!isset($_SESSION["user"], $_SESSION["role"])) {
+    if(!isset($_SESSION["login"])) {
         header("location: ../index.php");
         exit();
     } else {
-        if($_SESSION["role"] != "user") {
-            header("location: ../admin");
-            exit();
-        } else {
-            if(isset($_GET["logout"])) {
-                session_unset();
-                session_destroy();
-                header("location: ../index.php");
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION["login"]->role != "user") {
+                header("location: ../admin");
                 exit();
-            }
-
-            // si l'utilisateur clicker sur le button submit
-            if(isset($_POST["nName"], $_POST["nEmail"], $_POST["nPassword"])) {
-                $nouveauNom = $_POST["nName"];
-                $nouveauEmail = $_POST["nEmail"];
-                $nouveauPassword = $_POST["nPassword"];
-                // executer la modification
-                $usersModel->updateProfile($nouveauNom);
-                $_SESSION["login"] = $usersModel->getUserDataById($_SESSION["userId"]);
-                header("refresh:0");
-                exit();
+            } else {
+                if(isset($_GET["logout"])) {
+                    session_unset();
+                    session_destroy();
+                    header("location: ../index.php");
+                    exit();
+                }
+    
+                // si l'utilisateur clicker sur le button submit
+                if(isset($_POST["nName"], $_POST["nEmail"], $_POST["nPassword"])) {
+                    $nouveauNom = $_POST["nName"];
+                    $nouveauEmail = $_POST["nEmail"];
+                    $nouveauPassword = $_POST["nPassword"];
+                    // executer la modification
+                    $usersModel->updateProfile($nouveauNom);
+                    $_SESSION["login"] = $usersModel->getUserDataById($_SESSION["userId"]);
+                    header("refresh:0");
+                    exit();
+                }
             }
         }
     }

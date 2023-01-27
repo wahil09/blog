@@ -6,17 +6,17 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
     </style>
-<?php if(isset($_SESSION["role"])) :?>
+<?php if(isset($_SESSION["login"])) :?>
     <!-- pour les inscrits -->
     <link rel="stylesheet" href="../assets/css/all.css">
     <style>
         <?php include "../assets/css/style.css" ?>
         <?php include "../assets/css/MQuiry.css" ?>
     </style>
-    <title><?php echo $_SESSION['role']?></title>
+    <title><?php echo $_SESSION['login']->role?></title>
 
     <!-- Config de l'admin -->
-    <?php if($_SESSION["role"] == "admin") :?>
+    <?php if($_SESSION["login"]->role == "admin") :?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="../assets/js/jquery.cookie.js"></script>
@@ -30,7 +30,7 @@
         </script>
 
     <!-- Config de l'utilisateur -->
-    <?php elseif($_SESSION['role'] == "user") :?>
+    <?php elseif($_SESSION['login']->role == "user") :?>
         
     <?php endif; ?>
 

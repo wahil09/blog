@@ -3,44 +3,46 @@
     include "../model.php";
     $categoriesModel = new ModelCategories();
 
-    if(!isset($_SESSION["user"], $_SESSION["role"])) {
+    if(!isset($_SESSION["login"])) {
         header("location: ../index.php");
         exit();
     } else {
-        if($_SESSION["user"] != "admin") {
-            header("location: ../users/index.php");
-            exit();
-        }
-
-        if(isset($_GET["logout"])) {
-            session_unset();
-            session_destroy();
-            header("location: ../index.php");
-            exit();
-        }
-
-        if (isset($_SESSION["category_ajouter"])) {
-            $category_ajouter = $_SESSION["category_ajouter"];
-            echo "<script>
-                    alert('$category_ajouter est bien ajouter !');
-                </script>";
-            unset($_SESSION['category_ajouter']);
-            // header("location: new_post.php");
-            header('refresh: 0.5; URL=new_post.php');
-            exit();
-        };
-    
-        if(isset($_SESSION["category_exist"])) {
-            $category_exist = $_SESSION["category_exist"];
-            echo "<script>
-                alert('Désoli! ce categorie: \"$category_exist\" est déja Ajouter ? !');
-            </script>";
-            unset($_SESSION["category_exist"]);
-        }
-    
-        if(isset($_POST["category"])) {
-            $category_name = $_POST["category"];
-            $categoriesModel->setCategories($category_name, $_SESSION["adminId"]);
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION["login"]->role != "admin") {
+                header("location: ../users/index.php");
+                exit();
+            } else {
+                if(isset($_GET["logout"])) {
+                    session_unset();
+                    session_destroy();
+                    header("location: ../index.php");
+                    exit();
+                }
+        
+                if (isset($_SESSION["category_ajouter"])) {
+                    $category_ajouter = $_SESSION["category_ajouter"];
+                    echo "<script>
+                            alert('$category_ajouter est bien ajouter !');
+                        </script>";
+                    unset($_SESSION['category_ajouter']);
+                    // header("location: new_post.php");
+                    header('refresh: 0.5; URL=new_post.php');
+                    exit();
+                };
+            
+                if(isset($_SESSION["category_exist"])) {
+                    $category_exist = $_SESSION["category_exist"];
+                    echo "<script>
+                        alert('Désoli! ce categorie: \"$category_exist\" est déja Ajouter ? !');
+                    </script>";
+                    unset($_SESSION["category_exist"]);
+                }
+            
+                if(isset($_POST["category"])) {
+                    $category_name = $_POST["category"];
+                    $categoriesModel->setCategories($category_name, $_SESSION["login"]->id);
+                }
+            }
         }
     }
 ?>

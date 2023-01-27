@@ -4,22 +4,25 @@
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
 
-    if(!isset($_SESSION["user"], $_SESSION["role"])) {
+    if(!isset($_SESSION["login"])) {
         header("location: ../index.php");
         exit();
     } else {
-        if($_SESSION['role'] != "admin") {
-            header("location: ../users/index.php");
-            exit();
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION['login']->role != "admin") {
+                header("location: ../users/");
+                exit();
+            } else {
+                if(isset($_GET["logout"])) {
+                    session_unset();
+                    session_destroy();
+                    header("location: ../index.php");
+                    exit();
+                }
+            }
         }
     }
 
-    if(isset($_GET["logout"])) {
-        session_unset();
-        session_destroy();
-        header("location: ../index.php");
-        exit();
-    }
 ?>
 
 <!DOCTYPE html>

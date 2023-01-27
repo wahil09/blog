@@ -2,9 +2,14 @@
     session_start();
     include "model.php";
     $usersModel = new ModelUsers();
-    if(isset($_SESSION['user'])) {
-        header('location: index.php');
-        exit();
+    if(isset($_SESSION['login'])) {
+        if($_SESSION["login"]->role == "user") {
+            header("location: users/");
+            exit();
+        } else {
+            header("location: admin/");
+            exit();
+        }
     }
 
     if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {

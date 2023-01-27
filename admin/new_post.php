@@ -4,52 +4,54 @@
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
-    if(!isset($_SESSION["user"], $_SESSION["role"])) {
+    if(!isset($_SESSION["login"])) {
         header("location: ../index.php");
         exit();
     } else {
-        if($_SESSION["role"] != "admin") {
-            header("location: ../users/index.php");
-            exit();
-        } else {
-            if(isset($_GET["logout"])) {
-                session_unset();
-                session_destroy();
-                header("location: ../index.php");
-            }
-        
-            if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
-                $postTitle = $_POST["postTitle"];
-                $postContent = $_POST["postContent"];
-                $postAdminId = $_SESSION["adminId"];
-                $postCat = $_POST["Categories"];
-                $postAuthor = $_SESSION["user"];
-                $postImage = $_FILES["imageToUpload"]["name"];
-                if($postsModel->imageExist($postImage)) {
-                    echo 
-                        "<script>
-                            alert('image existe, change le nom de l\'image !');
-                        </script>";
-                } else {
-                    $postCategoryId = $categoriesModel->getCategoryId($postCat);
-                    $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postAdminId, $postCategoryId);
-                    if(isset($_SESSION['post-partager'])) {
-                        if($_SESSION["post-partager"]) {
-                            echo "<script>
-                                alert('Post Partager !');
+        if(isset($_SESSION['login']->role)) {
+            if($_SESSION["login"]->role != "admin") {
+                header("location: ../users/index.php");
+                exit();
+            } else {
+                if(isset($_GET["logout"])) {
+                    session_unset();
+                    session_destroy();
+                    header("location: ../index.php");
+                }
+            
+                if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
+                    $postTitle = $_POST["postTitle"];
+                    $postContent = $_POST["postContent"];
+                    $postAdminId = $_SESSION["adminId"];
+                    $postCat = $_POST["Categories"];
+                    $postAuthor = $_SESSION["user"];
+                    $postImage = $_FILES["imageToUpload"]["name"];
+                    if($postsModel->imageExist($postImage)) {
+                        echo 
+                            "<script>
+                                alert('image existe, change le nom de l\'image !');
                             </script>";
-                            include "upload_image.php";
-                            unset($_SESSION["post-partager"]);
-                            header("location: ". "index.php"); // changer ca en refresh
-                            exit();
-                        } else {
-                            echo "<script>
-                                alert('Post no partager / Exist déja !');
-                            </script>";
-                            unset($_SESSION["post-partager"]);
+                    } else {
+                        $postCategoryId = $categoriesModel->getCategoryId($postCat);
+                        $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postAdminId, $postCategoryId);
+                        if(isset($_SESSION['post-partager'])) {
+                            if($_SESSION["post-partager"]) {
+                                echo "<script>
+                                    alert('Post Partager !');
+                                </script>";
+                                include "upload_image.php";
+                                unset($_SESSION["post-partager"]);
+                                header("location: ". "index.php"); // changer ca en refresh
+                                exit();
+                            } else {
+                                echo "<script>
+                                    alert('Post no partager / Exist déja !');
+                                </script>";
+                                unset($_SESSION["post-partager"]);
+                            }
                         }
-                    }
-                }     
+                    }     
+                }
             }
         }
     }

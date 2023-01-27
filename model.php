@@ -85,7 +85,7 @@
         public function updateProfile($nouveauNom) {
             $request = $this->db->prepare("UPDATE users SET userName = :nouveauNom WHERE id= :idUserCurrent");
             $request->bindValue("nouveauNom", $nouveauNom);
-            $request->bindValue("idUserCurrent", $_SESSION['userId']);
+            $request->bindValue("idUserCurrent", $_SESSION['login']->id);
             $request->execute();
 
             return $request->fetch();

@@ -5,8 +5,8 @@
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
-    if(isset($_SESSION["user"], $_SESSION["role"])) {
-        if($_SESSION["role"] == "user") {
+    if(isset($_SESSION["login"])) {
+        if($_SESSION["login"]->role == "user") {
             header("location: users/index.php");
             exit();
         } else {

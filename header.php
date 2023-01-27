@@ -1,17 +1,16 @@
 <header>
     <div class="container flex-r">
-        <?php if(isset($_SESSION["role"])) :?>
+        <?php if(isset($_SESSION["login"])) :?>
             <div class="logo-box">
                 <h1><?php echo htmlspecialchars($_SESSION["login"]->username) ?></h1>
             </div>
             <!-- Config de l'admin -->
-            <?php if($_SESSION["role"] == "admin") :?>
+            <?php if($_SESSION["login"]->role == "admin") :?>
             <!-- bar du navigation pour les grand écrans -->
             <nav>
                 <ul class="menu flex-r">
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="?messages">Messages</a></li>
-                    <li><a href="?messages">Dashboard</a></li>
                     <li><a href="afficher_users.php">Users</a></li>
                     <li class="li-article"><span>Articles</span>
                         <ul class="last-ul">
@@ -44,7 +43,7 @@
                 </ul>
             </div>
             <!-- Config de l'utilisateur -->
-            <?php elseif($_SESSION['role'] == "user") :?>
+            <?php elseif($_SESSION["login"]->role == "user") :?>
                 <!-- bar du navigation pour les grand écrans -->
                 <nav>
                     <ul class="menu flex-r">

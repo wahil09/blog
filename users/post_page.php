@@ -6,19 +6,21 @@
     $categories = $categoriesModel->getCategories();
 
     // condition pour que les utlisateurs peuvent lire tout l'article
-    if(!isset($_SESSION["user"], $_SESSION["role"])) {
+    if(!isset($_SESSION["login"])) {
         header("location: login.php");
         exit();
     } else {
-        if($_SESSION["role"] != "user") {
-            header("location: ../admin");
-            exit();
-        } else {
-            if(isset($_GET["logout"])) {
-                session_unset();
-                session_destroy();
-                header("location: index.php");
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION["login"]->role != "user") {
+                header("location: ../admin");
                 exit();
+            } else {
+                if(isset($_GET["logout"])) {
+                    session_unset();
+                    session_destroy();
+                    header("location: index.php");
+                    exit();
+                }
             }
         }
     }

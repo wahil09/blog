@@ -5,19 +5,21 @@
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
-    if(!isset($_SESSION["user"], $_SESSION["role"])) {
+    if(!isset($_SESSION["login"])) {
         header("location: ../index.php");
         exit();
     } else {
-        if($_SESSION["role"] != "user") {
-            header("location: ../admin");
-            exit();
-        } else {
-            if(isset($_GET["logout"])) {
-                session_unset();
-                session_destroy();
-                header("location: ../index.php");
+        if(isset($_SESSION["login"]->role)) {
+            if($_SESSION["login"]->role != "user") {
+                header("location: ../admin");
                 exit();
+            } else {
+                if(isset($_GET["logout"])) {
+                    session_unset();
+                    session_destroy();
+                    header("location: ../index.php");
+                    exit();
+                }
             }
         }
     }

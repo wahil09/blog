@@ -1,16 +1,16 @@
 <footer>
     <div class="container flex-r">
         <p>&copy; All rights reserved </p>
-        <?php if(isset($_SESSION["role"])) :?>
+        <?php if(isset($_SESSION["login"])) :?>
             <ul class="flex-r">
-                <li><a href="#"><i class="fa-brands fa-github"></i><?php echo htmlspecialchars($_SESSION['user']) ?>-github</a></li>
-                <li><a href="#"><i class="fa-brands fa-linkedin"></i><?php echo htmlspecialchars($_SESSION['user']) ?>-linkedin</a></li>
+                <li><a href="#"><i class="fa-brands fa-github"></i><?php echo htmlspecialchars($_SESSION['login']->username) ?>-github</a></li>
+                <li><a href="#"><i class="fa-brands fa-linkedin"></i><?php echo htmlspecialchars($_SESSION['login']->username) ?>-linkedin</a></li>
             </ul>
             <!-- Config de l'admin -->
-            <?php if($_SESSION["role"] == "admin") :?>
+            <?php if($_SESSION["login"]->role == "admin") :?>
                 <!-- rien pour le moment -->
                 <!-- Config de l'utilisateur -->
-            <?php elseif($_SESSION['role'] == "user") :?>
+            <?php elseif($_SESSION["login"]->role == "user") :?>
                 <!-- rien pour le moment -->
             <?php endif; ?>
         
