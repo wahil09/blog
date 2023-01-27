@@ -25,7 +25,7 @@
                     $nouveauPassword = $_POST["nPassword"];
                     // executer la modification
                     $usersModel->updateProfile($nouveauNom);
-                    $_SESSION["login"] = $usersModel->getUserDataById($_SESSION["userId"]);
+                    $_SESSION["login"] = $usersModel->getUserDataById($_SESSION["login"]->id);
                     header("refresh:0");
                     exit();
                 }

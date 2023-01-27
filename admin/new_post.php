@@ -22,9 +22,9 @@
                 if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
                     $postTitle = $_POST["postTitle"];
                     $postContent = $_POST["postContent"];
-                    $postAdminId = $_SESSION["adminId"];
                     $postCat = $_POST["Categories"];
-                    $postAuthor = $_SESSION["user"];
+                    $postAdminId = $_SESSION["login"]->id;
+                    $postAuthor = $_SESSION["login"]->postAuthor;
                     $postImage = $_FILES["imageToUpload"]["name"];
                     if($postsModel->imageExist($postImage)) {
                         echo 
