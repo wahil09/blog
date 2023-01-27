@@ -82,9 +82,14 @@
         }
 
         // pour modifier le profile
-        public function updateProfile($nouveauNom) {
-            $request = $this->db->prepare("UPDATE users SET userName = :nouveauNom WHERE id= :idUserCurrent");
+        public function updateProfile($nouveauNom, $nouveauEmail, $nouveauPassword, $nouveauMetier, $nouveauPresentation) {
+            $request = $this->db->prepare("UPDATE users SET username = :nouveauNom, email = :nouveauEmail, password = :nouveauPassword, job = :nouveauMetier, presentation = :nouveauPresentation WHERE id= :idUserCurrent");
             $request->bindValue("nouveauNom", $nouveauNom);
+            $request->bindValue("nouveauEmail", $nouveauEmail);
+            $request->bindValue("nouveauPassword", $nouveauPassword);
+            $request->bindValue("nouveauMetier", $nouveauMetier);
+            $request->bindValue("nouveauPresentation", $nouveauPresentation);
+
             $request->bindValue("idUserCurrent", $_SESSION['login']->id);
             $request->execute();
 

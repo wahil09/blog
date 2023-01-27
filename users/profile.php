@@ -17,14 +17,15 @@
                     header("location: ../index.php");
                     exit();
                 }
-    
                 // si l'utilisateur clicker sur le button submit
-                if(isset($_POST["nName"], $_POST["nEmail"], $_POST["nPassword"])) {
+                if(isset($_POST["nName"], $_POST["nEmail"], $_POST["nPassword"], $_POST["nMetier"], $_POST["nPresentation"])) {
                     $nouveauNom = $_POST["nName"];
                     $nouveauEmail = $_POST["nEmail"];
                     $nouveauPassword = $_POST["nPassword"];
+                    $nouveauMetier = $_POST["nMetier"];
+                    $nouveauPresentation = $_POST["nPresentation"];
                     // executer la modification
-                    $usersModel->updateProfile($nouveauNom);
+                    $usersModel->updateProfile($nouveauNom, $nouveauEmail, $nouveauPassword, $nouveauMetier, $nouveauPresentation);
                     $_SESSION["login"] = $usersModel->getUserDataById($_SESSION["login"]->id);
                     header("refresh:0");
                     exit();
@@ -48,7 +49,8 @@
                     </div>
                     <div class="info-box flex-c">
                         <h3><?php echo htmlspecialchars($_SESSION['login']->username) ?> welcome to your profile</h3>
-                        <p><?php print_r($_SESSION['login']->presentation) ?></p>
+                        <p><?php echo $_SESSION['login']->presentation ?></p>
+                        <p>Métier : <?php echo $_SESSION['login']->job ?></p>
                     </div>
                 </article>
             </div>
@@ -78,7 +80,7 @@
                     </div>
                     <div class="box-txt-area">
                         <h4>A Propos de moi :</h4>
-                        <textarea name="presentation" id="presentation" cols="90" rows="10" class='inp-edit-form'></textarea>
+                        <textarea name="nPresentation" id="nPresentation" cols="90" rows="10" class='inp-edit-form'></textarea>
                     </div>
 
                     <div class='box-btn'>
