@@ -6,16 +6,22 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
         if(!empty($email) && !empty($password)) {
-            $userObject = $usersModel->userAlreadyRegistered($email, $password);
-            if($userObject) {
-                $_SESSION["role"] = $userObject->role;
-                if($userObject->role == "user") {
-                    $_SESSION["login"] = $userObject;
-                } elseif($userObject->role == "admin") {
-                    $_SESSION["login"] = $userObject;
-                }
+            if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $userObject = $usersModel->userAlreadyRegistered($email, $password);
+                if($userObject) {
+                    $_SESSION["role"] = $userObject->role;
+                    if($userObject->role == "user") {
+                        $_SESSION["login"] = $userObject;
+                    } elseif($userObject->role == "admin") {
+                        $_SESSION["login"] = $userObject;
+                    }
+                } else {
+                    $_SESSION["error_login_user"] = $email;
+                    header("refresh:0");
+                    exit();
+                } 
             } else {
-                $_SESSION["error_login_user"] = $email;
+                $_SESSION["email-error"] = true;
                 header("refresh:0");
                 exit();
             }
@@ -71,6 +77,10 @@
                     <div class="inp-box">
                         <label for="email">Email</label>
                         <input class="inp" type="email" name="email" id="email" required>
+                        <?php if(isset($_SESSION["email-error"])) {
+                            echo "<p class='error-msg'>Entrer validate email !</p>";
+                            unset($_SESSION['email-error']);
+                        }?>
                     </div>
                     <div class="inp-box">
                         <label for="password">Password</label><!-- <a href="#">Forgot?</a> -->

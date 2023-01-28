@@ -20,7 +20,9 @@
 
 .return-acceuil a {
     display: block;
-    padding: 20px 25px;
+    text-align: center;
+    width: 100px;
+    padding: 15px;
     background-color: #333;
     color: white;
     border-radius: 20px;
@@ -28,6 +30,7 @@
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
+    font-size: clamp(.8em, 2.5vw, 1em);
 }
 .return-acceuil a:hover {
     background-color: #c239da;
@@ -104,6 +107,7 @@
 
 .error-msg {
     color: red !important;
+    font-size: .8em !important;
 }
 
 .flex-r {
@@ -670,7 +674,7 @@ body .error-box .row-2 {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
-    margin: 0 15px;
+    margin: 15px;
 }
 
 .register-body .register .container-register {
@@ -691,7 +695,7 @@ body .error-box .row-2 {
 
 .register-body .register .container-register h3 {
     font-weight: 100;
-    font-size: 25px;
+    font-size: clamp(.9em, 2.5vw, 1.2em);
 }
 
 .register-body .register .container-register .register-form {
@@ -706,13 +710,14 @@ body .error-box .row-2 {
 .register-body .register .container-register .register-form .form-group label {
     display: block;
     margin: 13px 0;
-    font-size: 13px;
+    font-size: clamp(.6em, 2.5vw, .8em);
     font-weight: 400;
 }
 
 .register-body .register .container-register .register-form .form-group input {
     width: 100%;
-    height: 52px;
+    height: clamp(35px, 2.5vw, 50px);
+    font-size: clamp(.8em, 2.5vw, .8em);
     padding: 10px 20px;
     outline: none;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -722,7 +727,6 @@ body .error-box .row-2 {
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
     background: #3C3D47;
-    font-size: 16px;
     color: white;
 }
 
@@ -732,13 +736,12 @@ body .error-box .row-2 {
 }
 
 .register-body .register .container-register p {
-    font-size: 15px;
+    font-size: clamp(.8em, 2.5vw, .9em);
     color: #8a8a8f;
 }
 
 .register-body .register .container-register p a {
     color: #01D28E;
-    font-size: 15px;
 }
 /* ---------------------- End Style Register Page ----------------------- */
 
