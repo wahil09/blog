@@ -25,22 +25,17 @@
                             alert('$category_ajouter est bien ajouter !');
                         </script>";
                     unset($_SESSION['category_ajouter']);
-                    // header("location: new_post.php");
                     header('refresh: 0.5; URL=new_post.php');
                     exit();
                 };
             
-                if(isset($_SESSION["category_exist"])) {
-                    $category_exist = $_SESSION["category_exist"];
-                    echo "<script>
-                        alert('Désoli! ce categorie: \"$category_exist\" est déja Ajouter ? !');
-                    </script>";
-                    unset($_SESSION["category_exist"]);
-                }
-            
                 if(isset($_POST["category"])) {
-                    $category_name = $_POST["category"];
-                    $categoriesModel->setCategories($category_name, $_SESSION["login"]->id);
+                    if(!empty($_POST["category"])) {
+                        $category_name = $_POST["category"];
+                        $categoriesModel->setCategories($category_name, $_SESSION["login"]->id);
+                    } else {
+                        $_SESSION["champs-vide"] = true;
+                    }
                 }
             }
         }
@@ -56,6 +51,17 @@
                 <form method="post" class="form-categorie">
                     <label for="category">New Category :</label>
                     <input type="text" name="category" id="category" required>
+                    <?php 
+                        if(isset($_SESSION["category_exist"])) {
+                            echo "<p class='error-msg'>Category existe déja !</p>";
+                            unset($_SESSION["category_exist"]);
+                        }
+                        if(isset($_SESSION['champs-vide'])) {
+                            echo "<p class='error-msg'>Champs vide !</p>";
+                            unset($_SESSION["champs-vide"]);
+                        }
+                    ?>
+
                     <input type="submit" value="Ajouter">
                 </form>
                 <div class="sidebar">
