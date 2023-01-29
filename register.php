@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     include "model.php";
     $usersModel = new ModelUsers();
     if(isset($_SESSION['login'])) {

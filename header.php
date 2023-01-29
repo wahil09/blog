@@ -10,7 +10,7 @@
             <nav>
                 <ul class="menu flex-r">
                     <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="?messages">Messages</a></li>
+                    <li><a href="dashboard.php">Dashboard</a></li>
                     <li><a href="afficher_users.php">Users</a></li>
                     <li class="li-article"><span>Articles</span>
                         <ul class="last-ul">

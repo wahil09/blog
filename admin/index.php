@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     include "../model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
@@ -22,7 +21,6 @@
             }
         }
     }
-
 ?>
 
 <!DOCTYPE html>
