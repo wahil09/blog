@@ -17,6 +17,10 @@ a {
 
 :root {
     --f-size-primary: clamp(1em, 2.5vw, 1em);
+    --h-header: 65px;
+
+    /* --- color --- */
+    --m-color: #0A232A;
 }
 
 .flex-r {
@@ -34,16 +38,20 @@ a {
 }
 
 /* ---------------- Start Header Style ---------------- */
+.content {
+    text-transform: capitalize;
+}
+
 .content .header-panel {
-    background-color: #0A232A;
+    background-color: var(--m-color);
     color: white;
     justify-content: space-between;
     padding: 10px 30px;
-    height: 65px;
+    height: var(--h-header);
 }
 
 .content .header-panel .title {
-    font-size: clamp(1.3em, 2.5vw, 2em);
+    font-size: clamp(1.3em, 2.5vw, 1.8em);
 }
 
 .content .header-panel .nav-panel {
@@ -69,7 +77,7 @@ a {
     overflow: hidden;
     background-color: #0A232A;
     transition: .7s;
-    width: 125%;
+    width: 124%;
     height: 0;
     left: 0;
     top: 220%;
@@ -83,7 +91,7 @@ a {
     display: block;
     color: white;
     width: 100%;
-    padding: 10px;
+    padding: 10px 19px;
     transition: .4s;
     -webkit-transition: .4s;
     -moz-transition: .4s;
@@ -92,7 +100,48 @@ a {
 }
 
 .content .header-panel .nav-panel ul .menu-box #menu a:hover {
-    padding-left: 17px;
+    padding-left: 25px;
+    background-color: rgb(56, 48, 57);
+}
+/* ---------------- End Header Style ------------------ */
+
+
+/* ---------------- Start Main Style ------------------ */
+.content .container-panel {
+    background-color: aliceblue;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas: 
+    "sideBare sideBare . ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel "
+    ;
+    height: calc(100vh - var(--h-header));
+}
+/* ---------- Start Side-Bare Style ----------- */
+.content .container-panel .side-bare {
+    grid-area: sideBare;
+    background-color: #2A4658;
+    min-width: 250px;
 }
 
-/* ---------------- End Header Style ---------------- */
+.content .container-panel .side-bare .side-bare-menu li a {
+    display: block;
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid var(--m-color);
+    font-family: serif;
+}
+.content .container-panel .side-bare .side-bare-menu li a:hover {
+    background-color: var(--m-color);
+}
+
+/* ---------- End Side-Bare Style ----------- */
+
+
+
+/* ---------- Start Content-Panel Style ----------- */
+.content .container-panel .content-panel {
+    grid-area: ContentPanel;
+}
+/* ---------- End Content-Panel Style ----------- */
+
+/* ---------------- End Main Style ------------------ */
