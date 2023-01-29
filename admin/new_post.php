@@ -24,7 +24,7 @@
                     $postContent = $_POST["postContent"];
                     $postCat = $_POST["Categories"];
                     $postAdminId = $_SESSION["login"]->id;
-                    $postAuthor = $_SESSION["login"]->postAuthor;
+                    $postAuthor = $_SESSION["login"]->username;
                     $postImage = $_FILES["imageToUpload"]["name"];
                     if($postsModel->imageExist($postImage)) {
                         echo 
