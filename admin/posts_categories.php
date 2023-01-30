@@ -1,23 +1,23 @@
 <?php 
-    include "../config.php";
+    include "config.php";
     include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
     if(!isset($_SESSION["login"])) {
-        header("location:". $BlogPathLien."index.php");
+        header("location:". $BlogPATH."index.php");
         exit();
     } else {
         if(isset($_SESSION["login"]->role)) {
             if($_SESSION["login"]->role != "admin") {
-                header("location:". $BlogPathLien."users");
+                header("location:".$BlogPATH."users");
                 exit();
             } else {
                 if(isset($_GET["logout"])) {
                     session_unset();
                     session_destroy();
-                    header("location:". $BlogPathLien."index.php");
+                    header("location:".$BlogPATH."index.php");
                     exit();
                 }
             }
@@ -30,9 +30,9 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include $BlogPathInclude."head.php" ?>
+    <?php include $BlogPathInclude ."head.php" ?>
 <body id="body" class="post-categorie">
-    <?php include $BlogPathInclude."header.php" ?>
+    <?php require_once $BlogPathInclude ."header.php" ?>
     <main class="content">
             <div class="container">
                 <section class='posts'>
@@ -42,7 +42,7 @@
                         <?php for($i=0; isset($posts[$i]); $i++) : ?>
                             <article class='post'>
                                 <div class='post-image'>
-                                    <img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'>
+                                    <img src="<?php echo  $BlogPATH?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>"alt='<?php echo $posts[$i]['postImage'] ?>'>
                                 </div>
                                 <div class='post-title'>
                                     <h3><?php echo $posts[$i]['postTitle'] ?></h3>
@@ -88,7 +88,7 @@
                                 <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
                                         <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
-                                            <span class='img-last-post'><img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
+                                            <span class='img-last-post'><img src='<?php echo  $BlogPATH?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
                                             <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                         </a>
                                     </li>
@@ -109,5 +109,6 @@
     <?php
         include $BlogPathInclude."footer.php";
     ?>
+    <script src="<?php echo  $BlogPATH?>assets/js/script.js"></script>
 </body>
 </html>

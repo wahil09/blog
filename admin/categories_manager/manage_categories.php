@@ -1,21 +1,21 @@
 <?php 
-    include "../../model.php";
     require_once("../config.php");
+    include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $categories = $categoriesModel->getCategories();
     if(!isset($_SESSION["login"])) {
-        header("location: ../../index.php");
+        header("location:".$BlogPathLien. "index.php");
         exit();
     } else {
         if(isset($_SESSION["login"]->role)) {
             if($_SESSION['login']->role != "admin") {
-                header("location:". $BlogPATH ."users");
+                header("location:". $BlogPathLien ."users");
                 exit();
             } else {
                 if(isset($_GET["logout"])) {
                     session_unset();
                     session_destroy();
-                    header("location:". $BlogPATH ."index.php");
+                    header("location:". $BlogPathLien ."index.php");
                     exit();
                 }
             }
@@ -24,16 +24,16 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php require_once("../head.php")?>
+<?php require_once($AdminPathInclude."head.php")?>
 <body>
     <div class="content">
-        <?php include($AdminPATH."header.php");?>
+        <?php include($AdminPathInclude."header.php");?>
         <main class="container-panel">
             <?php require_once("../side-bare.php")?>
             <section class="box-content-panel">
                 <div class="content-panel">
                     <ul>
-                        <li><a href="new_post.php" class="btn-panel">add category</a></li>
+                        <li><a href="new_category.php" class="btn-panel">add category</a></li>
                         <li><a href="#" class="btn-panel">manage categories</a></li>
                     </ul>
                     <div class="clear"></div>
@@ -69,6 +69,5 @@
             </section>
         </main>
     </div>
-    <script src="../assets/js/script.js"></script>
 </body>
 </html>

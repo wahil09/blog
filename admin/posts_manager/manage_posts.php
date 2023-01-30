@@ -1,22 +1,22 @@
 <?php 
-    require_once("../../model.php");
     require_once("../config.php");
+    require_once($BlogPathInclude."model.php");
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $posts = $postsModel->getPosts();
     if(!isset($_SESSION["login"])) {
-        header($BlogPATH."index.php");
+        header($BlogPathLien."index.php");
         exit();
     } else {
         if(isset($_SESSION["login"]->role)) {
             if($_SESSION['login']->role != "admin") {
-                header("location:". $BlogPATH ."users");
+                header("location:". $BlogPathLien ."users");
                 exit();
             } else {
                 if(isset($_GET["logout"])) {
                     session_unset();
                     session_destroy();
-                    header("location:". $BlogPATH ."index.php");
+                    header("location:". $BlogPathLien ."index.php");
                     exit();
                 }
             }
@@ -25,12 +25,12 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php require_once("../head.php")?>
+<?php require_once($AdminPathInclude."head.php")?>
 <body>
     <div class="content">
-        <?php require_once("../header.php")?>
+        <?php require_once($AdminPathInclude."header.php")?>
         <main class="container-panel">
-            <?php require_once("../side-bare.php")?>
+            <?php require_once($AdminPathInclude."side-bare.php")?>
             <section class="box-content-panel">
                 <div class="content-panel">
                     <ul>
@@ -73,6 +73,5 @@
             </section>
         </main>
     </div>
-    <script src="../assets/js/script.js"></script>
 </body>
 </html>
