@@ -10,7 +10,7 @@
             <nav>
                 <ul class="menu flex-r">
                     <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="dashboard.php">Dashboard</a></li>
+                    <li><a href="posts_manager/manage_posts.php">Dashboard</a></li>
                     <li><a href="afficher_users.php">Users</a></li>
                     <li class="li-article"><span>Articles</span>
                         <ul class="last-ul">
@@ -30,7 +30,7 @@
                 </div>
                 <ul class="menu-phone flex-c" id="menuPhone">
                     <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="?messages">Messages</a></li>
+                    <li><a href="posts_manager/manage_posts.php">Dashboard</a></li>
                     <li><a href="afficher_users.php">Users</a></li>
                     <li class="li-article"><span>Articles</span>
                         <ul class="last-ul">

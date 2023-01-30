@@ -1,21 +1,22 @@
 <?php 
     require_once("../../model.php");
+    require_once("../config.php");
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $posts = $postsModel->getPosts();
     if(!isset($_SESSION["login"])) {
-        header("location: ../index.php");
+        header($BlogPATH."index.php");
         exit();
     } else {
         if(isset($_SESSION["login"]->role)) {
             if($_SESSION['login']->role != "admin") {
-                header("location: ../users/");
+                header("location:". $BlogPATH ."users");
                 exit();
             } else {
                 if(isset($_GET["logout"])) {
                     session_unset();
                     session_destroy();
-                    header("location: ../index.php");
+                    header("location:". $BlogPATH ."index.php");
                     exit();
                 }
             }

@@ -1,5 +1,5 @@
 <?php 
-    define('APP_NAME', dirname(__FILE__) . '/../');
+    require_once("config.php");
     if(!isset($_SESSION["login"])) {
         header("location: ../index.php");
         exit();
@@ -26,11 +26,7 @@
             <li class="menu-box">
                 <span id="openMenu"><i class="fa-solid fa-user"></i>wahil chettouf</span>
                 <ul id="menu" class="ul-in-ul">
-                    <?php if(explode('/', $_SERVER["PHP_SELF"])[3] != "index.php") :?>
-                        <li><a href="../index.php">Acceuil</a></li>
-                    <?php else :?>
-                        <li><a href="index.php">Acceuil</a></li>
-                    <?php endif ?>
+                    <li><a href="<?php echo $AdminPathLien ?>index.php">Acceuil</a></li>
                     <li><a href="?logout">Déconnexion</a></li>
                 </ul>
             </li>
