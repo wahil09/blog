@@ -10,8 +10,8 @@
             <!-- bar du navigation pour les grand écrans -->
             <nav>
                 <ul class="menu flex-r">
-                    <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="posts_manager/manage_posts.php">Dashboard</a></li>
+                    <li><a href="<?php echo $BlogPathLien?>admin/index.php">Acceuil</a></li>
+                    <li><a href="<?php echo $BlogPathLien?>admin/manage_posts.php">Dashboard</a></li>
                     <li><a href="afficher_users.php">Users</a></li>
                     <li class="li-article"><span>Articles</span>
                         <ul class="last-ul">
@@ -30,8 +30,8 @@
                     <span class="bar bottom"></span>
                 </div>
                 <ul class="menu-phone flex-c" id="menuPhone">
-                    <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="posts_manager/manage_posts.php">Dashboard</a></li>
+                    <li><a href="<?php echo $BlogPathLien?>admin/index.php">Acceuil</a></li>
+                    <li><a href="<?php echo $BlogPathLien?>admin/posts_manager/manage_posts.php">Dashboard</a></li>
                     <li><a href="afficher_users.php">Users</a></li>
                     <li class="li-article"><span>Articles</span>
                         <ul class="last-ul">

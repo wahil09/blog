@@ -40,9 +40,8 @@
                                     alert('Post Partager !');
                                 </script>";
                                 include $BlogPathInclude."admin/upload_image.php";
-                                echo $BlogPathInclude."admin/upload_image.php";
                                 unset($_SESSION["post-partager"]);
-                                header("location: ".$BlogPathLien. "index.php"); // changer ca en refresh
+                                header( "refresh: .3; url=".$BlogPathLien."admin/index.php" );
                                 exit();
                             } else {
                                 echo "<script>
