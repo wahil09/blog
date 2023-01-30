@@ -52,12 +52,10 @@
 
         // ------------ Getters ------------
         function getUsers() {
-            $sth = $this->db->prepare("SELECT id, inscriptionDate, username, email FROM users WHERE role != 'admin'");
+            $sth = $this->db->prepare("SELECT * FROM users ");
             $sth->execute();
-            if(!empty($sth)) {
-                $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
-                return $categories;
-            } 
+            $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
+            return $categories;
         }
 
         function getUserDataById($userId) {

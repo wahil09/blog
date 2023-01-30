@@ -37,7 +37,7 @@ a {
 }
 
 :root {
-    --f-size-primary: clamp(1em, 2.5vw, 1em);
+    --f-size-primary: clamp(.5em, 2.5vw, 1em);
     --f-size-title: clamp(1em, 2.5vw, 1.4em);
     --h-header: 65px;
     /* --- color --- */
@@ -190,6 +190,8 @@ a {
 
 .content .container-panel .box-content-panel .content-panel table td a {
     text-transform: capitalize;
+    font-size: 14px;
+
 }
 
 .content .container-panel .box-content-panel .content-panel table td a:hover {
