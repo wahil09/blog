@@ -5,18 +5,18 @@
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
     if(!isset($_SESSION["login"])) {
-        header("location:".$AdminPathLien."index.php");
+        header("location:".$BlogPathLien."index.php");
         exit();
     } else {
         if(isset($_SESSION['login']->role)) {
             if($_SESSION["login"]->role != "admin") {
-                header("location:".$AdminPathLien."users/index.php");
+                header("location:".$BlogPathLien."users/index.php");
                 exit();
             } else {
                 if(isset($_GET["logout"])) {
                     session_unset();
                     session_destroy();
-                    header("location:".$AdminPathLien."index.php");
+                    header("location:".$BlogPathLien."index.php");
                 }
             
                 if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
@@ -39,9 +39,10 @@
                                 echo "<script>
                                     alert('Post Partager !');
                                 </script>";
-                                include "upload_image.php";
+                                include $BlogPathInclude."admin/upload_image.php";
+                                echo $BlogPathInclude."admin/upload_image.php";
                                 unset($_SESSION["post-partager"]);
-                                header("location: ". "index.php"); // changer ca en refresh
+                                header("location: ".$BlogPathLien. "index.php"); // changer ca en refresh
                                 exit();
                             } else {
                                 echo "<script>
@@ -60,9 +61,9 @@
 
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "../head.php" ?>
+    <?php include $BlogPathInclude."head.php" ?>
 <body id="body" class="post-categorie">
-    <?php include "../header.php" ?>
+    <?php include $BlogPathInclude."header.php" ?>
     <main class="content">
             <div class="container">
                 <section class='new-post'>
@@ -121,7 +122,7 @@
                             <?php for($i=0; isset($posts[$i])&&$i <3 ; $i++) : ?>
                                 <li class='last-post'>
                                     <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
-                                        <span class='img-last-post'><img src='../assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
+                                        <span class='img-last-post'><img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
                                         <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                     </a>
                                 </li>
@@ -140,8 +141,8 @@
             </div>
         </main>
     <?php
-        include "../footer.php";
+        include $BlogPathInclude."footer.php";
     ?>
-    <script src="../assets/js/script.js"></script>
+    <script src="<?php echo $BlogPathLien?>/assets/js/script.js"></script>
 </body>
 </html>

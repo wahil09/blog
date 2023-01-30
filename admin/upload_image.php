@@ -1,8 +1,10 @@
 <?php
+    require_once("../../config.php");
     //ini_set("log_errors", 1); // Enable error logging
     //ini_set("error_log", "/tmp/php-error.log"); // set error path
     //error_log( "Hello, errors!" ); // log a test error
-    $target_dir = "../assets/img/posts_images/";
+    $target_dir = $BlogPathInclude."assets/img/posts_images/";
+    echo basename($_FILES["imageToUpload"]["name"]);
     $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

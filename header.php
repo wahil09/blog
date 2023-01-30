@@ -1,3 +1,4 @@
+<?php require_once("config.php")?>
 <header>
     <div class="container flex-r">
         <?php if(isset($_SESSION["login"])) :?>
