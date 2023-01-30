@@ -7,9 +7,9 @@
     <title>Dashboard</title>
     <style>
         <?php
-            require_once("config.php");
-            require_once($AdminPathInclude."assets/css/style.css");
-            require_once($AdminPathInclude."assets/css/MQuiry.css");
+            require_once("../../config.php");
+            require_once($BlogPathInclude."admin/assets/css/style.css");
+            require_once($BlogPathInclude."admin/assets/css/MQuiry.css");
             require_once($BlogPathInclude."assets/css/all.css");
         ?>
     </style>

@@ -1,5 +1,5 @@
 <?php 
-    require_once("../config.php");
+    require_once("../../config.php");
     require_once($BlogPathInclude."model.php");
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
@@ -25,12 +25,12 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php require_once($AdminPathInclude."head.php")?>
+<?php require_once($BlogPathInclude."admin/head.php")?>
 <body>
     <div class="content">
-        <?php require_once($AdminPathInclude."header.php")?>
+        <?php require_once($BlogPathInclude."admin/header.php")?>
         <main class="container-panel">
-            <?php require_once($AdminPathInclude."side-bare.php")?>
+            <?php require_once($BlogPathInclude."admin/side-bare.php")?>
             <section class="box-content-panel">
                 <div class="content-panel">
                     <ul>

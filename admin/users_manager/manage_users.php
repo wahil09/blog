@@ -1,5 +1,6 @@
 <?php 
-    include "../../model.php";
+    include "../../config.php";
+    include $BlogPathInclude."model.php";
     $usersModel = new ModelUsers();
     $users = $usersModel->getUsers();
     if(!isset($_SESSION["login"])) {

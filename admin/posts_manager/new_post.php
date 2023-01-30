@@ -1,21 +1,22 @@
 <?php 
-    include "../model.php";
+    include "../../config.php";
+    include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
     if(!isset($_SESSION["login"])) {
-        header("location: ../index.php");
+        header("location:".$AdminPathLien."index.php");
         exit();
     } else {
         if(isset($_SESSION['login']->role)) {
             if($_SESSION["login"]->role != "admin") {
-                header("location: ../users/index.php");
+                header("location:".$AdminPathLien."users/index.php");
                 exit();
             } else {
                 if(isset($_GET["logout"])) {
                     session_unset();
                     session_destroy();
-                    header("location: ../index.php");
+                    header("location:".$AdminPathLien."index.php");
                 }
             
                 if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {

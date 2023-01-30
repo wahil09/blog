@@ -1,5 +1,5 @@
 <?php 
-    include "config.php";
+    include "../config.php";
     include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
@@ -42,7 +42,7 @@
                         <?php for($i=0; isset($posts[$i]); $i++) : ?>
                             <article class='post'>
                                 <div class='post-image'>
-                                    <img src="<?php echo  $BlogPATH?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>"alt='<?php echo $posts[$i]['postImage'] ?>'>
+                                    <img src="<?php echo  $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>"alt='<?php echo $posts[$i]['postImage'] ?>'>
                                 </div>
                                 <div class='post-title'>
                                     <h3><?php echo $posts[$i]['postTitle'] ?></h3>
@@ -88,7 +88,7 @@
                                 <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
                                         <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
-                                            <span class='img-last-post'><img src='<?php echo  $BlogPATH?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
+                                            <span class='img-last-post'><img src='<?php echo  $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
                                             <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                         </a>
                                     </li>
@@ -109,6 +109,6 @@
     <?php
         include $BlogPathInclude."footer.php";
     ?>
-    <script src="<?php echo  $BlogPATH?>assets/js/script.js"></script>
+    <script src="<?php echo  $BlogPathLien?>assets/js/script.js"></script>
 </body>
 </html>

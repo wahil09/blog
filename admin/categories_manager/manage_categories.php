@@ -1,5 +1,5 @@
 <?php 
-    require_once("../config.php");
+    require_once("../../config.php");
     include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $categories = $categoriesModel->getCategories();
@@ -24,10 +24,10 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php require_once($AdminPathInclude."head.php")?>
+<?php require_once($BlogPathInclude."admin/head.php")?>
 <body>
     <div class="content">
-        <?php include($AdminPathInclude."header.php");?>
+        <?php include($BlogPathInclude."admin/header.php");?>
         <main class="container-panel">
             <?php require_once("../side-bare.php")?>
             <section class="box-content-panel">
