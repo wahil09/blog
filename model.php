@@ -6,11 +6,13 @@
         public $pass;
         public $dbname;
         public $db;
-        function __construct() {
+        public $tbname;
+        function __construct($tbname) {
             $this->severname = "localhost";
             $this->user = "root";
             $this->pass = "";
             $this->dbname = "wahil";
+            $this->tbname = $tbname;
             try {
                 $this->db = new PDO("mysql:host=".$this->severname."; dbname=".$this->dbname."; charset=utf8",$this->user, $this->pass);
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -46,6 +48,10 @@
             $request->execute();
             return $request->fetch(PDO::FETCH_ASSOC);
         }
+
+        public function getTableName() {
+            return $this->tbname;
+        }
     }
 
     class ModelUsers extends Connection {
@@ -72,9 +78,6 @@
             return $request->fetchObject();
         }
 
-        public function getTableName() {
-            return $this->tbname;
-        }
 
 
         // ------------- Setters ------------- -

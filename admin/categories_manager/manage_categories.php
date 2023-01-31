@@ -1,7 +1,7 @@
 <?php 
     require_once("../../config.php");
     include $BlogPathInclude."model.php";
-    $categoriesModel = new ModelCategories();
+    $categoriesModel = new ModelCategories("categories");
     $categories = $categoriesModel->getCategories();
     if(!isset($_SESSION["login"])) {
         header("location:".$BlogPathLien. "index.php");
@@ -18,6 +18,14 @@
                     header("location:". $BlogPathLien ."index.php");
                     exit();
                 }
+            }
+            
+            // supprimer des categories
+            if(isset($_GET["delete"])) {
+                $categoryId = $_GET["delete"];
+                $categoriesModel->deleteById($categoryId, $categoriesModel->getTableName());
+                header("location:".$_SERVER['PHP_SELF']);
+                exit();
             }
         }
     }
@@ -55,7 +63,7 @@
                                         <td class="action-content">
                                         <ul class="flex-r">
                                             <li><a href="" class="first-action">edit</a></li>
-                                            <li><a href="" class="second-action">delete</a></li>
+                                            <li><a href="?delete=<?php echo $categories[$i]['id']?>" class="second-action">delete</a></li>
                                         </ul>
                                     </td>
                                     </tr>
