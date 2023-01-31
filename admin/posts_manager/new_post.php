@@ -20,18 +20,17 @@
                 }
             
                 if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
+                    include $BlogPathInclude."admin/upload_image.php";
+
                     $postTitle = $_POST["postTitle"];
                     $postContent = $_POST["postContent"];
                     $postCat = $_POST["Categories"];
                     $postAdminId = $_SESSION["login"]->id;
                     $postAuthor = $_SESSION["login"]->username;
-                    $postImage = $_FILES["imageToUpload"]["name"];
-                    if($postsModel->imageExist($postImage)) {
-                        echo 
-                            "<script>
-                                alert('image existe, change le nom de l\'image !');
-                            </script>";
-                    } else {
+                    $postImage = $_SESSION["imageName"];
+                    echo $postImage;
+
+                    if($_SESSION['imageValider']) {
                         $postCategoryId = $categoriesModel->getCategoryId($postCat);
                         $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postAdminId, $postCategoryId);
                         if(isset($_SESSION['post-partager'])) {
@@ -39,18 +38,23 @@
                                 echo "<script>
                                     alert('Post Partager !');
                                 </script>";
-                                include $BlogPathInclude."admin/upload_image.php";
                                 unset($_SESSION["post-partager"]);
-                                header( "refresh: .3; url=".$BlogPathLien."admin/index.php" );
-                                exit();
+    
+                                // header( "refresh: .3; url=".$BlogPathLien."admin/index.php" );
+                                // exit();
                             } else {
                                 echo "<script>
                                     alert('Post no partager / Exist déja !');
                                 </script>";
                                 unset($_SESSION["post-partager"]);
                             }
-                        }
-                    }     
+                        } 
+                    } else {
+                        echo "<script>
+                            alert('Post no partager / error-image !');
+                        </script>";
+                        unset($_SESSION["imageValider"]);
+                    }
                 }
             }
         }

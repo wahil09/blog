@@ -20,7 +20,7 @@
                 }
             }
             
-            // supprimer des categories
+            // delete category
             if(isset($_GET["delete"])) {
                 $categoryId = $_GET["delete"];
                 $categoriesModel->deleteById($categoryId, $categoriesModel->getTableName());

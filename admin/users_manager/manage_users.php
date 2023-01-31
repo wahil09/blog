@@ -23,7 +23,7 @@
                 }
             }
 
-            // supprimer des utilisateurs
+            // delete user
             if(isset($_GET["delete"])) {
                 $userId = $_GET["delete"];
                 $usersModel->deleteById($userId, $usersModel->getTableName());
