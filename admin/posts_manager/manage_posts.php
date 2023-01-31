@@ -19,6 +19,13 @@
                     header("location:". $BlogPathLien ."index.php");
                     exit();
                 }
+                // delete post
+                if(isset($_GET["delete"])) {
+                    $userId = $_GET["delete"];
+                    $postsModel->deleteById($userId, $postsModel->getTableName());
+                    header("location:".$_SERVER['PHP_SELF']);
+                    exit();
+                }
             }
         }
     }
@@ -58,7 +65,7 @@
                                         <td class="action-content">
                                         <ul class="flex-r">
                                             <li><a href="" class="first-action">edit</a></li>
-                                            <li><a href="" class="second-action">delete</a></li>
+                                            <li><a href="?delete=<?php echo $posts[$i]['id']?>" class="second-action">delete</a></li>
                                             <li><a href="" class="last-action">publish</a></li>
                                         </ul>
                                     </td>
