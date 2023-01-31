@@ -4,8 +4,11 @@
     //ini_set("error_log", "/tmp/php-error.log"); // set error path
     //error_log( "Hello, errors!" ); // log a test error
     $target_dir = $BlogPathInclude."assets/img/posts_images/";
+
+    // j'utilise current time pour différencier entre les noms des images
     $date = date('d-m-Y-h-i-s-');
     $fileName = $date .basename( $_FILES["imageToUpload"]["name"]);
+    
     $target_file = $target_dir . $fileName;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

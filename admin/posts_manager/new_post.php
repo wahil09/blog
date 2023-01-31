@@ -27,10 +27,9 @@
                     $postCat = $_POST["Categories"];
                     $postAdminId = $_SESSION["login"]->id;
                     $postAuthor = $_SESSION["login"]->username;
-                    $postImage = $_SESSION["imageName"];
-                    echo $postImage;
+                    $postImage = $_SESSION["imageName"]; // viens de file upload_image.php
 
-                    if($_SESSION['imageValider']) {
+                    if($_SESSION['imageValider']) { // viens de file upload_image.php
                         $postCategoryId = $categoriesModel->getCategoryId($postCat);
                         $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postAdminId, $postCategoryId);
                         if(isset($_SESSION['post-partager'])) {
@@ -89,7 +88,7 @@
                         </div>
                         <div class="inp-box">
                             <label for="imageToUpload">Article image : </label>
-                            <input type="file" name="imageToUpload" id="imageToUpload" required>
+                            <input type="file" name="imageToUpload" id="imageToUpload" accept="image/*" required>
                         </div>
                         <div class="inp-box">
                             <textarea name="postContent" id="post-text" cols="90" rows="10" required></textarea>
