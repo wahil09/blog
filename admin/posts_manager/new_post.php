@@ -42,6 +42,8 @@
                                 // header( "refresh: .3; url=".$BlogPathLien."admin/index.php" );
                                 // exit();
                             } else {
+                                // pour supprimer l'image télécharger 
+                                unlink($target_file);
                                 echo "<script>
                                     alert('Post no partager / Exist déja !');
                                 </script>";
