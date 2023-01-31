@@ -19,6 +19,12 @@
                     exit();
                 }
             }
+            if(isset($_GET["delete"])) {
+                $userId = $_GET["delete"];
+                $result = $usersModel->deleteById($userId, $usersModel->getTableName());
+                header("location:".$_SERVER['PHP_SELF']);
+                exit();
+            }
         }
     }
 ?>
@@ -57,7 +63,7 @@
                                         <td class="action-content">
                                         <ul class="flex-r">
                                             <li><a href="" class="first-action">edit</a></li>
-                                            <li><a href="?delet=<?php echo $users[$i]['id']?>" class="second-action">delete</a></li>
+                                            <li><a href="?delete=<?php echo $users[$i]['id']?>" class="second-action">delete</a></li>
                                         </ul>
                                     </td>
                                     </tr>

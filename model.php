@@ -39,9 +39,17 @@
             }
             return $val;
         }
+
+        public function deleteById($id, $tbname) {
+            $request = $this->db->prepare('DELETE FROM '.$tbname.' WHERE id=:id');
+            $request->bindValue("id", $id);
+            $request->execute();
+            return [$tbname, $request->fetchObject()];
+        }
     }
 
     class ModelUsers extends Connection {
+        public $tbname = "users";
         public function userAlreadyRegistered($email, $password) {
             $request = $this->db->prepare("SELECT * FROM users WHERE password=:password &&email=:email");
             $request->bindValue("email", $email);
@@ -62,6 +70,10 @@
             $request = $this->db->prepare("SELECT * FROM users WHERE id = $userId");
             $request->execute();
             return $request->fetchObject();
+        }
+
+        public function getTableName() {
+            return $this->tbname;
         }
 
 
