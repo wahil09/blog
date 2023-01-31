@@ -44,7 +44,7 @@
             $request = $this->db->prepare('DELETE FROM '.$tbname.' WHERE id=:id');
             $request->bindValue("id", $id);
             $request->execute();
-            return [$tbname, $request->fetchObject()];
+            return $request->fetch(PDO::FETCH_ASSOC);
         }
     }
 

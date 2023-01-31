@@ -3,15 +3,18 @@
     include $BlogPathInclude."model.php";
     $usersModel = new ModelUsers();
     $users = $usersModel->getUsers();
+    // vérifier si quellqu'un est connécter
     if(!isset($_SESSION["login"])) {
         header("location: ../../index.php");
         exit();
     } else {
+        // vérifier qui est connécter
         if(isset($_SESSION["login"]->role)) {
             if($_SESSION['login']->role != "admin") {
                 header("location: ../../users/");
                 exit();
             } else {
+                // pour la déconnexion
                 if(isset($_GET["logout"])) {
                     session_unset();
                     session_destroy();
@@ -19,9 +22,11 @@
                     exit();
                 }
             }
+
+            // supprimer des utilisateurs
             if(isset($_GET["delete"])) {
                 $userId = $_GET["delete"];
-                $result = $usersModel->deleteById($userId, $usersModel->getTableName());
+                $usersModel->deleteById($userId, $usersModel->getTableName());
                 header("location:".$_SERVER['PHP_SELF']);
                 exit();
             }
