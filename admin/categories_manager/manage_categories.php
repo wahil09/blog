@@ -34,7 +34,7 @@
                 <div class="content-panel">
                     <ul>
                         <li><a href="new_category.php" class="btn-panel">add category</a></li>
-                        <li><a href="#" class="btn-panel">manage categories</a></li>
+                        <li><a href="manage_categories.php" class="btn-panel">manage categories</a></li>
                     </ul>
                     <div class="clear"></div>
                     <h2 class="title-panel-page">manage categories</h2> 
@@ -69,5 +69,9 @@
             </section>
         </main>
     </div>
+    <?php
+        // On ferme la connexion
+        $categoriesModel->closeConnection();
+    ?>
 </body>
 </html>

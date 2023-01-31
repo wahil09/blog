@@ -11,15 +11,7 @@
             <nav>
                 <ul class="menu flex-r">
                     <li><a href="<?php echo $BlogPathLien?>admin/index.php">Acceuil</a></li>
-                    <li><a href="<?php echo $BlogPathLien?>admin/manage_posts.php">Dashboard</a></li>
-                    <li><a href="afficher_users.php">Users</a></li>
-                    <li class="li-article"><span>Articles</span>
-                        <ul class="last-ul">
-                            <li class="last-li"><a href="new_post.php">new post</a></li>
-                            <li class="last-li"><a href="#">mes articles</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="categories.php">Categories</a></li>
+                    <li><a href="<?php echo $BlogPathLien?>admin/posts_manager/manage_posts.php">Dashboard</a></li>
                     <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
                 </ul>
             </nav>
@@ -32,14 +24,6 @@
                 <ul class="menu-phone flex-c" id="menuPhone">
                     <li><a href="<?php echo $BlogPathLien?>admin/index.php">Acceuil</a></li>
                     <li><a href="<?php echo $BlogPathLien?>admin/posts_manager/manage_posts.php">Dashboard</a></li>
-                    <li><a href="afficher_users.php">Users</a></li>
-                    <li class="li-article"><span>Articles</span>
-                        <ul class="last-ul">
-                            <li class="last-li"><a href="new_post.php">new post</a></li>
-                            <li class="last-li"><a href="#">mes articles</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="categories.php">Categories</a></li>
                     <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
                 </ul>
             </div>

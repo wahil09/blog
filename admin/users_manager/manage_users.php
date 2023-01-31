@@ -71,6 +71,9 @@
             </section>
         </main>
     </div>
-    <script src="../assets/js/script.js"></script>
+    <?php
+        // On ferme la connexion
+        $categoriesModel->closeConnection();
+    ?>
 </body>
 </html>

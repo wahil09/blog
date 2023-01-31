@@ -7,14 +7,21 @@
     font-family: Roboto;
 }
 
+.error-msg {
+    color: red !important;
+    font-size: .8em !important;
+}
+
 .clear {
     clear: both;
 }
 
 .btn-panel {
+    background-color: var(--bg-btn);
+    font-size: var(--f-size-primary);
     display: inline-block;
     padding: 10px 15px;
-    background-color: var(--bg-btn);
+    margin: 5px 0;
     color: white;
     margin-right: 3px;
     border-radius: 5px;
@@ -23,6 +30,9 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     float: left;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 .btn-panel:hover {
     background-color: #1b4753;
@@ -37,7 +47,7 @@ a {
 }
 
 :root {
-    --f-size-primary: clamp(.5em, 2.5vw, 1em);
+    --f-size-primary: clamp(.9em, 2.5vw, 1em);
     --f-size-title: clamp(1em, 2.5vw, 1.4em);
     --h-header: 65px;
     /* --- color --- */
@@ -97,7 +107,6 @@ a {
 .content .header-panel .nav-panel ul .menu-box #menu {
     position: absolute;
     overflow: hidden;
-    background-color: #0A232A;
     transition: .7s;
     width: 124%;
     height: 0;
@@ -110,6 +119,8 @@ a {
 }
 
 .content .header-panel .nav-panel ul .menu-box #menu a {
+    font-size: var(--f-size-primary);
+    background-color: #0A232A;
     display: block;
     color: white;
     width: 100%;
@@ -142,10 +153,10 @@ a {
 .content .container-panel .side-bare {
     grid-area: sideBare;
     background-color: #2A4658;
-    min-width: 145px;
 }
 
 .content .container-panel .side-bare .side-bare-menu li a {
+    background-color: #2A4658;
     display: block;
     color: white;
     padding: 10px;
@@ -181,6 +192,7 @@ a {
     border-spacing: 0;
     text-align: center;
     text-transform: none;
+    font-size: var(--f-size-primary);
 }
 
 .content .container-panel .box-content-panel .content-panel :is(table) :is(td, th) {
@@ -209,8 +221,27 @@ a {
 .content .container-panel .box-content-panel .content-panel table td .last-action {
     color: blue;
 }
-
 /* ---- End Style table panel data ---- */
+
+
+
+/* ---- Start Style new-category-form ---- */
+.content .container-panel .box-content-panel .content-panel .new-category-form {
+}
+
+.content .container-panel .box-content-panel .content-panel .new-category-form #category {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 10px 0;
+    outline: none;
+}
+.content .container-panel .box-content-panel .content-panel .new-category-form .btn-panel {
+    float: none;
+}
+
+/* ---- End Style new-category-form ---- */
+
+
 
 /* ---------- End Content-Panel Style ----------- */
 

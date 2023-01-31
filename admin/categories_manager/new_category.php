@@ -2,6 +2,7 @@
     include "../../config.php";
     include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
+    $categories = $categoriesModel->getCategories();
 
     if(!isset($_SESSION["login"])) {
         header("location:".$BlogPathLien."index.php");
@@ -35,60 +36,52 @@
                         $categoriesModel->setCategories($category_name, $_SESSION["login"]->id);
                     } else {
                         $_SESSION["champs-vide"] = true;
+                        header("location: new_category.php");
+                        exit();
                     }
                 }
             }
         }
     }
 ?>
-<!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include $BlogPathInclude."head.php" ?>
-    <body id="body" class="post-categorie">
-        <?php include $BlogPathInclude."header.php" ?>
-        <main class="content">
-            <div class="container">
-                <form method="post" class="form-categorie">
-                    <label for="category">New Category :</label>
-                    <input type="text" name="category" id="category" required>
-                    <?php 
-                        if(isset($_SESSION["category_exist"])) {
-                            echo "<p class='error-msg'>Category existe déja !</p>";
-                            unset($_SESSION["category_exist"]);
-                        }
-                        if(isset($_SESSION['champs-vide'])) {
-                            echo "<p class='error-msg'>Champs vide !</p>";
-                            unset($_SESSION["champs-vide"]);
-                        }
-                    ?>
+<?php require_once($BlogPathInclude."admin/head.php")?>
+<body>
+    <div class="content">
+        <?php include($BlogPathInclude."admin/header.php");?>
+        <main class="container-panel">
+            <?php require_once("../side-bare.php")?>
+            <section class="box-content-panel">
+                <div class="content-panel">
+                    <ul>
+                        <li><a href="new_category.php" class="btn-panel">add category</a></li>
+                        <li><a href="manage_categories.php" class="btn-panel">manage categories</a></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <h2 class="title-panel-page">manage categories</h2> 
 
-                    <input type="submit" value="Ajouter">
-                </form>
-                <div class="sidebar">
-                    <div class="row categories flex-c">
-                        <h2>Categories</h2>
-                        <ul class="flex-c">
-                            <?php 
-                            $categories = $categoriesModel->getCategories();
-                            if(!empty($categories)) :?>
-                                <?php for($i=0; isset($categories[$i]); $i++) {
-                                    echo "
-                                    <li><a href='posts_categories.php?id=".$categories[$i]['id']."'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($categories[$i]['categoryName'])."</span></a></li>
-                                    ";
-                                }?>
-                            <?php else :?>
-                                <p>aucune categorie existe !</p>
-                            <?php endif ?>
-                        </ul>
-                    </div>
+                    <form method="post" action="" class="new-category-form">
+                        <label for="category">Category Name :</label>
+                        <input type="text" name="category" id="category" required>
+                        <?php 
+                            if(isset($_SESSION["category_exist"])) {
+                                echo "<p class='error-msg'>Category existe déja !</p>";
+                                unset($_SESSION["category_exist"]);
+                            }
+                            if(isset($_SESSION['champs-vide'])) {
+                                echo "<p class='error-msg'>Champs vide !</p>";
+                                unset($_SESSION["champs-vide"]);
+                            }
+                        ?>
+                        <input type="submit" value="Save Category" class="btn-panel">
+                    </form>
                 </div>
-            </div>
+            </section>
         </main>
-        <?php
-            include "../footer.php";
-            // On ferme la connexion
-            $categoriesModel->closeConnection();
-        ?>
-        <script src="<?php echo $BlogPathLien?>assets/js/script.js"></script>
-    </body>
+    </div>
+    <?php
+        // On ferme la connexion
+        $categoriesModel->closeConnection();
+    ?>
+</body>
 </html>

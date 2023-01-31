@@ -9,6 +9,12 @@
     .content .container-panel .box-content-panel {
         margin: 0 20px;
     }
+
+    .content .container-panel .box-content-panel .content-panel table .post-title {
+        width: 250px;
+        line-height: 1.4;
+    }
+    
 }
 
 @media screen and (max-width: 768px) {
@@ -25,7 +31,25 @@
     /* --- start sideBare Style --- */
     .content .container-panel .side-bare {
     }
-    /* --- start sideBare Style --- */
+    /* --- End sideBare Style --- */
 
+    .btn-panel {
+        padding: 7px 10px;
+    }
+    /* ----- End Style container-panel ----- */
+}
+
+
+@media screen and (max-width: 568px) {
+    /* ----- Start Style container-panel ----- */
+    
+    /* --- start sideBare Style --- */
+    .content .container-panel .side-bare {
+    }
+    /* --- End sideBare Style --- */
+
+    .content .container-panel .box-content-panel .content-panel table .post-title {
+        width: 200px;
+    }
     /* ----- End Style container-panel ----- */
 }

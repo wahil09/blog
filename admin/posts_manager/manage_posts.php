@@ -53,7 +53,7 @@
                                 <?php for($i=0; isset($posts[$i]); $i++) :?>
                                     <tr>
                                         <td><?= $posts[$i]['id'] ?></td>
-                                        <td><?= $posts[$i]['postTitle'] ?></td>
+                                        <td class="post-title"><?= $posts[$i]['postTitle'] ?></td>
                                         <td><?= $posts[$i]['postAuthor'] ?></td>
                                         <td class="action-content">
                                         <ul class="flex-r">
@@ -73,5 +73,9 @@
             </section>
         </main>
     </div>
+    <?php
+        // On ferme la connexion
+        $categoriesModel->closeConnection();
+    ?>
 </body>
 </html>

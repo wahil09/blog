@@ -138,11 +138,11 @@
                 $this->db->exec($new_category);
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
                 $_SESSION['category_ajouter'] = $category_name;
-                header("location: manage_categories.php");
+                header("location: new_category.php");
                 exit();
             } else {
                 $_SESSION["category_exist"] = $this->replaceQuote($category_name);
-                header("location: manage_categories.php");
+                header("location: new_category.php");
                 exit();
             }
             
