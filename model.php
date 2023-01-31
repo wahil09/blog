@@ -52,6 +52,13 @@
         public function getTableName() {
             return $this->tbname;
         }
+
+        public function checkIfExistById($id, $tbname) {
+            $request = $this->db->prepare("SELECT * FROM ". $tbname ." WHERE id=:id");
+            $request->bindValue("id", $id);
+            $request->execute();
+            return $request->fetchObject();
+        }
     }
 
     class ModelUsers extends Connection {

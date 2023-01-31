@@ -21,10 +21,29 @@
                 }
                 // delete post
                 if(isset($_GET["delete"])) {
-                    $userId = $_GET["delete"];
-                    $postsModel->deleteById($userId, $postsModel->getTableName());
-                    header("location:".$_SERVER['PHP_SELF']);
-                    exit();
+                    $postId = $_GET["delete"];
+                    // vérifier s'il n'est pas supprimer déja 
+                    $postsDeleted = $postsModel->checkIfExistById($postId, "posts");
+                    if(!empty($postsDeleted)) {
+                        // supprimer le post
+                        $postsModel->deleteById($postId, $postsModel->getTableName());
+                        echo "<script>
+                            alert('le post est bien supprimer !');
+                        </script>";
+                        // check if image existe in posts_images directory
+                        if(file_exists($PathImagesPosts . $postsDeleted->postImge)) {
+                            // supprimer l'image de post supprimer
+                            unlink($PathImagesPosts . $postsDeleted->postImage);
+                        } else {
+                            // l'image n'existe plus / on le supprime pas elle est déja supprimer
+                        }
+                        header("location:".$_SERVER['PHP_SELF']);
+                        exit();
+                    } else {
+                        echo "<script>
+                            alert('post Déja supprimer / n'éxiste plus');
+                        </script>";
+                    }
                 }
             }
         }
@@ -42,7 +61,7 @@
                 <div class="content-panel">
                     <ul>
                         <li><a href="new_post.php" class="btn-panel">add post</a></li>
-                        <li><a href="#" class="btn-panel">manage posts</a></li>
+                        <li><a href="manage_posts.php" class="btn-panel">manage posts</a></li>
                     </ul>
                     <div class="clear"></div>
                     <h2 class="title-panel-page">manage posts</h2> 
@@ -65,7 +84,7 @@
                                         <td class="action-content">
                                         <ul class="flex-r">
                                             <li><a href="" class="first-action">edit</a></li>
-                                            <li><a href="?delete=<?php echo $posts[$i]['id']?>" class="second-action">delete</a></li>
+                                            <li><a href="?delete=<?php echo $posts[$i]['id']?>&&imgName=<?php echo $posts[$i]['postImage']?>" class="second-action">delete</a></li>
                                             <li><a href="" class="last-action">publish</a></li>
                                         </ul>
                                     </td>
