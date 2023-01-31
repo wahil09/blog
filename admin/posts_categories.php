@@ -1,8 +1,8 @@
 <?php 
     include "../config.php";
     include $BlogPathInclude."model.php";
-    $categoriesModel = new ModelCategories();
-    $postsModel = new ModelPosts();
+    $categoriesModel = new ModelCategories("categories");
+    $postsModel = new ModelPosts("posts");
     $categories = $categoriesModel->getCategories();
 
     if(!isset($_SESSION["login"])) {

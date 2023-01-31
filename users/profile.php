@@ -1,6 +1,6 @@
 <?php 
     include "../model.php";
-    $usersModel = new ModelUsers();
+    $usersModel = new ModelUsers("users");
     if(!isset($_SESSION["login"])) {
         header("location: ../index.php");
         exit();

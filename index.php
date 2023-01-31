@@ -1,7 +1,7 @@
 <?php 
     include "model.php";
-    $categoriesModel = new ModelCategories();
-    $postsModel = new ModelPosts();
+    $categoriesModel = new ModelCategories("categories");
+    $postsModel = new ModelPosts('posts');
     $categories = $categoriesModel->getCategories();
 
     if(isset($_SESSION["login"])) {
