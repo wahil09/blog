@@ -34,7 +34,7 @@
                 <div class="content-panel">
                     <ul>
                         <li><a href="new_post.php" class="btn-panel">add user</a></li>
-                        <li><a href="#" class="btn-panel">manage users</a></li>
+                        <li><a href="manage_users.php" class="btn-panel">manage users</a></li>
                     </ul>
                     <div class="clear"></div>
                     <h2 class="title-panel-page">manage users</h2> 
@@ -52,12 +52,12 @@
                                 <?php for($i=0; isset($users[$i]); $i++) :?>
                                     <tr>
                                         <td><?= $users[$i]['id'] ?></td>
-                                        <td><?= $users[$i]['username'] ?></td>
-                                        <td><?= $users[$i]['role'] ?></td>
+                                        <td><?= htmlspecialchars($users[$i]['username']) ?></td>
+                                        <td><?= htmlspecialchars($users[$i]['role']) ?></td>
                                         <td class="action-content">
                                         <ul class="flex-r">
                                             <li><a href="" class="first-action">edit</a></li>
-                                            <li><a href="" class="second-action">delete</a></li>
+                                            <li><a href="?delet=<?php echo $users[$i]['id']?>" class="second-action">delete</a></li>
                                         </ul>
                                     </td>
                                     </tr>
@@ -73,7 +73,7 @@
     </div>
     <?php
         // On ferme la connexion
-        $categoriesModel->closeConnection();
+        $usersModel->closeConnection();
     ?>
 </body>
 </html>

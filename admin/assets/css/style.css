@@ -235,8 +235,19 @@ a {
     margin: 10px 0;
     outline: none;
 }
+
 .content .container-panel .box-content-panel .content-panel .new-category-form .btn-panel {
     float: none;
+}
+
+.content .container-panel .box-content-panel .content-panel .categories-box {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.content .container-panel .box-content-panel .content-panel .categories-box ul {
+    justify-content: center;
+    margin: 10px 0;
 }
 
 /* ---- End Style new-category-form ---- */

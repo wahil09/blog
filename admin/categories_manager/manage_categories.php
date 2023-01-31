@@ -51,7 +51,7 @@
                                 <?php for($i=0; isset($categories[$i]); $i++) :?>
                                     <tr>
                                         <td><?= $categories[$i]['id'] ?></td>
-                                        <td><?= $categories[$i]['categoryName'] ?></td>
+                                        <td><?= htmlspecialchars($categories[$i]['categoryName']) ?></td>
                                         <td class="action-content">
                                         <ul class="flex-r">
                                             <li><a href="" class="first-action">edit</a></li>

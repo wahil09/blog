@@ -53,8 +53,8 @@
                                 <?php for($i=0; isset($posts[$i]); $i++) :?>
                                     <tr>
                                         <td><?= $posts[$i]['id'] ?></td>
-                                        <td class="post-title"><?= $posts[$i]['postTitle'] ?></td>
-                                        <td><?= $posts[$i]['postAuthor'] ?></td>
+                                        <td class="post-title"><?= htmlspecialchars($posts[$i]['postTitle']) ?></td>
+                                        <td><?= htmlspecialchars($posts[$i]['postAuthor']) ?></td>
                                         <td class="action-content">
                                         <ul class="flex-r">
                                             <li><a href="" class="first-action">edit</a></li>
@@ -76,6 +76,7 @@
     <?php
         // On ferme la connexion
         $categoriesModel->closeConnection();
+        $postsModel->closeConnection();
     ?>
 </body>
 </html>

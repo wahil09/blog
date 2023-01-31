@@ -75,6 +75,25 @@
                         ?>
                         <input type="submit" value="Save Category" class="btn-panel">
                     </form>
+
+                    <div class="categories-box">
+                        <h2>Categories</h2>
+                        <ul class="flex-r">
+                            <?php 
+                            $categories = $categoriesModel->getCategories();
+                            if(!empty($categories)) :?>
+                                <?php for($i=0; isset($categories[$i]); $i++) :?>
+                                    <li>
+                                            <a class='btn-panel' href='<?php echo $BlogPathLien ?>admin/posts_categories.php?id=<?php echo $categories[$i]['id'] ?>'>
+                                                <span><?php echo htmlspecialchars($categories[$i]['categoryName'])?></span>
+                                        </a>
+                                    </li>
+                                <?php endfor ?>
+                            <?php else :?>
+                                <p>aucune categorie existe !</p>
+                            <?php endif ?>
+                        </ul>
+                    </div>
                 </div>
             </section>
         </main>
