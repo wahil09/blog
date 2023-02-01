@@ -43,12 +43,12 @@
         }
     } 
 
-    if (isset($_SESSION["user_inscrit"])) {
-        $user_inscrit = $_SESSION["user_inscrit"];
+    if (isset($_SESSION["user_bien_inscrit"])) {
+        $user_inscrit = $_SESSION["user_bien_inscrit"];
         echo "<script>
                 alert('$user_inscrit vous ètez bien Inscrit !');
             </script>";
-        unset($_SESSION['user_inscrit']);
+        unset($_SESSION['user_bien_inscrit']);
     };
 ?>
 

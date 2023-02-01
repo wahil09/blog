@@ -105,13 +105,10 @@
                 $newUser = "INSERT INTO ". $this->getTableName() ."(username, email, password, role) VALUES('$username', '$email', '$password', 'user') ";
                 $this->db->exec($newUser);
                 // pour afficher un message sur login.php qui dit "categorie ajouter !"
-                $_SESSION['user_inscrit'] = $username;
-                header("location: login.php");
-                exit();
+                $_SESSION['user_bien_inscrit'] = $username;
+
             } else {
                 $_SESSION["user_exist"] = $email;
-                header("location: register.php");
-                exit();
             }
         }
 

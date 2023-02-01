@@ -30,7 +30,15 @@
                 header("location:".$_SERVER['PHP_SELF']);
                 exit();
             }
-        }
+
+            // vérifier si vous avez bien créez un nouveau utlisateur
+            if(isset($_SESSION["user_bien_inscrit"])) :?>
+                <script>
+                    alert("<?php echo $_SESSION['login']->username?> vous aves bien créez l'utilisateur <?php echo $_SESSION['user_bien_inscrit']?>")
+                </script>
+                <?php unset($_SESSION["user_bien_inscrit"])?>
+            <?php endif ?>
+        <?php }
     }
 ?>
 <!DOCTYPE html>

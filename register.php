@@ -37,6 +37,11 @@
         }
     }
 
+    if(isset($_SESSION["user_bien_inscrit"])) {
+        header("location: login.php");
+        exit();
+    }
+
     // On ferme la connexion
     $usersModel->closeConnection();
 ?>
@@ -54,7 +59,7 @@
             <h3>Create Your Account</h3>
             <form method="post" class="register-form">
                 <?php if(isset($_SESSION["user_exist"])) {
-                    echo "<p class='error-msg'>Désoli! cette email : ".$_SESSION["user_exist"]." est déja utiliser !</p>";
+                    echo "<p class='error-msg'>Désoli! cette email : ".htmlspecialchars($_SESSION["user_exist"])." est déja utiliser !</p>";
                     unset($_SESSION["user_exist"]);
                 }?>
                 <div class="form-group">

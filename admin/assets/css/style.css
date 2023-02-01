@@ -261,18 +261,13 @@ a {
 /* ---- End Style new-category-form ---- */
 
 
-/* ---- Start Style new-post-form ---- */
-.content .container-panel .box-content-panel .content-panel .form-new-post {
+/* ---- Start Style form-new ---- */
+.content .container-panel .box-content-panel .content-panel :is(.form-new-post, .form-new-user) {
     align-items: flex-start;
     padding: 10px 0;
 }
 
-.content .container-panel .box-content-panel .content-panel .form-new-post {
-    align-items: flex-start;
-    padding: 10px 0;
-}
-
-.content .container-panel .box-content-panel .content-panel .form-new-post label {
+.content .container-panel .box-content-panel .content-panel :is(.form-new-post, .form-new-user) label {
     font-size: var(--f-size-primary);
 }
 
@@ -280,8 +275,7 @@ a {
     padding: 10px 0;
     margin: 0;
 }
-
-/* ---- End Style new-post-form ---- */
+/* ---- End Style form-new ---- */
 
 
 
