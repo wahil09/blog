@@ -45,10 +45,10 @@
     }
 ?>
 <html lang="fr-FR">
-<?php require_once($BlogPathInclude."admin/head.php")?>
+<?php require_once($adminPathInclude."head.php")?>
 <body>
     <div class="content">
-        <?php include($BlogPathInclude."admin/header.php");?>
+        <?php include($adminPathInclude."header.php");?>
         <main class="container-panel">
             <?php require_once("../side-bare.php")?>
             <section class="box-content-panel">

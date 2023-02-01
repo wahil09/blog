@@ -51,12 +51,12 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php require_once($BlogPathInclude."admin/head.php")?>
+<?php require_once($adminPathInclude."head.php")?>
 <body>
     <div class="content">
-        <?php require_once($BlogPathInclude."admin/header.php")?>
+        <?php require_once($adminPathInclude."header.php")?>
         <main class="container-panel">
-            <?php require_once($BlogPathInclude."admin/side-bare.php")?>
+            <?php require_once($adminPathInclude."side-bare.php")?>
             <section class="box-content-panel">
                 <div class="content-panel">
                     <ul>

@@ -8,9 +8,8 @@
     <style>
         <?php
             require_once("../../config.php");
-            require_once($BlogPathInclude."admin/assets/css/style.css");
-            require_once($BlogPathInclude."admin/assets/css/MQuiry.css");
-            require_once($BlogPathInclude."assets/css/all.css");
+            require_once($adminPathInclude."assets/css/style.css");
+            require_once($adminPathInclude."assets/css/MQuiry.css");
         ?>
     </style>
 </head>

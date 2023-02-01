@@ -20,7 +20,7 @@
                 }
             
                 if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"])) {
-                    include $BlogPathInclude."admin/upload_image.php";
+                    include $adminPathInclude."upload_image.php";
 
                     $postTitle = $_POST["postTitle"];
                     $postContent = $_POST["postContent"];
