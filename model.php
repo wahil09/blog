@@ -164,9 +164,10 @@
         function setCategories($category_name, $userId) {
             // check if categorie exist
             if($this->isExist($category_name)) {
-                $category_name = $this->replaceQuote($category_name);
-                $new_category = "INSERT INTO ". $this->getTableName() ."(categoryName, userId) VALUES('$category_name', '$userId')";
-                $this->db->exec($new_category);
+                $request = $this->db->prepare("INSERT INTO ". $this->getTableName() ."(categoryName, userId) VALUES(?, ?)");
+                $request->bindParam(1, $category_name);
+                $request->bindParam(2, $userId);
+                $request->execute();
                 // pour afficher un message sur categories.php qui dit "categorie ajouter !"
                 $_SESSION['category_ajouter'] = $category_name;
                 header("location: new_category.php");
@@ -236,14 +237,15 @@
         // ------------- Setters ------------- 
         public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId, $postCategoryId) {
             if(!$this->isExist($postTitle, $postUserId, $postContent)) {
-                // replace all single with \' a cause d'error if insert ex: $postContent -> j'habite ici user l'insert '$postContent' => 'j'habite' <- error
-                $postTitle = $this->replaceQuote($postTitle);
-                $postCat = $this->replaceQuote($postCat);
-                $postImage = $this->replaceQuote($postImage);
-                $postContent = $this->replaceQuote($postContent);
-                $postAuthor = $this->replaceQuote($postAuthor);
-                $newPost = "INSERT INTO ". $this->getTableName() ."(postTitle, postCat, postImage, postContent, postAuthor, userId, categoryId) VALUES('$postTitle', '$postCat', '$postImage', '$postContent', '$postAuthor', '$postUserId', '$postCategoryId')";
-                $this->db->exec($newPost);
+                $request = $this->db->prepare("INSERT INTO ". $this->getTableName() ."(postTitle, postCat, postImage, postContent, postAuthor, userId, categoryId) VALUES(?, ?, ?, ?, ?, ?, ?)");
+                $request->bindParam(1, $postTitle);
+                $request->bindParam(2, $postCat);
+                $request->bindParam(3, $postImage);
+                $request->bindParam(4, $postContent);
+                $request->bindParam(5, $postAuthor);
+                $request->bindParam(6, $postUserId);
+                $request->bindParam(7, $postCategoryId);
+                $request->execute();
                 $_SESSION["post-partager"] = true;
             } else {
                 $_SESSION["post-partager"] = false;
