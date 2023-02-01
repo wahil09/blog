@@ -1,6 +1,6 @@
 <?php 
     include "../model.php";
-    $categoriesModel = new ModelCategories("categories");
+    $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts("posts");
     $categories = $categoriesModel->getCategories();
 

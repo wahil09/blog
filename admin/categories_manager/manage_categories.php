@@ -32,12 +32,12 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php require_once($adminPathInclude."head.php")?>
+<?php require_once($adminPathInclude."inc/head.php")?>
 <body>
     <div class="content">
-        <?php include($adminPathInclude."header.php");?>
+        <?php include($adminPathInclude."inc/header.php");?>
         <main class="container-panel">
-            <?php require_once("../side-bare.php")?>
+            <?php require_once($adminPathInclude."inc/side-bare.php")?>
             <section class="box-content-panel">
                 <div class="content-panel">
                     <ul>

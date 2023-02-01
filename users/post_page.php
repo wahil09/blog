@@ -1,7 +1,7 @@
 <?php 
     include "../model.php";
-    $categoriesModel = new ModelCategories("categories");
-    $postsModel = new ModelPosts("posts");
+    $categoriesModel = new ModelCategories();
+    $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
     // condition pour que les utlisateurs peuvent lire tout l'article
