@@ -10,8 +10,8 @@
             <!-- bar du navigation pour les grand écrans -->
             <nav>
                 <ul class="menu flex-r">
-                    <li><a href="<?php echo $BlogPathLien?>admin/index.php">Acceuil</a></li>
-                    <li><a href="<?php echo $BlogPathLien?>admin/posts_manager/manage_posts.php">Dashboard</a></li>
+                    <li><a href="<?php echo $adminPathLien?>index.php">Acceuil</a></li>
+                    <li><a href="<?php echo $adminPathLien?>posts_manager/manage_posts.php">Dashboard</a></li>
                     <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
                 </ul>
             </nav>
@@ -22,8 +22,8 @@
                     <span class="bar bottom"></span>
                 </div>
                 <ul class="menu-phone flex-c" id="menuPhone">
-                    <li><a href="<?php echo $BlogPathLien?>admin/index.php">Acceuil</a></li>
-                    <li><a href="<?php echo $BlogPathLien?>admin/posts_manager/manage_posts.php">Dashboard</a></li>
+                    <li><a href="<?php echo $adminPathLien?>index.php">Acceuil</a></li>
+                    <li><a href="<?php echo $adminPathLien?>posts_manager/manage_posts.php">Dashboard</a></li>
                     <li><a href="?logout">Logout<i style="padding-left: 10px;" class="fa-sharp fa-solid fa-right-from-bracket"></i></a></li>
                 </ul>
             </div>

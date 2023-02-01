@@ -84,7 +84,7 @@
                             if(!empty($categories)) :?>
                                 <?php for($i=0; isset($categories[$i]); $i++) :?>
                                     <li>
-                                            <a class='btn-panel' href='<?php echo $BlogPathLien ?>admin/posts_categories.php?id=<?php echo $categories[$i]['id'] ?>'>
+                                            <a class='btn-panel' href='<?php echo $adminPathLien ?>posts_categories.php?id=<?php echo $categories[$i]['id'] ?>'>
                                                 <span><?php echo htmlspecialchars($categories[$i]['categoryName'])?></span>
                                         </a>
                                     </li>

@@ -44,7 +44,7 @@
             <section class="box-content-panel">
                 <div class="content-panel">
                     <ul>
-                        <li><a href="new_post.php" class="btn-panel">add user</a></li>
+                        <li><a href="new_user.php" class="btn-panel">add user</a></li>
                         <li><a href="manage_users.php" class="btn-panel">manage users</a></li>
                     </ul>
                     <div class="clear"></div>

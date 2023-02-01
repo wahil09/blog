@@ -38,9 +38,8 @@
                                     alert('Post Partager !');
                                 </script>";
                                 unset($_SESSION["post-partager"]);
-    
-                                // header( "refresh: .3; url=".$BlogPathLien."admin/index.php" );
-                                // exit();
+                                header( "refresh: .3; url=".$adminPathLien."index.php" );
+                                exit();
                             } else {
                                 // pour supprimer l'image télécharger 
                                 unlink($target_file);
