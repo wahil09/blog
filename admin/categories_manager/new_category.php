@@ -58,7 +58,7 @@
                         <li><a href="manage_categories.php" class="btn-panel">manage categories</a></li>
                     </ul>
                     <div class="clear"></div>
-                    <h2 class="title-panel-page">manage categories</h2> 
+                    <h2 class="title-panel-page">create category</h2> 
 
                     <form method="post" action="" class="new-category-form">
                         <label for="category">Category Name :</label>

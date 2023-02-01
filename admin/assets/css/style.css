@@ -16,6 +16,14 @@
     clear: both;
 }
 
+.inp-style {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 10px 0 15px;
+    outline: none;
+    font-size: var(--f-size-primary);
+}
+
 .btn-panel {
     background-color: var(--bg-btn);
     font-size: var(--f-size-primary);
@@ -48,7 +56,7 @@ a {
 
 :root {
     --f-size-primary: clamp(.9em, 2.5vw, 1em);
-    --f-size-title: clamp(1em, 2.5vw, 1.4em);
+    --f-size-title: clamp(1.1em, 2.5vw, 1.4em);
     --h-header: 65px;
     /* --- color --- */
     --m-color: #0A232A;
@@ -147,7 +155,7 @@ a {
     grid-template-areas: 
     "sideBare sideBare . ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel . "
     ;
-    height: calc(100vh - var(--h-header));
+    min-height: calc(100vh - var(--h-header));
 }
 /* ---------- Start Side-Bare Style ----------- */
 .content .container-panel .side-bare {
@@ -249,8 +257,30 @@ a {
     justify-content: center;
     margin: 10px 0;
 }
-
 /* ---- End Style new-category-form ---- */
+
+
+/* ---- Start Style new-post-form ---- */
+.content .container-panel .box-content-panel .content-panel .form-new-post {
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.content .container-panel .box-content-panel .content-panel .form-new-post {
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.content .container-panel .box-content-panel .content-panel .form-new-post label {
+    font-size: var(--f-size-primary);
+}
+
+.content .container-panel .box-content-panel .content-panel .form-new-post input[type="file"] {
+    padding: 10px 0;
+    margin: 0;
+}
+
+/* ---- End Style new-post-form ---- */
 
 
 

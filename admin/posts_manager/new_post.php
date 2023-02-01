@@ -64,21 +64,27 @@
 
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include $BlogPathInclude."head.php" ?>
-<body id="body" class="post-categorie">
-    <?php include $BlogPathInclude."header.php" ?>
-    <main class="content">
-            <div class="container">
-                <section class='new-post'>
-                    <h2>Nouveau Article :</h2>
-                    <form enctype="multipart/form-data" method="post" class="flex-c form-new-post">
-                        <div class="inp-box">
+    <?php require_once($adminPathInclude."inc/head.php")?>
+    <body>
+        <div class="content">
+            <?php require_once($adminPathInclude."inc/header.php")?>
+            <main class="container-panel">
+                <?php require_once($adminPathInclude."inc/side-bare.php")?>
+                <section class="box-content-panel">
+                    <div class="content-panel">
+                        <ul>
+                            <li><a href="new_post.php" class="btn-panel">add post</a></li>
+                            <li><a href="manage_posts.php" class="btn-panel">manage posts</a></li>
+                        </ul>
+                        <div class="clear"></div>
+                        <h2 class="title-panel-page">create post</h2> 
+
+                        <form enctype="multipart/form-data" method="post" class="flex-c form-new-post">
                             <label for="title">Article name : </label>
-                            <input type="text" name="postTitle" id="title" required>
-                        </div>
-                        <div class="inp-box">
+                            <input type="text" name="postTitle" id="title" class="inp-style" required>
+                            
                             <label for="Categories">Categories : </label>
-                            <select name="Categories" id="Categories" required>
+                            <select name="Categories" id="Categories" class="inp-style" required>
                                 <option value="">Choisir un categorie ...</option>
                                 <?php if(!empty($categories)) :?>
                                     <?php for($i=0; isset($categories[$i]); $i++) :?>
@@ -86,66 +92,29 @@
                                     <?php endfor ?>
                                 <?php endif ?>
                             </select>
-                        </div>
-                        <div class="inp-box">
-                            <label for="imageToUpload">Article image : </label>
-                            <input type="file" name="imageToUpload" id="imageToUpload" accept="image/*" required>
-                        </div>
-                        <div class="inp-box">
-                            <textarea name="postContent" id="post-text" cols="90" rows="10" required></textarea>
-                        </div>
-                        <div class="inp-box">
-                            <input type="submit" value="upload">
-                        </div>
-                    </form>
-                </section>
 
-                <div class="sidebar">
-                    <div class="row categories flex-c">
-                        <h2>Categories</h2>
-                        <ul class="flex-c">
-                            <?php 
-                            if(!empty($categories)) :?>
-                                <?php for($i=0; isset($categories[$i]); $i++) {
-                                    echo "
-                                    <li><a href='posts_categories.php?id=".$categories[$i]['id']."'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($categories[$i]['categoryName'])."</span></a></li>
-                                    ";
-                                }?>
-                            <?php else :?>
-                                <p>aucune categorie existe !</p>
-                            <?php endif ?>
-                        </ul>
+                            <label for="imageToUpload">Article image : </label>
+                            <input type="file" name="imageToUpload" id="imageToUpload" class="inp-style" accept="image/*" required>
+
+                            <textarea name="postContent" id="post-text" class="inp-style" cols="90" rows="10" required></textarea>
+
+                            <input type="submit" value="upload" class="btn-panel">
+                        </form>
+                    </section>
+
+                    <?php
+                        // On ferme la connexion
+                        $categoriesModel->closeConnection();
+                        $postsModel->closeConnection();
+                    ?>
                     </div>
-                    <div class="row last-posts flex-c">
-                        <h2>dernier posts</h2>
-                        <ul class="flex-c">
-                        <?php
-                        $posts = $postsModel->getLastPosts();
-                        if($posts) :?>
-                            <?php for($i=0; isset($posts[$i])&&$i <3 ; $i++) : ?>
-                                <li class='last-post'>
-                                    <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
-                                        <span class='img-last-post'><img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
-                                        <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
-                                    </a>
-                                </li>
-                            <?php endfor ;?>
-                        <?php else :?>
-                            <p>aucune Postes publier !</p>
-                        <?php endif ?>
-                        </ul>
-                        <?php
-                            // On ferme la connexion
-                            $categoriesModel->closeConnection();
-                            $postsModel->closeConnection();
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </main>
-    <?php
-        include $BlogPathInclude."footer.php";
-    ?>
-    <script src="<?php echo $BlogPathLien?>/assets/js/script.js"></script>
-</body>
+                </section>
+            </main>
+        </div>
+        <?php
+            // On ferme la connexion
+            $categoriesModel->closeConnection();
+            $postsModel->closeConnection();
+        ?>
+    </body>
 </html>

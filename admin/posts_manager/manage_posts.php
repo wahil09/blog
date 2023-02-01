@@ -51,58 +51,58 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php require_once($adminPathInclude."inc/head.php")?>
-<body>
-    <div class="content">
-        <?php require_once($adminPathInclude."inc/header.php")?>
-        <main class="container-panel">
-            <?php require_once($adminPathInclude."inc/side-bare.php")?>
-            <section class="box-content-panel">
-                <div class="content-panel">
-                    <ul>
-                        <li><a href="new_post.php" class="btn-panel">add post</a></li>
-                        <li><a href="manage_posts.php" class="btn-panel">manage posts</a></li>
-                    </ul>
-                    <div class="clear"></div>
-                    <h2 class="title-panel-page">manage posts</h2> 
-                    <?php if(!empty($posts)) :?>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>N</th>
-                                    <th>title</th>
-                                    <th>author</th>
-                                    <th>action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php for($i=0; isset($posts[$i]); $i++) :?>
+    <?php require_once($adminPathInclude."inc/head.php")?>
+    <body>
+        <div class="content">
+            <?php require_once($adminPathInclude."inc/header.php")?>
+            <main class="container-panel">
+                <?php require_once($adminPathInclude."inc/side-bare.php")?>
+                <section class="box-content-panel">
+                    <div class="content-panel">
+                        <ul>
+                            <li><a href="new_post.php" class="btn-panel">add post</a></li>
+                            <li><a href="manage_posts.php" class="btn-panel">manage posts</a></li>
+                        </ul>
+                        <div class="clear"></div>
+                        <h2 class="title-panel-page">manage posts</h2> 
+                        <?php if(!empty($posts)) :?>
+                            <table>
+                                <thead>
                                     <tr>
-                                        <td><?= $posts[$i]['id'] ?></td>
-                                        <td class="post-title"><?= htmlspecialchars($posts[$i]['postTitle']) ?></td>
-                                        <td><?= htmlspecialchars($posts[$i]['postAuthor']) ?></td>
-                                        <td class="action-content">
-                                        <ul class="flex-r">
-                                            <li><a href="" class="first-action">edit</a></li>
-                                            <li><a href="?delete=<?php echo $posts[$i]['id']?>&&imgName=<?php echo $posts[$i]['postImage']?>" class="second-action">delete</a></li>
-                                            <li><a href="" class="last-action">publish</a></li>
-                                        </ul>
-                                    </td>
+                                        <th>N</th>
+                                        <th>title</th>
+                                        <th>author</th>
+                                        <th>action</th>
                                     </tr>
-                                <?php endfor ?>
-                            </tbody>
-                        </table>
-                    <?php else :?>
-                        <p>Aucune post publier !</p>
-                    <?php endif ?>
-                </div>
-            </section>
-        </main>
-    </div>
-    <?php
-        // On ferme la connexion
-        $categoriesModel->closeConnection();
-        $postsModel->closeConnection();
-    ?>
-</body>
+                                </thead>
+                                <tbody>
+                                    <?php for($i=0; isset($posts[$i]); $i++) :?>
+                                        <tr>
+                                            <td><?= $posts[$i]['id'] ?></td>
+                                            <td class="post-title"><?= htmlspecialchars($posts[$i]['postTitle']) ?></td>
+                                            <td><?= htmlspecialchars($posts[$i]['postAuthor']) ?></td>
+                                            <td class="action-content">
+                                            <ul class="flex-r">
+                                                <li><a href="" class="first-action">edit</a></li>
+                                                <li><a href="?delete=<?php echo $posts[$i]['id']?>&&imgName=<?php echo $posts[$i]['postImage']?>" class="second-action">delete</a></li>
+                                                <li><a href="" class="last-action">publish</a></li>
+                                            </ul>
+                                        </td>
+                                        </tr>
+                                    <?php endfor ?>
+                                </tbody>
+                            </table>
+                        <?php else :?>
+                            <p>Aucune post publier !</p>
+                        <?php endif ?>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <?php
+            // On ferme la connexion
+            $categoriesModel->closeConnection();
+            $postsModel->closeConnection();
+        ?>
+    </body>
 </html>
