@@ -99,11 +99,12 @@
             $sth->execute();
             // check if categorie exist
             if(empty($sth->fetch())) {
-                $username = $this->replaceQuote($username);
-                $email = $this->replaceQuote($email);
-                $password = $this->replaceQuote($password);
-                $newUser = "INSERT INTO ". $this->getTableName() ."(username, email, password, role) VALUES('$username', '$email', '$password', '$role') ";
-                $this->db->exec($newUser);
+                $request = $this->db->prepare("INSERT INTO ". $this->getTableName() ."(username, email, password, role) VALUES(?, ?, ?, ?)");
+                $request->bindParam(1, $username);
+                $request->bindParam(2, $email);
+                $request->bindParam(3, $password);
+                $request->bindParam(4, $role);
+                $request->execute();
                 // pour afficher un message sur login.php qui dit "categorie ajouter !"
                 $_SESSION['user_bien_inscrit'] = $username;
             } else {
