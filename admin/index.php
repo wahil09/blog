@@ -1,8 +1,8 @@
 <?php 
     include "../config.php";
     include $BlogPathInclude."model.php";
-    $categoriesModel = new ModelCategories("categories");
-    $postsModel = new ModelPosts("posts");
+    $categoriesModel = new ModelCategories();
+    $postsModel = new ModelPosts();
 
     if(!isset($_SESSION["login"])) {
         header("location: ../index.php");

@@ -1,7 +1,7 @@
 <?php 
     include "../../config.php";
     include $BlogPathInclude."model.php";
-    $usersModel = new ModelUsers("users");
+    $usersModel = new ModelUsers();
     $users = $usersModel->getUsers();
     // vérifier si quellqu'un est connécter
     if(!isset($_SESSION["login"])) {

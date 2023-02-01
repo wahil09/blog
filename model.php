@@ -6,13 +6,13 @@
         public $pass;
         public $dbname;
         public $db;
-        public $tbname;
-        function __construct($tbname) {
+        //public $tbname;
+        public function __construct(/*$tbname*/) {
             $this->severname = "localhost";
             $this->user = "root";
             $this->pass = "";
             $this->dbname = "wahil";
-            $this->tbname = $tbname;
+            //$this->tbname = $tbname;
             try {
                 $this->db = new PDO("mysql:host=".$this->severname."; dbname=".$this->dbname."; charset=utf8",$this->user, $this->pass);
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -49,9 +49,10 @@
             return $request->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function getTableName() {
-            return $this->tbname;
-        }
+        // utiliser cette methode s tu veux entrer le nom de table (data base) sur toutes les object créer (class connexion, child class)
+        // public function getTableName() {
+        //     return $this->tbname;
+        // }
 
         public function checkIfExistById($id, $tbname) {
             $request = $this->db->prepare("SELECT * FROM ". $tbname ." WHERE id=:id");
@@ -62,6 +63,8 @@
     }
 
     class ModelUsers extends Connection {
+        public $tbname = "users";
+
         public function userAlreadyRegistered($email, $password) {
             $request = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE password=:password &&email=:email");
             $request->bindValue("email", $email);
@@ -84,6 +87,9 @@
             return $request->fetchObject();
         }
 
+        public function getTableName() {
+            return $this->tbname;
+        }
 
 
         // ------------- Setters ------------- -
@@ -125,6 +131,8 @@
     }
 
     class ModelCategories extends Connection {
+        public $tbname = "categories";
+
         public function isExist($category_name) {
             $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE categoryName = :categoryName");
             $sth->bindValue("categoryName", $category_name);
@@ -149,6 +157,11 @@
             $sth->execute();
             return $sth->fetchObject()->id;
         }
+        
+        public function getTableName() {
+            return $this->tbname;
+        }
+
 
         // ------------- Setters ------------- 
         function setCategories($category_name, $userId) {
@@ -171,6 +184,8 @@
     }
 
     class ModelPosts extends Connection {
+        public $tbname = "posts";
+
         public function isExist($postTitle, $postUserId, $postContent) {
             $check = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE userId=:userId && postTitle=:postTitle && postContent=:postContent");
             $check->bindValue("postTitle", $postTitle);
@@ -216,6 +231,11 @@
             return $request->fetchAll(PDO::FETCH_ASSOC);
         }
         
+        public function getTableName() {
+            return $this->tbname;
+        }
+
+
         // ------------- Setters ------------- 
         public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId, $postCategoryId) {
             if(!$this->isExist($postTitle, $postUserId, $postContent)) {

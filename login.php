@@ -1,6 +1,6 @@
 <?php 
     include "model.php";
-    $usersModel = new ModelUsers("users");
+    $usersModel = new ModelUsers();
     if(isset($_POST["email"]) && isset($_POST["password"])) {
         $email = $_POST["email"];
         $password = $_POST["password"];

@@ -1,7 +1,7 @@
 <?php 
     require_once("../../config.php");
     include $BlogPathInclude."model.php";
-    $categoriesModel = new ModelCategories("categories");
+    $categoriesModel = new ModelCategories();
     $categories = $categoriesModel->getCategories();
     if(!isset($_SESSION["login"])) {
         header("location:".$BlogPathLien. "index.php");
