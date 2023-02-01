@@ -93,7 +93,7 @@
 
 
         // ------------- Setters ------------- -
-        function setUser($username, $email, $password) {
+        function setUser($username, $email, $password, $role = "user") {
             $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE email = :email");
             $sth->bindValue("email", $email);
             $sth->execute();
@@ -102,11 +102,10 @@
                 $username = $this->replaceQuote($username);
                 $email = $this->replaceQuote($email);
                 $password = $this->replaceQuote($password);
-                $newUser = "INSERT INTO ". $this->getTableName() ."(username, email, password, role) VALUES('$username', '$email', '$password', 'user') ";
+                $newUser = "INSERT INTO ". $this->getTableName() ."(username, email, password, role) VALUES('$username', '$email', '$password', '$role') ";
                 $this->db->exec($newUser);
                 // pour afficher un message sur login.php qui dit "categorie ajouter !"
                 $_SESSION['user_bien_inscrit'] = $username;
-
             } else {
                 $_SESSION["user_exist"] = $email;
             }

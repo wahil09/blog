@@ -1,5 +1,5 @@
 <?php 
-    include "../model.php";
+    include "../../model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();

@@ -22,15 +22,16 @@
                     exit();
                 }
 
-                if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['cPassword'])) {
+                if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['cPassword']) && isset($_POST['role'])) {
                     $username = $_POST["username"];
                     $email = $_POST["email"];
                     $password = $_POST["password"];
                     $cPassword = $_POST["cPassword"]; //confirm password
-                    if(!empty($username) && !empty($email) && !empty($password) && !empty($password)) {
+                    $role = $_POST["role"]; //confirm password
+                    if(!empty($username) && !empty($email) && !empty($password) && !empty($password) && !empty($role)) {
                         if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
                             if($password === $cPassword) {
-                                $usersModel->setUser($username, $email, $password);
+                                $usersModel->setUser($username, $email, $password, $role);
                             } else {
                                 $_SESSION["error-confirm-password"] = true;
                                 header("refresh:0");
@@ -99,6 +100,13 @@
                                 echo "<p class='error-msg'>confirm password is not equal password !</p>";
                                 unset($_SESSION['error-confirm-password']);
                             }?>
+
+
+                            <label for="role">rôle</label>
+                            <select name="role" id="role" class="inp-style">
+                                <option value="user">user</option>
+                                <option value="admin">admin</option>
+                            </select>
 
                             <input type="submit" id="submit" class="btn-panel" value="Sign Up">
                     </form>

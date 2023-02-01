@@ -1,5 +1,5 @@
 <?php 
-    include "../config.php";
+    include "../../config.php";
     include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
