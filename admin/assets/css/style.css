@@ -10,6 +10,7 @@
 .error-msg {
     color: red !important;
     font-size: .8em !important;
+    text-transform: none !important;
 }
 
 .clear {
