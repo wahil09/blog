@@ -5,7 +5,7 @@
     $postsModel = new ModelPosts();
 
     if(!isset($_SESSION["login"])) {
-        header("location:".$BlogPathLien."index.php");
+        header("location:".$BlogPathLien);
         exit();
     } else {
         if($_SESSION['login']->role != "admin") {

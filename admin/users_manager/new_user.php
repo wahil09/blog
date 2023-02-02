@@ -5,7 +5,7 @@
     $users = $usersModel->getUsers();
     // vérifier si quellqu'un est connécter
     if(!isset($_SESSION["login"])) {
-        header("location: ".$BlogPathInclude."index.php");
+        header("location:".$BlogPathLien);
         exit();
     } else {
         if($_SESSION['login']->role != "admin") {

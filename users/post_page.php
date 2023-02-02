@@ -1,30 +1,24 @@
 <?php 
-    include "../model.php";
+    include "../config.php";
+    include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
-    // condition pour que les utlisateurs peuvent lire tout l'article
     if(!isset($_SESSION["login"])) {
-        header("location: login.php");
+        header("location:".$BlogPathLien);
         exit();
     } else {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role != "user") {
-                header("location: ../admin");
-                exit();
-            } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location: index.php");
-                    exit();
-                }
-            }
+        if($_SESSION['login']->role != "user") {
+            header("location: ".$BlogPathLien."admin/");
+            exit();
         }
     }
+    
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
 
-    $post = [];
     if(isset($_GET["id"])) {
         $postId = $_GET["id"];
         $post = $postsModel->getPostSelected($postId);

@@ -1,30 +1,27 @@
 <?php 
-    include "../model.php";
+    include "../config.php";
+    include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
     if(!isset($_SESSION["login"])) {
-        header("location: ../index.php");
+        header("location:".$BlogPathLien);
         exit();
     } else {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role != "user") {
-                header("location: ../admin");
-                exit();
-            } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location: ../index.php");
-                    exit();
-                }
-            }
+        if($_SESSION['login']->role != "user") {
+            header("location: ".$BlogPathLien."admin/");
+            exit();
         }
-        if(isset($_GET["id"])) {
-            $categoriesId = $_GET["id"];
-            $posts = $postsModel->getPostsByCategory($categoriesId);
-        }
+    }
+    
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
+
+    if(isset($_GET["id"])) {
+        $categoriesId = $_GET["id"];
+        $posts = $postsModel->getPostsByCategory($categoriesId);
     }
 ?>
 <!DOCTYPE html>

@@ -1,37 +1,34 @@
 <?php 
-    include "../model.php";
+    include "../config.php";
+    include $BlogPathInclude."model.php";
     $usersModel = new ModelUsers();
+
     if(!isset($_SESSION["login"])) {
-        header("location: ../index.php");
+        header("location:".$BlogPathLien);
         exit();
     } else {
-        
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role != "user") {
-                header("location: ../admin");
-                exit();
-        } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location: ../index.php");
-                    exit();
-                }
-                // si l'utilisateur clicker sur le button submit
-                if(isset($_POST["nName"], $_POST["nEmail"], $_POST["nPassword"], $_POST["nMetier"], $_POST["nPresentation"])) {
-                    $nouveauNom = $_POST["nName"];
-                    $nouveauEmail = $_POST["nEmail"];
-                    $nouveauPassword = $_POST["nPassword"];
-                    $nouveauMetier = $_POST["nMetier"];
-                    $nouveauPresentation = $_POST["nPresentation"];
-                    // executer la modification
-                    $usersModel->updateProfile($nouveauNom, $nouveauEmail, $nouveauPassword, $nouveauMetier, $nouveauPresentation);
-                    $_SESSION["login"] = $usersModel->getUserDataById($_SESSION["login"]->id);
-                    header("refresh:0");
-                    exit();
-                }
-            }
+        if($_SESSION['login']->role != "user") {
+            header("location: ".$BlogPathLien."admin/");
+            exit();
         }
+    }
+    
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
+
+    // si l'utilisateur taper sur le button submit
+    if(isset($_POST["nName"], $_POST["nEmail"], $_POST["nPassword"], $_POST["nMetier"], $_POST["nPresentation"])) {
+        $nouveauNom = $_POST["nName"];
+        $nouveauEmail = $_POST["nEmail"];
+        $nouveauPassword = $_POST["nPassword"];
+        $nouveauMetier = $_POST["nMetier"];
+        $nouveauPresentation = $_POST["nPresentation"];
+        // executer la modification
+        $usersModel->updateProfile($nouveauNom, $nouveauEmail, $nouveauPassword, $nouveauMetier, $nouveauPresentation);
+        $_SESSION["login"] = $usersModel->getUserDataById($_SESSION["login"]->id);
+        header("refresh:0");
+        exit();
     }
 ?>
 <!DOCTYPE html>
