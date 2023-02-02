@@ -5,7 +5,7 @@
     $users = $usersModel->getUsers();
     // vérifier si quellqu'un est connécter
     if(!isset($_SESSION["login"])) {
-        header("location: ../../index.php");
+        header("location: ".$BlogPathLien."index.php");
         exit();
     } else {
         // vérifier qui est connécter

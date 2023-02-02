@@ -5,7 +5,7 @@
     $postsModel = new ModelPosts();
     $posts = $postsModel->getPosts();
     if(!isset($_SESSION["login"])) {
-        header($BlogPathLien."index.php");
+        header("location:" .$BlogPathLien."index.php");
         exit();
     } else {
         if(isset($_SESSION["login"]->role)) {

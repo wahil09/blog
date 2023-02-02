@@ -11,7 +11,7 @@
         // vérifier qui est connécter
         if(isset($_SESSION["login"]->role)) {
             if($_SESSION['login']->role != "admin") {
-                header("location: ../../users/");
+                header("location: ".$BlogPathLien."index.php");
                 exit();
             } else {
                 // pour la déconnexion
