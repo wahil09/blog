@@ -184,6 +184,20 @@
     class ModelPosts extends Connection {
         public $tbname = "posts";
 
+        public function publishPostById($postId) {
+            $request = $this->db->prepare("UPDATE ".$this->getTableName(). " SET published = 1 WHERE id= :postId");
+            $request->bindValue("postId", $postId);
+            $request->execute();
+            return $request->fetchObject();
+        }
+
+        public function checkIfPostPublishedById($postId) {
+            $request = $this->db->prepare("SELECT * FROM ". $this->getTableName(). " WHERE id= :postId");
+            $request->bindValue("postId", $postId);
+            $request->execute();
+            return $request->fetchObject()->published == 0;
+        }
+
         public function isExist($postTitle, $postUserId, $postContent) {
             $check = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE userId=:userId && postTitle=:postTitle && postContent=:postContent");
             $check->bindValue("postTitle", $postTitle);
@@ -207,8 +221,8 @@
             return $posts;
         }
 
-        function getPostsNoPublished() {
-            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName(). " WHERE published = 0");
+        function getPosts() {
+            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName());
             $sth->execute();
             $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
             return $posts;

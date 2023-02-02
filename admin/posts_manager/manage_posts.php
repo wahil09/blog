@@ -3,7 +3,7 @@
     require_once($BlogPathInclude."model.php");
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
-    $posts = $postsModel->getPostsNoPublished();
+    $posts = $postsModel->getPosts();
     if(!isset($_SESSION["login"])) {
         header($BlogPathLien."index.php");
         exit();
@@ -43,6 +43,34 @@
                         echo "<script>
                             alert('post Déja supprimer / n'éxiste plus');
                         </script>";
+                    }
+                }
+
+                // publish post 
+                if(isset($_GET["publish"])) {
+                    $postId = $_GET["publish"];
+                    $postContent = $postsModel->checkIfExistById($postId, "posts");
+                    // vérifier si le post existe
+                    if(!empty($postContent)) {
+
+                        // vérifier si le post est déja publier
+                        $postsNoPublished = $postsModel->checkIfPostPublishedById($postId);
+                        if($postsNoPublished) {
+                            $postsModel->publishPostById($postId);
+                            echo "<script>
+                                alert('le post est bien supprimer !');
+                            </script>";
+                            header("location:".$_SERVER['PHP_SELF']);
+                            exit();
+                        } else {
+                            echo "<script>
+                                alert('post est déja publier !');
+                            </script>";
+                        }
+                    } else {
+                        echo '<script>
+                            alert("post est supprimer / n\'éxiste plus");
+                        </script>';
                     }
                 }
             }
@@ -85,7 +113,9 @@
                                             <ul class="flex-r">
                                                 <li><a href="" class="first-action">edit</a></li>
                                                 <li><a href="?delete=<?php echo $posts[$i]['id']?>&&imgName=<?php echo $posts[$i]['postImage']?>" class="second-action">delete</a></li>
-                                                <li><a href="" class="last-action">publish</a></li>
+                                                <?php if($posts[$i]['published'] == 0) :?>
+                                                    <li><a href="?publish=<?php echo $posts[$i]['id']?>" class="last-action">publish</a></li>
+                                                <?php endif?>
                                             </ul>
                                         </td>
                                         </tr>
