@@ -16,8 +16,6 @@
                     }
                 } else {
                     $_SESSION["error_login_user"] = $email;
-                    header("refresh:0");
-                    exit();
                 } 
             } else {
                 $_SESSION["email-error"] = true;
@@ -75,7 +73,7 @@
                     } ?>
                     <div class="inp-box">
                         <label for="email">Email</label>
-                        <input class="inp" type="email" name="email" id="email" required>
+                        <input class="inp" type="email" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" required>
                         <?php if(isset($_SESSION["email-error"])) {
                             echo "<p class='error-msg'>Entrer validate email !</p>";
                             unset($_SESSION['email-error']);

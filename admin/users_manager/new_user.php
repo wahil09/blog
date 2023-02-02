@@ -80,10 +80,10 @@
                             unset($_SESSION["user_exist"]);
                         }?>
                             <label for="username">username</label>
-                            <input type="text" id="username" class="inp-style" name="username" placeholder="Wahil Ch" required>
+                            <input type="text" id="username" class="inp-style" name="username" placeholder="name" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""?>" required>
 
                             <label for="Email">email</label>
-                            <input type="email" id="email" class="inp-style" name="email" placeholder="wahilchettouf@gmail.com" required>
+                            <input type="email@gmail.com" id="email" class="inp-style" name="email" placeholder="email"  value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" required>
 
                             <?php if(isset($_SESSION["email-error"])) {
                                 echo "<p class='error-msg'>Entrer validate email !</p>";

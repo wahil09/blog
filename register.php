@@ -29,8 +29,6 @@
                 }
             } else {
                 $_SESSION["email-error"] = true;
-                header("refresh:0");
-                exit();
             }
         } else {
             $_SESSION["champs-vide"] = true;
@@ -64,11 +62,11 @@
                 }?>
                 <div class="form-group">
                     <label for="username">FULL NAME</label>
-                    <input type="text" id="username" name="username" placeholder="Wahil Ch" required>
+                    <input type="text" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""?>" placeholder="Wahil Ch" required>
                 </div>
                 <div class="form-group">
                     <label for="Email">EMAIL ADDRESS</label>
-                    <input type="email" id="email" name="email" placeholder="wahilchettouf@gmail.com" required>
+                    <input type="email" id="email" name="email" placeholder="wahilchettouf@gmail.com" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" required>
                     <?php if(isset($_SESSION["email-error"])) {
                         echo "<p class='error-msg'>Entrer validate email !</p>";
                         unset($_SESSION['email-error']);
