@@ -67,11 +67,13 @@
                         <?php 
                         $categories = $categoriesModel->getCategories();
                         if(!empty($categories)) :?>
-                            <?php for($i=0; isset($categories[$i]); $i++) {
-                                echo "
-                                <li><a href='posts_categories.php?id=".$categories[$i]['id']."'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($categories[$i]['categoryName'])."</span></a></li>
-                                ";
-                            }?>
+                            <?php for($i=0; isset($categories[$i]); $i++) :?>
+                                <li>
+                                    <a href='<?php echo $adminPathLien?>inc/posts_categories.php?id="<?php echo $categories[$i]['id']?>'>
+                                    <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($categories[$i]['categoryName'])?></span>
+                                </a>
+                                </li>
+                            <?php endfor?>
                         <?php else :?>
                             <p>aucune categorie existe !</p>
                         <?php endif ?>

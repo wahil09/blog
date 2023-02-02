@@ -244,7 +244,7 @@
         }
 
         public function getPostsByCategory($categoryId) {
-            $request = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE categoryId = :categoryId WHERE published = 1");
+            $request = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE categoryId = :categoryId && published = 1");
             $request->bindValue("categoryId", $categoryId);
             $request->execute();
             return $request->fetchAll(PDO::FETCH_ASSOC);
