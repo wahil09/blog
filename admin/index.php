@@ -85,7 +85,7 @@
                         if($posts) : ?>
                             <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                 <li class='last-post'>
-                                    <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
+                                    <a href='<?php echo $adminPathLien?>inc/post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
                                         <span class='img-last-post'><img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
                                         <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                     </a>

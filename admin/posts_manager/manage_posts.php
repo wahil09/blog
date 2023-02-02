@@ -58,19 +58,23 @@
                         if($postsNoPublished) {
                             $postsModel->publishPostById($postId);
                             echo "<script>
-                                alert('le post est bien supprimer !');
+                                alert('le post est bien publier !');
                             </script>";
-                            header("location:".$_SERVER['PHP_SELF']);
+                            header("refresh:.1; url=".$_SERVER['PHP_SELF']);
                             exit();
                         } else {
                             echo "<script>
                                 alert('post est déja publier !');
                             </script>";
+                            header("refresh:.1; url=".$_SERVER['PHP_SELF']);
+                            exit();
                         }
                     } else {
                         echo '<script>
                             alert("post est supprimer / n\'éxiste plus");
                         </script>';
+                        header("refresh:.1; url=".$_SERVER['PHP_SELF']);
+                        exit();
                     }
                 }
             }

@@ -1,4 +1,5 @@
 <?php 
+    include "../../config.php";
     include "../../model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
@@ -33,16 +34,16 @@
 
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "../head.php" ?>
+    <?php include $BlogPathInclude."head.php" ?>
 <body id="body" class="post-categorie">
-    <?php include "../header.php" ?>
+    <?php include $BlogPathInclude."header.php" ?>
     <main class="content">
             <div class="container">
                 <section class='posts'>
                     <article class='post'>
                         <?php if(!empty($post)) :?>
                             <div class='post-image'>
-                                <img src='../assets/img/posts_images/<?php echo $post['postImage'] ?>' alt=''>
+                                <img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $post['postImage'] ?>' alt=''>
                             </div>
                             <div class='post-title'>
                                 <h3><?php echo htmlspecialchars($post['postTitle']) ?></h3>
@@ -54,7 +55,7 @@
                                     <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($post['postCat']) ?></span>
                                 </p>
                                 <p class='post-description'><?php echo htmlspecialchars($post['postContent']) ?></p>
-                                <a href="index.php" class='btn-custom'>Acceuil</a>
+                                <a href="<?php echo $BlogPathLien?>index.php" class='btn-custom'>Acceuil</a>
                             </div>
                         <?php else :?>
                             <h3>Post supprimer</h3>
@@ -70,7 +71,7 @@
                             if(!empty($categories)) :?>
                                 <?php for($i=0; isset($categories[$i]); $i++) {
                                     echo "
-                                    <li><a href='posts_categories.php?id=".$categories[$i]['id']."'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($categories[$i]['categoryName'])."</span></a></li>
+                                    <li><a href='$adminPathLien>inc/posts_categories.php?id=".$categories[$i]['id']."'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($categories[$i]['categoryName'])."</span></a></li>
                                     ";
                                 }?>
                             <?php else :?>
@@ -86,8 +87,8 @@
                             if($posts) : ?>
                                 <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
-                                        <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
-                                            <span class='img-last-post'><img src='../assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
+                                        <a href='<?php echo $adminPathLien?>inc/post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
+                                            <span class='img-last-post'><img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'></span>
                                             <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
                                         </a>
                                     </li>
@@ -106,9 +107,9 @@
             </div>
         </main>
     <?php 
-        include "../footer.php";
+        include $BlogPathInclude."footer.php";
     ?>
-    <script src="../assets/js/script.js"></script>
+    <script src="<?php echo $BlogPathLien?>assets/js/script.js"></script>
     
 </body>
 </html>
