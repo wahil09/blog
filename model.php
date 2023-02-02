@@ -256,7 +256,7 @@
 
 
         // ------------- Setters ------------- 
-        public function setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId, $postCategoryId) {
+        public function savePost($postTitle, $postCat, $postImage, $postContent, $postAuthor, $postUserId, $postCategoryId) {
             if(!$this->isExist($postTitle, $postUserId, $postContent)) {
                 $request = $this->db->prepare("INSERT INTO ". $this->getTableName() ."(postTitle, postCat, postImage, postContent, postAuthor, userId, categoryId) VALUES(?, ?, ?, ?, ?, ?, ?)");
                 $request->bindParam(1, $postTitle);
@@ -267,9 +267,9 @@
                 $request->bindParam(6, $postUserId);
                 $request->bindParam(7, $postCategoryId);
                 $request->execute();
-                $_SESSION["post-partager"] = true;
+                $_SESSION["post_saved"] = true;
             } else {
-                $_SESSION["post-partager"] = false;
+                $_SESSION["post_saved"] = false;
             }
         }
     }

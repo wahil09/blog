@@ -33,14 +33,14 @@
         
                             if($_SESSION['imageValider']) { // viens de file upload_image.php
                                 $postCategoryId = $categoriesModel->getCategoryId($postCat);
-                                $postsModel->setPost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postAdminId, $postCategoryId);
-                                if(isset($_SESSION['post-partager'])) {
-                                    if($_SESSION["post-partager"]) {
+                                $postsModel->savePost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postAdminId, $postCategoryId);
+                                if(isset($_SESSION['post_saved'])) {
+                                    if($_SESSION["post_saved"]) {
                                         echo "<script>
-                                            alert('Post Partager !');
+                                            alert('Post Enregistrer !');
                                         </script>";
-                                        unset($_SESSION["post-partager"]);
-                                        header( "refresh: .3; url=".$adminPathLien."index.php" );
+                                        unset($_SESSION["post_saved"]);
+                                        header( "refresh: .3; url=".$adminPathLien."posts_manager/manage_posts.php" );
                                         exit();
                                     } else {
                                         // pour supprimer l'image télécharger 
@@ -48,12 +48,12 @@
                                         echo "<script>
                                             alert('Post no partager / Exist déja !');
                                         </script>";
-                                        unset($_SESSION["post-partager"]);
+                                        unset($_SESSION["post_saved"]);
                                     }
                                 } 
                             } else {
                                 echo "<script>
-                                    alert('Post no partager / error-image !');
+                                    alert('Post n'a pas enregistrer / error-image !');
                                 </script>";
                                 unset($_SESSION["imageValider"]);
                             }
