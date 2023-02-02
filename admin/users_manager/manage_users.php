@@ -5,42 +5,37 @@
     $users = $usersModel->getUsers();
     // vérifier si quellqu'un est connécter
     if(!isset($_SESSION["login"])) {
-        header("location: ".$BlogPathLien."index.php");
+        header("location: ".$BlogPathInclude."index.php");
         exit();
     } else {
-        // vérifier qui est connécter
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION['login']->role != "admin") {
-                header("location: ../../users/");
-                exit();
-            } else {
-                // pour la déconnexion
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location: ../../index.php");
-                    exit();
-                }
-            }
-
-            // delete user
-            if(isset($_GET["delete"])) {
-                $userId = $_GET["delete"];
-                $usersModel->deleteById($userId, $usersModel->getTableName());
-                header("location:".$_SERVER['PHP_SELF']);
-                exit();
-            }
-
-            // vérifier si vous avez bien créez un nouveau utlisateur
-            if(isset($_SESSION["user_bien_inscrit"])) :?>
-                <script>
-                    alert("<?php echo $_SESSION['login']->username?> vous aves bien créez l'utilisateur <?php echo $_SESSION['user_bien_inscrit']?>")
-                </script>
-                <?php unset($_SESSION["user_bien_inscrit"])?>
-            <?php endif ?>
-        <?php }
+        if($_SESSION['login']->role != "admin") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
+        }
     }
-?>
+
+    // pour la déconnexion
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
+
+    // delete user
+    if(isset($_GET["delete"])) {
+        $userId = $_GET["delete"];
+        $usersModel->deleteById($userId, $usersModel->getTableName());
+        header("location:".$_SERVER['PHP_SELF']);
+        exit();
+    }
+
+    // vérifier si vous avez bien créez un nouvelle utlisateur
+    if(isset($_SESSION["user_bien_inscrit"])) :?>
+        <script>
+            alert("<?php echo $_SESSION['login']->username?> vous aves bien créez l'utilisateur <?php echo $_SESSION['user_bien_inscrit']?>")
+        </script>
+        <?php unset($_SESSION["user_bien_inscrit"])?>
+    <?php endif ?>
+<?php ?>
+
 <!DOCTYPE html>
 <html lang="fr-FR">
 <?php require_once($adminPathInclude."inc/head.php")?>

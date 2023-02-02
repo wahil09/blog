@@ -4,70 +4,67 @@
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
+
     if(!isset($_SESSION["login"])) {
-        header("location:".$BlogPathLien."index.php");
+        header("location: ".$BlogPathInclude."index.php");
         exit();
     } else {
-        if(isset($_SESSION['login']->role)) {
-            if($_SESSION["login"]->role != "admin") {
-                header("location:".$BlogPathLien."users/index.php");
-                exit();
-            } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location:".$BlogPathLien."index.php");
-                }
-                
-                if(isset($_POST["save"])) {
-                    if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"], $_FILES["imageToUpload"])) {
-                        if(!empty($_POST["postTitle"]) && !empty($_POST["Categories"]) && !empty($_POST["postContent"]) && $_FILES["imageToUpload"]["size"] != 0) {
-                            include $adminPathInclude."inc/upload_image.php";
+        if($_SESSION['login']->role != "admin") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
+        }
+    }
     
-                            $postTitle = $_POST["postTitle"];
-                            $postContent = $_POST["postContent"];
-                            $postCat = $_POST["Categories"];
-                            $postAdminId = $_SESSION["login"]->id;
-                            $postAuthor = $_SESSION["login"]->username;
-                            $postImage = $_SESSION["imageName"]; // viens de file upload_image.php
-        
-                            if($_SESSION['imageValider']) { // viens de file upload_image.php
-                                $postCategoryId = $categoriesModel->getCategoryId($postCat);
-                                $postsModel->savePost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postAdminId, $postCategoryId);
-                                if(isset($_SESSION['post_saved'])) {
-                                    if($_SESSION["post_saved"]) {
-                                        echo "<script>
-                                            alert('Post Enregistrer !');
-                                        </script>";
-                                        unset($_SESSION["post_saved"]);
-                                        header( "refresh: .3; url=".$adminPathLien."posts_manager/manage_posts.php" );
-                                        exit();
-                                    } else {
-                                        // pour supprimer l'image télécharger 
-                                        unlink($target_file);
-                                        echo "<script>
-                                            alert('Post no partager / Exist déja !');
-                                        </script>";
-                                        unset($_SESSION["post_saved"]);
-                                    }
-                                } 
-                            } else {
-                                echo "<script>
-                                    alert('Post n'a pas enregistrer / error-image !');
-                                </script>";
-                                unset($_SESSION["imageValider"]);
-                            }
-                        } else {
-                            $_SESSION['champ-vide'] = true;
-                            header("location:". $_SERVER["PHP_SELF"]);
+    // pour la déconnexion
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
+                
+    if(isset($_POST["save"])) {
+        if(isset($_POST["postTitle"], $_POST["Categories"], $_POST["postContent"], $_FILES["imageToUpload"])) {
+            if(!empty($_POST["postTitle"]) && !empty($_POST["Categories"]) && !empty($_POST["postContent"]) && $_FILES["imageToUpload"]["size"] != 0) {
+                include $adminPathInclude."inc/upload_image.php";
+
+                $postTitle = $_POST["postTitle"];
+                $postContent = $_POST["postContent"];
+                $postCat = $_POST["Categories"];
+                $postAdminId = $_SESSION["login"]->id;
+                $postAuthor = $_SESSION["login"]->username;
+                $postImage = $_SESSION["imageName"]; // viens de file upload_image.php
+
+                if($_SESSION['imageValider']) { // viens de file upload_image.php
+                    $postCategoryId = $categoriesModel->getCategoryId($postCat);
+                    $postsModel->savePost($postTitle, $postCat, $postImage, $postContent, $postAuthor,$postAdminId, $postCategoryId);
+                    if(isset($_SESSION['post_saved'])) {
+                        if($_SESSION["post_saved"]) {
+                            echo "<script>
+                                alert('Post Enregistrer !');
+                            </script>";
+                            unset($_SESSION["post_saved"]);
+                            header( "refresh: .3; url=".$adminPathLien."posts_manager/manage_posts.php" );
                             exit();
+                        } else {
+                            // pour supprimer l'image télécharger 
+                            unlink($target_file);
+                            echo "<script>
+                                alert('Post no partager / Exist déja !');
+                            </script>";
+                            unset($_SESSION["post_saved"]);
                         }
-                    }
+                    } 
+                } else {
+                    echo "<script>
+                        alert('Post n'a pas enregistrer / error-image !');
+                    </script>";
+                    unset($_SESSION["imageValider"]);
                 }
+            } else {
+                $_SESSION['champ-vide'] = true;
+                header("location:". $_SERVER["PHP_SELF"]);
+                exit();
             }
         }
     }
-
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,12 @@
 <?php
     require_once("../../config.php");
+
+    // redirect l'admin sur la page index s'il entre sur cette page pas par new_post 
+    if(!isset($_FILES["imageToUpload"])) {
+        header("location: ".$adminPathLien);
+        exit();
+    }
+
     //ini_set("log_errors", 1); // Enable error logging
     //ini_set("error_log", "/tmp/php-error.log"); // set error path
     //error_log( "Hello, errors!" ); // log a test error

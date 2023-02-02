@@ -1,4 +1,6 @@
-<?php require_once("../../config.php")?>
+<?php
+    require_once("../../config.php");
+?>
 <div class="side-bare">
     <ul class="side-bare-menu">
         <li><a href="<?php echo $adminPathLien?>posts_manager/manage_posts.php">manage posts</a></li>

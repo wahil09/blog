@@ -5,27 +5,21 @@
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
-    // condition pour que les utlisateurs peuvent lire tout l'article
     if(!isset($_SESSION["login"])) {
-        header("location: login.php");
+        header("location: ".$BlogPathLien);
         exit();
     } else {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role != "admin") {
-                header("location: ../users");
-                exit();
-            } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location: index.php");
-                    exit();
-                }
-            }
+        if($_SESSION['login']->role != "admin") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
         }
     }
 
-    $post = [];
+    // pour la déconnexion
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
+
     if(isset($_GET["id"])) {
         $postId = $_GET["id"];
         $post = $postsModel->getPostSelected($postId);

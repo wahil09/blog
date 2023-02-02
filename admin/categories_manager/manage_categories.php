@@ -4,30 +4,26 @@
     $categoriesModel = new ModelCategories();
     $categories = $categoriesModel->getCategories();
     if(!isset($_SESSION["login"])) {
-        header("location:".$BlogPathLien. "index.php");
+        header("location: ".$BlogPathInclude."index.php");
         exit();
     } else {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION['login']->role != "admin") {
-                header("location:". $BlogPathLien ."users");
-                exit();
-            } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location:". $BlogPathLien ."index.php");
-                    exit();
-                }
-            }
-            
-            // delete category
-            if(isset($_GET["delete"])) {
-                $categoryId = $_GET["delete"];
-                $categoriesModel->deleteById($categoryId, $categoriesModel->getTableName());
-                header("location:".$_SERVER['PHP_SELF']);
-                exit();
-            }
+        if($_SESSION['login']->role != "admin") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
         }
+    }
+
+    // pour la déconnexion
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
+            
+    // delete category
+    if(isset($_GET["delete"])) {
+        $categoryId = $_GET["delete"];
+        $categoriesModel->deleteById($categoryId, $categoriesModel->getTableName());
+        header("location:".$_SERVER['PHP_SELF']);
+        exit();
     }
 ?>
 <!DOCTYPE html>

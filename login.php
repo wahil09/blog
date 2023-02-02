@@ -8,12 +8,7 @@
             if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $userObject = $usersModel->userAlreadyRegistered($email, $password);
                 if($userObject) {
-                    $_SESSION["role"] = $userObject->role;
-                    if($userObject->role == "user") {
-                        $_SESSION["login"] = $userObject;
-                    } elseif($userObject->role == "admin") {
-                        $_SESSION["login"] = $userObject;
-                    }
+                    $_SESSION["login"] = $userObject;
                 } else {
                     $_SESSION["error_login_user"] = $email;
                 } 

@@ -5,42 +5,38 @@
     $categories = $categoriesModel->getCategories();
 
     if(!isset($_SESSION["login"])) {
-        header("location:".$BlogPathLien."index.php");
+        header("location: ".$BlogPathInclude."index.php");
         exit();
     } else {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role != "admin") {
-                header("location:".$BlogPathLien."users/index.php");
-                exit();
-            } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location:".$BlogPathLien."index.php");
-                    exit();
-                }
+        if($_SESSION['login']->role != "admin") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
+        }
+    }
+
+    // pour la déconnexion
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
         
-                if (isset($_SESSION["category_ajouter"])) {
-                    $category_ajouter = $_SESSION["category_ajouter"];
-                    echo "<script>
-                            alert('$category_ajouter est bien ajouter !');
-                        </script>";
-                    unset($_SESSION['category_ajouter']);
-                    header('refresh: 0.5; URL=../posts_manager/new_post.php');
-                    exit();
-                };
-            
-                if(isset($_POST["category"])) {
-                    if(!empty($_POST["category"])) {
-                        $category_name = $_POST["category"];
-                        $categoriesModel->setCategories($category_name, $_SESSION["login"]->id);
-                    } else {
-                        $_SESSION["champs-vide"] = true;
-                        header("location: new_category.php");
-                        exit();
-                    }
-                }
-            }
+    if (isset($_SESSION["category_ajouter"])) {
+        $category_ajouter = $_SESSION["category_ajouter"];
+        echo "<script>
+                alert('$category_ajouter est bien ajouter !');
+            </script>";
+        unset($_SESSION['category_ajouter']);
+        header('refresh: 0.5; URL=../posts_manager/new_post.php');
+        exit();
+    };
+
+    if(isset($_POST["category"])) {
+        if(!empty($_POST["category"])) {
+            $category_name = $_POST["category"];
+            $categoriesModel->setCategories($category_name, $_SESSION["login"]->id);
+        } else {
+            $_SESSION["champs-vide"] = true;
+            header("location: new_category.php");
+            exit();
         }
     }
 ?>

@@ -4,80 +4,77 @@
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $posts = $postsModel->getPosts();
+
     if(!isset($_SESSION["login"])) {
-        header("location:" .$BlogPathLien."index.php");
+        header("location: ".$BlogPathInclude."index.php");
         exit();
     } else {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION['login']->role != "admin") {
-                header("location:". $BlogPathLien ."users");
+        if($_SESSION['login']->role != "admin") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
+        }
+    }
+    
+    // pour la déconnexion
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
+
+    // delete post
+    if(isset($_GET["delete"])) {
+        $postId = $_GET["delete"];
+        // vérifier s'il n'est pas supprimer déja 
+        $postsDeleted = $postsModel->checkIfExistById($postId, "posts");
+        if(!empty($postsDeleted)) {
+            // supprimer le post
+            $postsModel->deleteById($postId, $postsModel->getTableName());
+            echo "<script>
+                alert('le post est bien supprimer !');
+            </script>";
+            // check if image existe in posts_images directory
+            if(file_exists($PathImagesPosts . $postsDeleted->postImge)) {
+                // supprimer l'image de post supprimer
+                unlink($PathImagesPosts . $postsDeleted->postImage);
+            } else {
+                // l'image n'existe plus / on le supprime pas elle est déja supprimer
+            }
+            header("location:".$_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            echo "<script>
+                alert('post Déja supprimer / n'éxiste plus');
+            </script>";
+        }
+    }
+
+    // publish post 
+    if(isset($_GET["publish"])) {
+        $postId = $_GET["publish"];
+        $postContent = $postsModel->checkIfExistById($postId, "posts");
+        // vérifier si le post existe
+        if(!empty($postContent)) {
+            // vérifier si le post est déja publier
+            $postsNoPublished = $postsModel->checkIfPostPublishedById($postId);
+            if($postsNoPublished) {
+                $postsModel->publishPostById($postId);
+                echo "<script>
+                    alert('le post est bien publier !');
+                </script>";
+                header("refresh:.1; url=".$_SERVER['PHP_SELF']);
                 exit();
             } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location:". $BlogPathLien ."index.php");
-                    exit();
-                }
-                // delete post
-                if(isset($_GET["delete"])) {
-                    $postId = $_GET["delete"];
-                    // vérifier s'il n'est pas supprimer déja 
-                    $postsDeleted = $postsModel->checkIfExistById($postId, "posts");
-                    if(!empty($postsDeleted)) {
-                        // supprimer le post
-                        $postsModel->deleteById($postId, $postsModel->getTableName());
-                        echo "<script>
-                            alert('le post est bien supprimer !');
-                        </script>";
-                        // check if image existe in posts_images directory
-                        if(file_exists($PathImagesPosts . $postsDeleted->postImge)) {
-                            // supprimer l'image de post supprimer
-                            unlink($PathImagesPosts . $postsDeleted->postImage);
-                        } else {
-                            // l'image n'existe plus / on le supprime pas elle est déja supprimer
-                        }
-                        header("location:".$_SERVER['PHP_SELF']);
-                        exit();
-                    } else {
-                        echo "<script>
-                            alert('post Déja supprimer / n'éxiste plus');
-                        </script>";
-                    }
-                }
-
-                // publish post 
-                if(isset($_GET["publish"])) {
-                    $postId = $_GET["publish"];
-                    $postContent = $postsModel->checkIfExistById($postId, "posts");
-                    // vérifier si le post existe
-                    if(!empty($postContent)) {
-
-                        // vérifier si le post est déja publier
-                        $postsNoPublished = $postsModel->checkIfPostPublishedById($postId);
-                        if($postsNoPublished) {
-                            $postsModel->publishPostById($postId);
-                            echo "<script>
-                                alert('le post est bien publier !');
-                            </script>";
-                            header("refresh:.1; url=".$_SERVER['PHP_SELF']);
-                            exit();
-                        } else {
-                            echo "<script>
-                                alert('post est déja publier !');
-                            </script>";
-                            header("refresh:.1; url=".$_SERVER['PHP_SELF']);
-                            exit();
-                        }
-                    } else {
-                        echo '<script>
-                            alert("post est supprimer / n\'éxiste plus");
-                        </script>';
-                        header("refresh:.1; url=".$_SERVER['PHP_SELF']);
-                        exit();
-                    }
-                }
+                echo "<script>
+                    alert('post est déja publier !');
+                </script>";
+                header("refresh:.1; url=".$_SERVER['PHP_SELF']);
+                exit();
             }
+        } else {
+            echo '<script>
+                alert("post est supprimer / n\'éxiste plus");
+            </script>';
+            header("refresh:.1; url=".$_SERVER['PHP_SELF']);
+            exit();
         }
     }
 ?>

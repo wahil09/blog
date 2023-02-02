@@ -5,55 +5,49 @@
     $users = $usersModel->getUsers();
     // vérifier si quellqu'un est connécter
     if(!isset($_SESSION["login"])) {
-        header("location: ../../index.php");
+        header("location: ".$BlogPathInclude."index.php");
         exit();
     } else {
-        // vérifier qui est connécter
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION['login']->role != "admin") {
-                header("location: ".$BlogPathLien."index.php");
-                exit();
-            } else {
-                // pour la déconnexion
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location: ../../index.php");
-                    exit();
-                }
-
-                if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['cPassword']) && isset($_POST['role'])) {
-                    $username = $_POST["username"];
-                    $email = $_POST["email"];
-                    $password = $_POST["password"];
-                    $cPassword = $_POST["cPassword"]; //confirm password
-                    $role = $_POST["role"]; //confirm password
-                    if(!empty($username) && !empty($email) && !empty($password) && !empty($password) && !empty($role)) {
-                        if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                            if($password === $cPassword) {
-                                $usersModel->setUser($username, $email, $password, $role);
-                            } else {
-                                $_SESSION["error-confirm-password"] = true;
-                                header("refresh:0");
-                                exit();
-                            }
-                        } else {
-                            $_SESSION["email-error"] = true;
-                            header("refresh:0");
-                            exit();
-                        }
-                    } else {
-                        $_SESSION["champs-vide"] = true;
-                    }
-                }
-
-                // redirection to manage_users
-                if(isset($_SESSION["user_bien_inscrit"])) {
-                    header("location: manage_users.php");
-                    exit();
-                }
-            }
+        if($_SESSION['login']->role != "admin") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
         }
+    }
+
+    // pour la déconnexion
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
+
+    if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['cPassword']) && isset($_POST['role'])) {
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $cPassword = $_POST["cPassword"]; //confirm password
+        $role = $_POST["role"]; //confirm password
+        if(!empty($username) && !empty($email) && !empty($password) && !empty($password) && !empty($role)) {
+            if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                if($password === $cPassword) {
+                    $usersModel->setUser($username, $email, $password, $role);
+                } else {
+                    $_SESSION["error-confirm-password"] = true;
+                    header("refresh:0");
+                    exit();
+                }
+            } else {
+                $_SESSION["email-error"] = true;
+                header("refresh:0");
+                exit();
+            }
+        } else {
+            $_SESSION["champs-vide"] = true;
+        }
+    }
+
+    // redirection to manage_users
+    if(isset($_SESSION["user_bien_inscrit"])) {
+        header("location: manage_users.php");
+        exit();
     }
 ?>
 
