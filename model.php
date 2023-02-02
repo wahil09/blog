@@ -200,8 +200,15 @@
         }
         
         // ------------ Getters --------------
-        function getPosts() {
-            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName());
+        function getPostsPublished() {
+            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName(). " WHERE published = 1");
+            $sth->execute();
+            $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
+            return $posts;
+        }
+
+        function getPostsNoPublished() {
+            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName(). " WHERE published = 0");
             $sth->execute();
             $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
             return $posts;
@@ -209,7 +216,7 @@
 
         public function getPostSelected($postId) {
             if($this->tableIsEmpty()) {
-                $postSelected = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE id= :postID");
+                $postSelected = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE id= :postID && published = 1");
                 $postSelected->bindValue("postID", $postId);
                 $postSelected->execute();
                 return $postSelected->fetch();
@@ -217,13 +224,13 @@
         }
 
         public function getLastPosts() {
-            $request = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." ORDER BY postDate DESC");
+            $request = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE published = 1 ORDER BY postDate DESC");
             $request->execute();
             return $request->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function getPostsByCategory($categoryId) {
-            $request = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE categoryId = :categoryId");
+            $request = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE categoryId = :categoryId WHERE published = 1");
             $request->bindValue("categoryId", $categoryId);
             $request->execute();
             return $request->fetchAll(PDO::FETCH_ASSOC);

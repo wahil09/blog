@@ -33,7 +33,7 @@
                 <section class='posts'>
                     <h2 class="title">Articles :</h2>
                     <?php 
-                    $posts = $postsModel->getPosts();
+                    $posts = $postsModel->getPostsPublished();
                     if(!empty($posts)) : ?>
                         <?php for($i=0; isset($posts[$i]); $i++) : ?>
                             <article class='post'>

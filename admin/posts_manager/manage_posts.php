@@ -3,7 +3,7 @@
     require_once($BlogPathInclude."model.php");
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
-    $posts = $postsModel->getPosts();
+    $posts = $postsModel->getPostsNoPublished();
     if(!isset($_SESSION["login"])) {
         header($BlogPathLien."index.php");
         exit();
