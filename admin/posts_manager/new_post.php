@@ -89,14 +89,19 @@
 
                         <form enctype="multipart/form-data" method="post" class="flex-c form-new-post">
                             <label for="title">Article name : </label>
-                            <input type="text" name="postTitle" id="title" class="inp-style" >
+                            <input type="text" name="postTitle" id="title" class="inp-style" value='<?php echo isset($_POST["postTitle"]) ? $_POST["postTitle"] : "" ?>' >
                             
                             <label for="Categories">Categories : </label>
-                            <select name="Categories" id="Categories" class="inp-style" >
+                            <select name="Categories" id="Categories" class="inp-style">
                                 <option value="">Choisir un categorie ...</option>
                                 <?php if(!empty($categories)) :?>
                                     <?php for($i=0; isset($categories[$i]); $i++) :?>
-                                        <option value='<?= htmlspecialchars($categories[$i]["categoryName"]) ?>'><?= htmlspecialchars($categories[$i]["categoryName"]) ?></option>
+                                        <option 
+                                        value='<?= htmlspecialchars($categories[$i]["categoryName"]) ?>'
+
+                                        <?php echo isset($_POST['Categories']) && $_POST['Categories'] == htmlspecialchars($categories[$i]['categoryName']) ? 'selected' : ""?>><?= htmlspecialchars($categories[$i]["categoryName"])
+                                        ?>
+                                    </option>
                                     <?php endfor ?>
                                 <?php endif ?>
                             </select>
@@ -104,7 +109,7 @@
                             <label for="imageToUpload">Article image : </label>
                             <input type="file" name="imageToUpload" id="imageToUpload" class="inp-style" accept="image/*" >
 
-                            <textarea name="postContent" id="post-text" class="inp-style" cols="90" rows="10" ></textarea>
+                            <textarea name="postContent" id="post-text" class="inp-style" cols="90" rows="10"><?php echo isset($_POST['postContent']) ? $_POST['postContent'] : ""?></textarea>
                             <?php 
                                 if(isset($_SESSION['champ-vide'])) {
                                     echo '<p class="error-msg">un champ ou plusieur champs de formulaire sont vide !</p>';

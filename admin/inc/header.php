@@ -26,7 +26,7 @@
             <li class="menu-box">
                 <span id="openMenu"><i class="fa-solid fa-user"></i>wahil chettouf</span>
                 <ul id="menu" class="ul-in-ul">
-                    <li><a href="<?php echo $adminPathLien ?>/index.php">Acceuil</a></li>
+                    <li><a href="<?php echo $adminPathLien ?>index.php">Acceuil</a></li>
                     <li><a href="?logout">Déconnexion</a></li>
                 </ul>
             </li>

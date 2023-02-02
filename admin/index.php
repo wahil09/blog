@@ -51,7 +51,7 @@
                                     <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo $posts[$i]['postCat'] ?></span>
                                 </p>
                                 <p class='post-description'><?php echo htmlspecialchars(substr($posts[$i]['postContent'], 0, 300)) ?> ...</p>
-                                <a href='post_page.php?id=<?php echo htmlspecialchars($posts[$i]['id']) ?>' class='btn-custom' >Lire Plus</a>
+                                <a href='<?php echo $adminPathLien?>inc/post_page.php?id=<?php echo htmlspecialchars($posts[$i]['id']) ?>' class='btn-custom' >Lire Plus</a>
                             </div>
                         </article>
                     <?php endfor; ?>
