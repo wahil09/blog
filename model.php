@@ -222,7 +222,7 @@
         }
 
         function getPosts() {
-            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName());
+            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName(). " ORDER BY published ASC");
             $sth->execute();
             $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
             return $posts;
