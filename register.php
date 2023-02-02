@@ -1,15 +1,15 @@
 <?php 
-    include "model.php";
+    include "config.php";
+    include $BlogPathInclude."model.php";
     $usersModel = new ModelUsers();
-    if(isset($_SESSION['login'])) {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role == "user") {
-                header("location: users/");
-                exit();
-            } else {
-                header("location: admin/");
-                exit();
-            }
+
+    if(isset($_SESSION["login"])) {
+        if($_SESSION["login"]->role == "user") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
+        } else {
+            header("location: ".$BlogPathLien."admin/");
+            exit();
         }
     }
 
@@ -53,7 +53,7 @@
     </div>
     <section class="register flex-r">
         <div class="container-register flex-c">
-            <img src="assets/img/bg-register.jpg" alt="bg-register">
+            <img src="<?php echo $BlogPathLien?>assets/img/bg-register.jpg" alt="bg-register">
             <h3>Create Your Account</h3>
             <form method="post" class="register-form">
                 <?php if(isset($_SESSION["user_exist"])) {

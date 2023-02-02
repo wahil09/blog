@@ -1,26 +1,25 @@
 <?php 
-    include "model.php";
+    include "config.php";
+    include $BlogPathInclude."model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
 
     if(isset($_SESSION["login"])) {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role == "user") {
-                header("location: users/index.php");
-                exit();
-            } else {
-                header("location: admin/index.php");
-                exit();
-            }
+        if($_SESSION["login"]->role == "user") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
+        } else {
+            header("location: ".$BlogPathLien."admin/");
+            exit();
         }
     }
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "head.php" ?>
+<?php include $BlogPathInclude."head.php" ?>
     <body id="body" class="post-categorie">
-        <?php include "header.php" ?>
+    <?php include $BlogPathInclude."header.php" ?>
         <main class="content">
             <div class="container">
                 <section class='posts'>
@@ -31,7 +30,7 @@
                         <?php for($i=0; isset($posts[$i]); $i++) : ?>
                             <article class='post'>
                                 <div class='post-image'>
-                                    <img src='assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'>
+                                    <img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>' alt='<?php echo $posts[$i]['postImage'] ?>'>
                                 </div>
                                 <div class='post-title'>
                                     <h3><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></h3>
@@ -43,7 +42,7 @@
                                         <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($posts[$i]['postCat']) ?></span>
                                     </p>
                                     <p class='post-description'><?php echo htmlspecialchars(substr($posts[$i]['postContent'], 0, 300)) ?> ...</p>
-                                    <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='btn-custom' >Lire Plus</a>
+                                    <a href='<?php echo $BlogPathLien?>post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='btn-custom' >Lire Plus</a>
                                 </div>
                             </article>
                         <?php endfor; ?>
@@ -58,11 +57,15 @@
                         <ul class="flex-c">
                             <?php 
                             if(!empty($categories)) :?>
-                                <?php for($i=0; isset($categories[$i]); $i++) {
-                                    echo "
-                                    <li><a href='posts_categories.php?id=".$categories[$i]['id']."'><span><i class='fa-sharp fa-solid fa-tags'></i>".htmlspecialchars($categories[$i]['categoryName'])."</span></a></li>
-                                    ";
-                                }?>
+                                <?php for($i=0; isset($categories[$i]); $i++) :?>
+                                    <li>
+                                        <a href="<?php echo $BlogPathLien?>posts_categories.php?id=<?php echo $categories[$i]['id']?>">
+                                            <span>
+                                                <i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($categories[$i]['categoryName'])?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                <?php endfor?>
                             <?php else :?>
                                 <p>aucune categorie existe !</p>
                             <?php endif ?>
@@ -76,9 +79,9 @@
                             if($posts) :?>
                                 <?php for($i=0; isset($posts[$i])&&$i<3; $i++) : ?>
                                     <li class='last-post'>
-                                        <a href='post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
+                                        <a href='<?php echo $BlogPathLien?>post_page.php?id=<?php echo $posts[$i]['id'] ?>' class='last-post'>
                                             <span class='img-last-post'>
-                                                <img src='assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>'
+                                                <img src='<?php echo $BlogPathLien?>assets/img/posts_images/<?php echo $posts[$i]['postImage'] ?>'
                                                 alt='<?php echo $posts[$i]['postImage'] ?>'>
                                             </span>
                                             <span><?php echo htmlspecialchars($posts[$i]['postTitle']) ?></span>
@@ -99,8 +102,8 @@
             </div>
         </main>
         <?php
-            include "footer.php";
+            include $BlogPathInclude."footer.php";
         ?>
-        <script src="assets/js/script.js"></script>
+        <script src="<?php echo $BlogPathLien?>assets/js/script.js"></script>
     </body>
 </html>

@@ -1,6 +1,18 @@
 <?php 
-    include "model.php";
+    include "config.php";
+    include $BlogPathInclude."model.php";
     $usersModel = new ModelUsers();
+
+    if(isset($_SESSION["login"])) {
+        if($_SESSION["login"]->role == "user") {
+            header("location: ".$BlogPathLien."users/");
+            exit();
+        } else {
+            header("location: ".$BlogPathLien."admin/");
+            exit();
+        }
+    }
+
     if(isset($_POST["email"]) && isset($_POST["password"])) {
         $email = $_POST["email"];
         $password = $_POST["password"];
@@ -24,18 +36,6 @@
         $usersModel->closeConnection();
     }
 
-    if(isset($_SESSION["login"])) {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role == "user") {
-                header("location: users/index.php");
-                exit();
-            } else {
-                header("location: admin/index.php");
-                exit();
-            }
-        }
-    } 
-
     if (isset($_SESSION["user_bien_inscrit"])) {
         $user_inscrit = $_SESSION["user_bien_inscrit"];
         echo "<script>
@@ -47,7 +47,7 @@
 
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "head.php" ?>
+<?php include $BlogPathInclude."head.php" ?>
     <body class="flex-r login-body" style="position: relative">
         <div class="return-acceuil">
             <a href="index.php">Acceuil</a>
@@ -56,9 +56,9 @@
             <div class="container-login flex-c">
                 <h1>Sign In With</h1>
                 <ul class="row-box flex-r">
-                    <li><a class="flex-r" href="#"><img src="assets/img/facebook.png">Facebook
+                    <li><a class="flex-r" href="#"><img src="<?php echo $BlogPathLien?>assets/img/facebook.png">Facebook
                     </a></li>
-                    <li><a class="flex-r" href="#"><img src="assets/img/icon-google.png">Google</a></li>
+                    <li><a class="flex-r" href="#"><img src="<?php echo $BlogPathLien?>assets/img/icon-google.png">Google</a></li>
                 </ul>
                 <form action="" method="post" class="row-box flex-c">
                     <!-- afficher un paragraph quand les informations entrer pas valide -->
