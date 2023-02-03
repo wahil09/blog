@@ -1,0 +1,10 @@
+#Redirect /blog/admin/posts_manager/manage_posts.php /blog/admin/
+
+# avec l'options indexes on peux pas voire le contenu d'un dossier
+
+Options -Indexes 
+
+# pour afficher un message d'erreur quand la page rechercher se trouve pas
+ErrorDocument 404 "<h1>Nothing Here</h1><a href='/blog/index.php'>Acceuil</a>"
+
+ErrorDocument 403 "<h1>vous n'avez pas le chance !</h1><a href='/blog/index.php'>Acceuil</a>"
