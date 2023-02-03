@@ -32,7 +32,7 @@
                 $specialChars = preg_match("@[^\w]@", $password); // caractère spéciaux 
                 $passLength = strlen($password) >= 8; // 8 caractère au min
                 if($uppercase && $lowercase && $number && $specialChars && $passLength) {
-                    $userObject = $usersModel->userAlreadyRegistered($email, $password);
+                    $userObject = $usersModel->userConnected($email, $password);
                     if($userObject) {
                         $_SESSION["login"] = $userObject;
                         header("refresh:0");
@@ -53,12 +53,12 @@
         $usersModel->closeConnection();
     }
 
-    if (isset($_SESSION["user_bien_inscrit"])) {
-        $user_inscrit = $_SESSION["user_bien_inscrit"];
+    if (isset($_SESSION["user_inscrit"])) {
+        $user_inscrit = $_SESSION["user_inscrit"];
         echo "<script>
                 alert('$user_inscrit vous ètez bien Inscrit !');
             </script>";
-        unset($_SESSION['user_bien_inscrit']);
+        unset($_SESSION['user_inscrit']);
     };
 ?>
 
@@ -81,11 +81,11 @@
                 <form action="" method="post" class="row-box flex-c">
                     <div class="inp-box">
                         <label for="email">Email</label>
-                        <input class="inp" type="text" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" >
+                        <input class="inp" type="text" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" required>
                     </div>
                     <div class="inp-box">
                         <label for="password">Password</label><!-- <a href="#">Forgot?</a> -->
-                        <input class="inp" type="password" name="password" id="password" >
+                        <input class="inp" type="password" name="password" id="password" minlength="8" required>
                     </div>
                     <div class="inp-box">
                         <input class="inp" type="submit" value="Sign In" name="submit" id="submit">

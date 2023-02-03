@@ -65,13 +65,20 @@
     class ModelUsers extends Connection {
         public $tbname = "users";
 
-        public function userAlreadyRegistered($email, $password) {
+        public function userConnected($email, $password) {
             $request = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE password=:password &&email=:email");
             $request->bindValue("email", $email);
             $request->bindValue("password", $password);
             $request->execute();
             return $request->fetchObject(); // return un object s'il exist ou rien s'il n'est pas inscrit déja
         }   
+
+        public function isExist($email) {
+            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE email = :email");
+            $sth->bindValue("email", $email);
+            $sth->execute();
+            return !empty($sth->fetch());
+        }
 
         // ------------ Getters ------------
         function getUsers() {
@@ -94,24 +101,14 @@
 
         // ------------- Setters ------------- -
         function setUser($username, $email, $password, $role = "user") {
-            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName() ." WHERE email = :email");
-            $sth->bindValue("email", $email);
-            $sth->execute();
-            // check if categorie exist
-            if(empty($sth->fetch())) {
-                $request = $this->db->prepare("INSERT INTO ". $this->getTableName() ."(username, email, password, role) VALUES(?, ?, ?, ?)");
-                $request->bindParam(1, $username);
-                $request->bindParam(2, $email);
-                $request->bindParam(3, $password);
-                $request->bindParam(4, $role);
-                $request->execute();
-                // pour afficher un message sur login.php qui dit "categorie ajouter !"
-                $_SESSION['user_bien_inscrit'] = $username;
-            } else {
-                $_SESSION["user_exist"] = $email;
-            }
+            $request = $this->db->prepare("INSERT INTO ". $this->getTableName() ."(username, email, password, role) VALUES(?, ?, ?, ?)");
+            $request->bindParam(1, $username);
+            $request->bindParam(2, $email);
+            $request->bindParam(3, $password);
+            $request->bindParam(4, $role);
+            $request->execute();
+            return $request->fetch(PDO::FETCH_ASSOC);
         }
-
         // pour modifier le profile
         public function updateProfile($nouveauNom, $nouveauEmail, $nouveauPassword, $nouveauMetier, $nouveauPresentation) {
             $request = $this->db->prepare("UPDATE ". $this->getTableName() ." SET username = :nouveauNom, email = :nouveauEmail, password = :nouveauPassword, job = :nouveauMetier, presentation = :nouveauPresentation WHERE id= :idUserCurrent");
