@@ -1,6 +1,6 @@
 <?php 
-    include "config.php";
-    include $BlogPathInclude."model.php";
+    include "inc/config.php";
+    include $BlogPathInclude."inc/model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
@@ -17,9 +17,9 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php include $BlogPathInclude."head.php" ?>
+<?php include $BlogPathInclude."inc/head.php" ?>
     <body id="body" class="post-categorie">
-    <?php include $BlogPathInclude."header.php" ?>
+    <?php include $BlogPathInclude."inc/header.php" ?>
         <main class="content">
             <div class="container">
                 <section class='posts'>
@@ -102,7 +102,7 @@
             </div>
         </main>
         <?php
-            include $BlogPathInclude."footer.php";
+            include $BlogPathInclude."inc/footer.php";
         ?>
         <script src="<?php echo $BlogPathLien?>assets/js/script.js"></script>
     </body>

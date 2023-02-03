@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include "../config.php";
+    include "../inc/config.php";
     if(!isset($_SESSION["login"])) {
         header("location:".$BlogPathLien);
         exit();
@@ -18,9 +18,9 @@
 
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "../head.php" ?>
+<?php include $BlogPathInclude."inc/head.php" ?>
     <body id="body">
-        <?php include "../header.php" ?>
+    <?php include $BlogPathInclude."inc/header.php" ?>
         <main>
             <!-- ***** Contact Us ***** -->
             <section class="contact" id="contact">
@@ -55,7 +55,7 @@
                 </div>
             </section>
         </main>
-        <?php include "../footer.php" ?>
-        <script src="../assets/js/script.js"></script>
+        <?php include  $BlogPathInclude."inc/footer.php"; ?>
+        <script src="<?php echo $BlogPathLien?>assets/js/script.js"></script>
     </body>
 </html>

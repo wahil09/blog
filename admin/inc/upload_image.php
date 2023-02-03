@@ -1,5 +1,5 @@
 <?php
-    require_once("../../config.php");
+    require_once("../../inc/config.php");
 
     // redirect l'admin sur la page index s'il entre sur cette page pas par new_post 
     if(!isset($_FILES["imageToUpload"])) {

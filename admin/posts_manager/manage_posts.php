@@ -1,6 +1,6 @@
 <?php 
-    require_once("../../config.php");
-    require_once($BlogPathInclude."model.php");
+    require_once("../../inc/config.php");
+    require_once($BlogPathInclude."inc/model.php");
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $posts = $postsModel->getPosts();
@@ -17,7 +17,7 @@
     
     // pour la déconnexion
     if(isset($_GET["logout"])) {
-        require_once($BlogPathInclude."logout.php");
+        require_once($BlogPathInclude."inc/logout.php");
     }
 
     // delete post

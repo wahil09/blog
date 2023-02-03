@@ -1,5 +1,5 @@
 <?php 
-    require_once("../../config.php");
+    require_once("../../inc/config.php");
 ?>
 <header class="header-panel flex-r">
     <h1 class="title"><span>Admi</span>n Panel</h1>

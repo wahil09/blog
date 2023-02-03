@@ -1,6 +1,6 @@
 <?php 
-    include "../../config.php";
-    include $BlogPathInclude."model.php";
+    include "../../inc/config.php";
+    include $BlogPathInclude."inc/model.php";
     $categoriesModel = new ModelCategories();
     $postsModel = new ModelPosts();
     $categories = $categoriesModel->getCategories();
@@ -17,7 +17,7 @@
 
     // pour la déconnexion
     if(isset($_GET["logout"])) {
-        require_once($BlogPathInclude."logout.php");
+        require_once($BlogPathInclude."inc/logout.php");
     }
 
     if(isset($_GET["id"])) {
@@ -28,9 +28,9 @@
 
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include $BlogPathInclude."head.php" ?>
+    <?php include $BlogPathInclude."inc/head.php" ?>
 <body id="body" class="post-categorie">
-    <?php include $BlogPathInclude."header.php" ?>
+    <?php include $BlogPathInclude."inc/header.php" ?>
     <main class="content">
             <div class="container">
                 <section class='posts'>
@@ -103,7 +103,7 @@
             </div>
         </main>
     <?php 
-        include $BlogPathInclude."footer.php";
+        include $BlogPathInclude."inc/footer.php";
     ?>
     <script src="<?php echo $BlogPathLien?>assets/js/script.js"></script>
     

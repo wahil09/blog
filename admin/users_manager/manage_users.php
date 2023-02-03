@@ -1,6 +1,6 @@
 <?php 
-    include "../../config.php";
-    include $BlogPathInclude."model.php";
+    include "../../inc/config.php";
+    include $BlogPathInclude."inc/model.php";
     $usersModel = new ModelUsers();
     $users = $usersModel->getUsers();
     // vérifier si quellqu'un est connécter
@@ -16,7 +16,7 @@
 
     // pour la déconnexion
     if(isset($_GET["logout"])) {
-        require_once($BlogPathInclude."logout.php");
+        require_once($BlogPathInclude."inc/logout.php");
     }
 
     // delete user

@@ -1,6 +1,6 @@
 <?php 
-    include "config.php";
-    include $BlogPathInclude."model.php";
+    include "inc/config.php";
+    include $BlogPathInclude."inc/model.php";
     $usersModel = new ModelUsers();
 
     if(isset($_SESSION["login"])) {
@@ -47,10 +47,10 @@
 
 <!DOCTYPE html>
 <html lang="fr-FR">
-<?php include $BlogPathInclude."head.php" ?>
+<?php include $BlogPathInclude."inc/head.php" ?>
     <body class="flex-r login-body" style="position: relative">
         <div class="return-acceuil">
-            <a href="index.php">Acceuil</a>
+            <a href="<?php $BlogPathLien?>index.php">Acceuil</a>
         </div>
         <section class="login flex-r">
             <div class="container-login flex-c">
