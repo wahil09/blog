@@ -19,35 +19,58 @@
         require_once($BlogPathInclude."inc/logout.php");
     }
 
-    if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['cPassword']) && isset($_POST['role'])) {
+
+    // tableaux d'erreurs
+    $errors = [
+        "emailError" => "",
+        "passwordError" => "",
+        "identifiantError" => "",
+        "champVide" => "",
+        "confirmPassError" => "",
+        "emailExist" => "",
+        "siteError" => "",
+    ];
+
+    if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['cPassword'])) {
         $username = $_POST["username"];
         $email = $_POST["email"];
         $password = $_POST["password"];
         $cPassword = $_POST["cPassword"]; //confirm password
-        $role = $_POST["role"]; //confirm password
-        if(!empty($username) && !empty($email) && !empty($password) && !empty($password) && !empty($role)) {
+        if(!empty($username) && !empty($email) && !empty($password) && !empty($password)) {
             if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                if($password === $cPassword) {
-                    $usersModel->setUser($username, $email, $password, $role);
+                // validation password : il faut qu'il contient
+                $uppercase = preg_match('@[A-Z]@', $password); // lettre en majuscule
+                $lowercase  = preg_match("@[a-z]@", $password); // lettre en minuscule
+                $number = preg_match("@[0-9]@", $password); // un numéro
+                $specialChars = preg_match("@[^\w]@", $password); // caractère spéciaux 
+                $passLength = strlen($password) >= 8; // 8 caractère au min
+                if($uppercase && $lowercase && $number && $specialChars && $passLength) {
+                    if($password === $cPassword) {
+                        // check if user exist
+                        if(!$usersModel->isExist($email)) {
+                            // si tout est bon mail il y'a des problème coté serveur, database ...
+                            if(!$usersModel->setUser($username, $email, $password)) {
+                                $_SESSION["user_inscrit"] = $username;
+                                header("location: ".$adminPathLien."users_manager/manage_users.php");
+                                exit();
+                            } else {
+                                $errors["siteError"] = "Error base de donnes !";
+                            }
+                        } else {
+                            $errors["emailExist"] = "Désoli! ce email : ".htmlspecialchars($email)." est déja utiliser !";
+                        }
+                    } else {
+                        $errors['confirmPassError'] = "merci de confirmer que le confirm mote de passe ressembler au mote de pass";
+                    }
                 } else {
-                    $_SESSION["error-confirm-password"] = true;
-                    header("refresh:0");
-                    exit();
+                    $errors["passwordError"] = "Confirmer que le mote de passe contient :<br> au moins 1 caractère en majuscule, en minuscule, un muméro, caractère spéciaux, 8 caractère au min !";
                 }
             } else {
-                $_SESSION["email-error"] = true;
-                header("refresh:0");
-                exit();
+                $errors['emailError'] = "Entrer une email valide !";
             }
         } else {
-            $_SESSION["champs-vide"] = true;
+            $errors['champVide'] = "un ou plusieurs champs de formulaire sont vide !";
         }
-    }
-
-    // redirection to manage_users
-    if(isset($_SESSION["user_bien_inscrit"])) {
-        header("location: manage_users.php");
-        exit();
     }
 ?>
 
@@ -68,41 +91,33 @@
                     <div class="clear"></div>
                     <h2 class="title-panel-page">create user</h2> 
                     <form method="post" class="form-new-user flex-c">
+                        <!-- si l'email est déja utiliser -->
+                        <?php echo "<p class='error-msg'>".$errors['emailExist']."</p>";?>
+                        <label for="username">username</label>
+                        <input type="text" id="username" class="inp-style" name="username" placeholder="name" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""?>" required>
 
-                        <?php if(isset($_SESSION["user_exist"])) {
-                            echo "<p class='error-msg'>Désoli! cette email : ".$_SESSION["user_exist"]." est déja utiliser !</p>";
-                            unset($_SESSION["user_exist"]);
-                        }?>
-                            <label for="username">username</label>
-                            <input type="text" id="username" class="inp-style" name="username" placeholder="name" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""?>" required>
+                        <label for="Email">email</label>
+                        <input type="email@gmail.com" id="email" class="inp-style" name="email" placeholder="email"  value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" required>
 
-                            <label for="Email">email</label>
-                            <input type="email@gmail.com" id="email" class="inp-style" name="email" placeholder="email"  value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" required>
+                        <label for="password">password</label>
+                        <input type="password" id="password" class="inp-style" name="password" placeholder="Password" required>
 
-                            <?php if(isset($_SESSION["email-error"])) {
-                                echo "<p class='error-msg'>Entrer validate email !</p>";
-                                unset($_SESSION['email-error']);
-                            }?>
+                        <label for="cPassword">password confirmation</label>
+                        <input type="password" id="cPassword" class="inp-style" name="cPassword" placeholder="Confirm Password" required>
 
-                            <label for="password">password</label>
-                            <input type="password" id="password" class="inp-style" name="password" placeholder="Password" required>
+                        <label for="role">rôle</label>
+                        <select name="role" id="role" class="inp-style">
+                            <option value="user">user</option>
+                            <option value="admin">admin</option>
+                        </select>
 
-                            <label for="cPassword">password confirmation</label>
-                            <input type="password" id="cPassword" class="inp-style" name="cPassword" placeholder="Confirm Password" required>
-
-                            <?php if(isset($_SESSION["error-confirm-password"])) {
-                                echo "<p class='error-msg'>confirm password is not equal password !</p>";
-                                unset($_SESSION['error-confirm-password']);
-                            }?>
-
-
-                            <label for="role">rôle</label>
-                            <select name="role" id="role" class="inp-style">
-                                <option value="user">user</option>
-                                <option value="admin">admin</option>
-                            </select>
-
-                            <input type="submit" id="submit" class="btn-panel" value="Sign Up">
+                        <input type="submit" id="submit" class="btn-panel" value="Sign Up">
+                        <?php echo "<p class='error-msg'>".$errors['emailError']."</p>";?>
+                        <?php echo "<p class='error-msg'>".$errors['identifiantError']."</p>";?>
+                        <?php echo "<p class='error-msg'>".$errors['champVide']."</p>";?>
+                        <?php echo "<p class='error-msg'>".$errors['passwordError']."</p>";?>
+                        <?php echo "<p class='error-msg'>".$errors['confirmPassError']."</p>";?>
+                        <?php echo "<p class='error-msg'>".$errors['siteError']."</p>";?>
                     </form>
                 </div>
             </section>

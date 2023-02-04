@@ -28,11 +28,11 @@
     }
 
     // vérifier si vous avez bien créez un nouvelle utlisateur
-    if(isset($_SESSION["user_bien_inscrit"])) :?>
+    if(isset($_SESSION["user_inscrit"])) :?>
         <script>
-            alert("<?php echo $_SESSION['login']->username?> vous aves bien créez l'utilisateur <?php echo $_SESSION['user_bien_inscrit']?>")
+            alert("<?php echo $_SESSION['login']->username?> vous aves bien créez l'utilisateur <?php echo $_SESSION['user_inscrit']?>")
         </script>
-        <?php unset($_SESSION["user_bien_inscrit"])?>
+        <?php unset($_SESSION["user_inscrit"])?>
     <?php endif ?>
 <?php ?>
 

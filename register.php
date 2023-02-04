@@ -13,7 +13,7 @@
         }
     }
 
-    // Gestion d'erreurs
+    // tableaux d'erreurs
     $errors = [
         "emailError" => "",
         "passwordError" => "",
