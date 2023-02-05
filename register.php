@@ -5,10 +5,10 @@
 
     if(isset($_SESSION["login"])) {
         if($_SESSION["login"]->role == "user") {
-            header("location: ".$BlogPathLien."users/");
+            header("location: ".$BlogPathLien."users/index.php");
             exit();
         } else {
-            header("location: ".$BlogPathLien."admin/");
+            header("location: ".$BlogPathLien."admin/index.php");
             exit();
         }
     }

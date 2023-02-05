@@ -5,11 +5,11 @@
     $users = $usersModel->getUsers();
     // vérifier si quellqu'un est connécter
     if(!isset($_SESSION["login"])) {
-        header("location:".$BlogPathLien);
+        header("location:".$BlogPathLien."index.php");
         exit();
     } else {
         if($_SESSION['login']->role != "admin") {
-            header("location: ".$BlogPathLien."users/");
+            header("location: ".$BlogPathLien."users/index.php");
             exit();
         }
     }

@@ -8,3 +8,10 @@ Options -Indexes
 ErrorDocument 404 "<h1>Nothing Here</h1><a href='/blog/index.php'>Acceuil</a>"
 
 ErrorDocument 403 "<h1>vous n'avez pas le chance !</h1><a href='/blog/index.php'>Acceuil</a>"
+
+# // pour casher ou afficher les pages chercher sans extentions mème si on tape que le nom #de la page sans son extention // removing extensions
+
+Options +MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

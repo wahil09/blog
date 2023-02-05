@@ -11,10 +11,10 @@
 
     if(isset($_SESSION["login"])) {
         if($_SESSION["login"]->role == "user") {
-            header("location: ".$BlogPathLien."users/");
+            header("location: ".$BlogPathLien."users/index.php");
             exit();
         } else {
-            header("location: ".$BlogPathLien."admin/");
+            header("location: ".$BlogPathLien."admin/index.php");
             exit();
         }
     }
@@ -78,10 +78,11 @@
                     <li><a class="flex-r" href="#"><img src="<?php echo $BlogPathLien?>assets/img/icon-google.png">Google</a></li>
                 </ul>
 
+                <!-- ajouter les attributes (aria-describedby et ...) pour aides les gens -->
                 <form action="" method="post" class="row-box flex-c">
                     <div class="inp-box">
                         <label for="email">Email</label>
-                        <input class="inp" type="text" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?> "maxlength="255" required>
+                        <input class="inp" type="email" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?> "maxlength="255" required>
                     </div>
                     <div class="inp-box">
                         <label for="password">Password</label><!-- <a href="#">Forgot?</a> -->

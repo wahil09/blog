@@ -10,7 +10,7 @@
         exit();
     } else {
         if($_SESSION['login']->role != "user") {
-            header("location: ".$BlogPathLien."admin/");
+            header("location: ".$BlogPathLien."admin/index.php");
             exit();
         }
     }
