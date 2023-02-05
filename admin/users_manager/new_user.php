@@ -94,7 +94,7 @@
                         <!-- si l'email est déja utiliser -->
                         <?php echo "<p class='error-msg'>".$errors['emailExist']."</p>";?>
                         <label for="username">username</label>
-                        <input type="text" id="username" class="inp-style" name="username" placeholder="name" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""?>" required>
+                        <input type="text" id="username" class="inp-style" name="username" placeholder="name" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""?>" pattern="[A-Za-z]{3,25}" title="a-z-A-Z (3-25 characters)" required>
 
                         <label for="Email">email</label>
                         <input type="email@gmail.com" id="email" class="inp-style" name="email" placeholder="email"  value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" required>

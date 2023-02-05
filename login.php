@@ -30,7 +30,7 @@
                 $lowercase  = preg_match("@[a-z]@", $password); // lettre en minuscule
                 $number = preg_match("@[0-9]@", $password); // un numéro
                 $specialChars = preg_match("@[^\w]@", $password); // caractère spéciaux 
-                $passLength = strlen($password) >= 8; // 8 caractère au min
+                $passLength = strlen($password) >= 8 && strlen($password) < 255; // 8 caractère au min 255 au max
                 if($uppercase && $lowercase && $number && $specialChars && $passLength) {
                     $userObject = $usersModel->userConnected($email, $password);
                     if($userObject) {
@@ -41,7 +41,7 @@
                         $errors['identifiantError'] = "votre identifiant n'est pas valide !";
                     } 
                 } else {
-                    $errors["passwordError"] = "Confirmer que le mote de passe contient :<br> au moins 1 caractère en majuscule, en minuscule, un muméro, caractère spéciaux, 8 caractère au min !";
+                    $errors["passwordError"] = "Confirmer que le mote de passe contient :<br> au moins 1 caractère en majuscule, en minuscule, un muméro, caractère spéciaux, 8 caractère au min, 255 ou max !";
                 }
             } else {
                 $errors['emailError'] = "Entrer une email valide !";
@@ -81,11 +81,11 @@
                 <form action="" method="post" class="row-box flex-c">
                     <div class="inp-box">
                         <label for="email">Email</label>
-                        <input class="inp" type="text" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?>" required>
+                        <input class="inp" type="text" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?> "maxlength="255" required>
                     </div>
                     <div class="inp-box">
                         <label for="password">Password</label><!-- <a href="#">Forgot?</a> -->
-                        <input class="inp" type="password" name="password" id="password" minlength="8" required>
+                        <input class="inp" type="password" name="password" id="password" minlength="8" maxlength="255" required>
                     </div>
                     <div class="inp-box">
                         <input class="inp" type="submit" value="Sign In" name="submit" id="submit">

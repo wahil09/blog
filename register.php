@@ -30,6 +30,7 @@
         $password = $_POST["password"];
         $cPassword = $_POST["cPassword"]; //confirm password
         if(!empty($username) && !empty($email) && !empty($password) && !empty($password)) {
+            // ajouter des vérifications pour username
             if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 // validation password : il faut qu'il contient
                 $uppercase = preg_match('@[A-Z]@', $password); // lettre en majuscule
@@ -41,9 +42,9 @@
                     if($password === $cPassword) {
                         // check if user exist
                         if(!$usersModel->isExist($email)) {
-                            // si tout est bon mail il y'a des problème coté serveur, database ...
+                            // si tout est bon mais il y'a des problème coté serveur, database ...
                             if(!$usersModel->setUser($username, $email, $password)) {
-                                $_SESSION["user_inscrit"] = true;
+                                $_SESSION["user_inscrit"] = $username;
                                 header("location: login.php");
                                 exit();
                             } else {
@@ -86,7 +87,7 @@
                     <?php echo "<p class='error-msg'>".$errors['emailExist']."</p>";?>
                     <div class="form-group">
                         <label for="username">FULL NAME</label>
-                        <input type="text" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""?>" placeholder="Wahil Ch" required>
+                        <input type="text" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ""?>" placeholder="Wahil Ch" pattern="[A-Za-z]{3,25}" title="a-z-A-Z (3-25 characters)" required>
                     </div>
                     <div class="form-group">
                         <label for="Email">EMAIL ADDRESS</label>
