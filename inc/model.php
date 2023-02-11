@@ -221,7 +221,14 @@
         
         // ------------ Getters --------------
         function getPostsPublished() {
-            $sth = $this->db->prepare("SELECT * FROM ". $this->getTableName(). " WHERE published = 1");
+            $sth = $this->db->prepare("SELECT ". $this->getTableName(). ".id, "
+            . $this->getTableName(). ".postContent, "
+            . $this->getTableName(). ".postImage, "
+            . $this->getTableName(). ".postTitle, "
+            . $this->getTableName(). ".postDate, "
+            . $this->getTableName(). ".postCat, users.username FROM ". $this->getTableName(). 
+            " JOIN users ON "
+            . $this->getTableName(). ".userId = users.id WHERE published = 1");
             $sth->execute();
             $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
             return $posts;

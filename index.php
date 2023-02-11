@@ -37,7 +37,7 @@
                                 </div>
                                 <div class='post-details'>
                                     <p class='post-info'>
-                                        <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($posts[$i]['postAuthor']) ?></span>
+                                        <span><i class='fa-solid fa-user'></i><?php echo htmlspecialchars($posts[$i]['username']) ?></span>
                                         <span><i class='fa-solid fa-calendar-days'></i><?php echo htmlspecialchars($posts[$i]['postDate']) ?></span>
                                         <span><i class='fa-sharp fa-solid fa-tags'></i><?php echo htmlspecialchars($posts[$i]['postCat']) ?></span>
                                     </p>
