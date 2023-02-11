@@ -58,7 +58,7 @@
                                         <td><?= htmlspecialchars($categories[$i]['categoryName']) ?></td>
                                         <td class="action-content">
                                         <ul class="flex-r">
-                                            <li><a href="" class="first-action">edit</a></li>
+                                            <li><a href="<?php echo $adminPathLien?>categories_manager/edit_category.php?category_id=<?php echo $categories[$i]['id']?>" class="first-action">edit</a></li>
                                             <li><a href="?delete=<?php echo $categories[$i]['id']?>" class="second-action">delete</a></li>
                                         </ul>
                                     </td>

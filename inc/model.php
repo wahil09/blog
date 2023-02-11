@@ -138,6 +138,15 @@
             $sth = $this->db->query("SELECT categoryName FROM ". $this->getTableName());
             return empty($sth->fetch());
         }
+
+        public function updateCategory($nCategory, $categoryId) {
+            $request = $this->db->prepare("UPDATE ".$this->getTableName()." SET categoryName=? WHERE id=?");
+            $request->bindParam(1, $nCategory);
+            $request->bindParam(2, $categoryId);
+            $request->execute();
+            $_SESSION["category_modifier"] = true;
+            return $request->fetchObject();
+        }
         // ------------ Getters -------------
         function getCategories() {
             $sth = $this->db->prepare("SELECT id, categoryName FROM ". $this->getTableName());

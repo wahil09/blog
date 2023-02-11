@@ -7,6 +7,12 @@
     font-family: Roboto;
 }
 
+.error-table-vide {
+    text-align: center;
+    padding: 50px 0;
+    color: red;
+}
+
 .error-msg {
     color: red !important;
     font-size: .8em !important;
@@ -234,18 +240,18 @@ a {
 
 
 
-/* ---- Start Style new-category-form ---- */
-.content .container-panel .box-content-panel .content-panel .new-category-form {
+/* ---- Start Style category-form ---- */
+.content .container-panel .box-content-panel .content-panel .category-form {
 }
 
-.content .container-panel .box-content-panel .content-panel .new-category-form #category {
+.content .container-panel .box-content-panel .content-panel .category-form .category {
     width: 100%;
     padding: 10px 20px;
     margin: 10px 0;
     outline: none;
 }
 
-.content .container-panel .box-content-panel .content-panel .new-category-form .btn-panel {
+.content .container-panel .box-content-panel .content-panel .category-form .btn-panel {
     float: none;
 }
 
@@ -258,7 +264,7 @@ a {
     justify-content: center;
     margin: 10px 0;
 }
-/* ---- End Style new-category-form ---- */
+/* ---- End Style category-form ---- */
 
 
 /* ---- Start Style form-new ---- */

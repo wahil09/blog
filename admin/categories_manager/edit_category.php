@@ -19,23 +19,33 @@
         require_once($BlogPathInclude."inc/logout.php");
     }
         
-    if (isset($_SESSION["category_ajouter"])) {
-        $category_ajouter = $_SESSION["category_ajouter"];
+    if (isset($_SESSION["category_modifier"])) {
         echo "<script>
-                alert('$category_ajouter est bien ajouter !');
+                alert('category bien modifier !');
             </script>";
-        unset($_SESSION['category_ajouter']);
-        header('refresh: 0.5; URL=../posts_manager/new_post.php');
+        unset($_SESSION['category_modifier']);
+        header("refresh: 0.1; URL=".$adminPathLien."categories_manager/manage_categories.php");
         exit();
     };
 
-    if(isset($_POST["category"])) {
-        if(!empty($_POST["category"])) {
-            $category_name = $_POST["category"];
-            $categoriesModel->setCategories($category_name, $_SESSION["login"]->id);
+    if(isset($_POST["nCategory"], $_GET["category_id"])) {
+        $categoryId = $_GET["category_id"];
+        if(!empty($categoriesModel->checkIfExistById($categoryId, "categories"))) {
+            if(!empty($_POST["nCategory"])) {
+                $nCategory = $_POST["nCategory"];
+                $categoriesModel->updateCategory($nCategory, $categoryId);
+                header("location: edit_category.php?category_id=".$categoryId);
+                exit();
+            } else {
+                $_SESSION["champs-vide"] = true;
+                header("location: edit_category.php?category_id=".$categoryId);
+                exit();
+            }
         } else {
-            $_SESSION["champs-vide"] = true;
-            header("location: new_category.php");
+            echo "<script>
+                alert('category n\'existe pas!');
+            </script>";
+            header("refresh: .1; URL=".$adminPathLien."categories_manager/manage_categories");
             exit();
         }
     }
@@ -54,23 +64,26 @@
                         <li><a href="manage_categories.php" class="btn-panel">manage categories</a></li>
                     </ul>
                     <div class="clear"></div>
-                    <h2 class="title-panel-page">create category</h2> 
-
-                    <form method="post" action="" class="category-form">
-                        <label for="category">Category Name :</label>
-                        <input type="text" name="category" id="category" class='category' required>
-                        <?php 
-                            if(isset($_SESSION["category_exist"])) {
-                                echo "<p class='error-msg'>Category existe déja !</p>";
-                                unset($_SESSION["category_exist"]);
-                            }
-                            if(isset($_SESSION['champs-vide'])) {
-                                echo "<p class='error-msg'>Champs vide !</p>";
-                                unset($_SESSION["champs-vide"]);
-                            }
-                        ?>
-                        <input type="submit" value="Save Category" class="btn-panel">
-                    </form>
+                    <h2 class="title-panel-page">edit category</h2> 
+                    <?php if(isset($_GET["category_id"])) :?>
+                        <form method="post" action="" class="category-form">
+                            <label for="nCategory">Nouvelle nom :</label>
+                            <input type="text" name="nCategory" id="nCategory" class='category' required>
+                            <?php 
+                                if(isset($_SESSION["category_exist"])) {
+                                    echo "<p class='error-msg'>Category existe déja !</p>";
+                                    unset($_SESSION["category_exist"]);
+                                }
+                                if(isset($_SESSION['champs-vide'])) {
+                                    echo "<p class='error-msg'>Champs vide !</p>";
+                                    unset($_SESSION["champs-vide"]);
+                                }
+                            ?>
+                            <input type="submit" value="Save Change" class="btn-panel">
+                        </form>
+                    <?php else :?>
+                        <h4 class='error-table-vide'>aucune category séléctionner pour le modifier!</h4>
+                    <?php endif ?>
 
                     <div class="categories-box">
                         <h2>Categories</h2>
