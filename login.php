@@ -82,7 +82,7 @@
                 <form action="" method="post" class="row-box flex-c">
                     <div class="inp-box">
                         <label for="email">Email</label>
-                        <input class="inp" type="email" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?> "maxlength="255" required>
+                        <input class="inp" type="email" name="email" id="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ""?> " maxlength="255" required>
                     </div>
                     <div class="inp-box">
                         <label for="password">Password</label><!-- <a href="#">Forgot?</a> -->
