@@ -11,7 +11,7 @@
             $this->severname = "localhost";
             $this->user = "root";
             $this->pass = "";
-            $this->dbname = "wahil";
+            $this->dbname = "blog";
             //$this->tbname = $tbname;
             try {
                 $this->db = new PDO("mysql:host=".$this->severname."; dbname=".$this->dbname."; charset=utf8",$this->user, $this->pass);
