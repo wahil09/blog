@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 20 juil. 2023 à 20:36
+-- Généré le : ven. 21 juil. 2023 à 00:46
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -84,7 +84,7 @@ CREATE TABLE `users` (
   `password` varchar(50) NOT NULL,
   `role` varchar(10) NOT NULL,
   `presentation` text NOT NULL,
-  `inscriptionDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `inscriptionDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `job` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -93,8 +93,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `presentation`, `inscriptionDate`, `job`) VALUES
-(1, 'Wahil Chettouf', 'wahilchettouf@gmail.com', 'Waihl@123', 'user', 'Je suis wahil chettouf développeur web et web mobile, en formation chez La-plateforme...', '2023-07-20 19:26:03', 'Développeur Web'),
-(2, 'admin', 'admin@admin.com', 'admin@123', 'admin', '', '2023-07-20 19:29:23', 'admin');
+(1, 'Wahil Chettouf', 'wahilchettouf@gmail.com', 'Waihl@123', 'user', 'Je suis wahil chettouf développeur web et web mobile, en formation chez La-plateforme...', '2023-07-20 17:26:03', 'Développeur Web'),
+(2, 'admin', 'admin@admin.com', 'admin@123', 'admin', '', '2023-07-20 17:29:23', 'admin');
 
 --
 -- Index pour les tables déchargées
