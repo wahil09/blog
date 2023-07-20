@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Roboto;
+}
+
+.error-table-vide {
+    text-align: center;
+    padding: 50px 0;
+    color: red;
+}
+
+.error-msg {
+    color: red !important;
+    font-size: .8em !important;
+    text-transform: none !important;
+}
+
+.clear {
+    clear: both;
+}
+
+.inp-style {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 10px 0 15px;
+    outline: none;
+    font-size: var(--f-size-primary);
+}
+
+.btn-panel {
+    background-color: var(--bg-btn);
+    font-size: var(--f-size-primary);
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px 0;
+    color: white;
+    margin-right: 3px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    float: left;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.btn-panel:hover {
+    background-color: #1b4753;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+:root {
+    --f-size-primary: clamp(.9em, 2.5vw, 1em);
+    --f-size-title: clamp(1.1em, 2.5vw, 1.4em);
+    --h-header: 65px;
+    /* --- color --- */
+    --m-color: #0A232A;
+    --bg-btn: #285F6B;
+}
+
+.flex-r {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flex-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* ---------------- Start Header Style ---------------- */
+.content {
+    text-transform: capitalize;
+}
+
+.content .header-panel {
+    background-color: var(--m-color);
+    color: white;
+    justify-content: space-between;
+    padding: 10px 30px;
+    height: var(--h-header);
+}
+
+.content .header-panel .title {
+    font-size: clamp(1.3em, 2.5vw, 1.8em);
+}
+
+.content .header-panel .nav-panel {
+    font-size: var(--f-size-primary);
+}
+
+.content .header-panel .nav-panel ul .menu-box {
+    position: relative;
+}
+
+.content .header-panel .nav-panel ul .menu-box span {
+    font-size: var(--f-size-primary);
+    cursor: pointer;
+}
+
+.content .header-panel .nav-panel ul .menu-box span i {
+    color: white;
+    margin-right: 5px;
+}
+
+.content .header-panel .nav-panel ul .menu-box #menu {
+    position: absolute;
+    overflow: hidden;
+    transition: .5s;
+    width: 124%;
+    height: 0;
+    left: 0;
+    top: 217%;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+}
+
+.content .header-panel .nav-panel ul .menu-box #menu a {
+    font-size: var(--f-size-primary);
+    background-color: #0A232A;
+    display: block;
+    color: white;
+    width: 100%;
+    padding: 10px 19px;
+    transition: .4s;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    -ms-transition: .4s;
+    -o-transition: .4s;
+}
+
+.content .header-panel .nav-panel ul .menu-box #menu a:hover {
+    padding-left: 25px;
+    background-color: var(--bg-btn);
+}
+/* ---------------- End Header Style ------------------ */
+
+
+/* ---------------- Start Main Style ------------------ */
+.content .container-panel {
+    background-color: #ECECEC;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas: 
+    "sideBare sideBare . ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel ContentPanel . "
+    ;
+    min-height: calc(100vh - var(--h-header));
+}
+/* ---------- Start Side-Bare Style ----------- */
+.content .container-panel .side-bare {
+    grid-area: sideBare;
+    background-color: #2A4658;
+}
+
+.content .container-panel .side-bare .side-bare-menu li a {
+    background-color: #2A4658;
+    display: block;
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid var(--m-color);
+    font-family: serif;
+}
+.content .container-panel .side-bare .side-bare-menu li a:hover {
+    background-color: var(--m-color);
+}
+/* ---------- End Side-Bare Style ----------- */
+
+
+/* ---------- Start Content-Panel Style ----------- */
+.content .container-panel .box-content-panel {
+    grid-area: ContentPanel;
+}
+
+.content .container-panel .box-content-panel .content-panel {
+    margin-top: 30px;
+}
+
+.content .container-panel .box-content-panel .content-panel .title-panel-page {
+    text-align: center;
+    font-weight: 700;
+    padding: 10px;
+    font-size: var(--f-size-title);
+    color: rgb(101, 101, 101);
+}
+
+/* ---- start Style table panel data ---- */
+.content .container-panel .box-content-panel .content-panel table {
+    width: 100%;
+    border-spacing: 0;
+    text-align: center;
+    text-transform: none;
+    font-size: var(--f-size-primary);
+}
+
+.content .container-panel .box-content-panel .content-panel :is(table) :is(td, th) {
+    border-bottom: 1px solid rgb(209, 202, 202);
+    padding: 10px;
+}
+
+.content .container-panel .box-content-panel .content-panel table td a {
+    text-transform: capitalize;
+    font-size: 14px;
+
+}
+
+.content .container-panel .box-content-panel .content-panel table td a:hover {
+    text-decoration: underline;
+}
+
+.content .container-panel .box-content-panel .content-panel table td .first-action {
+    color: green;
+}
+
+.content .container-panel .box-content-panel .content-panel table td .second-action {
+    color: red;
+}
+
+.content .container-panel .box-content-panel .content-panel table td .last-action {
+    color: blue;
+}
+/* ---- End Style table panel data ---- */
+
+
+
+/* ---- Start Style category-form ---- */
+.content .container-panel .box-content-panel .content-panel .category-form {
+}
+
+.content .container-panel .box-content-panel .content-panel .category-form .category {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 10px 0;
+    outline: none;
+}
+
+.content .container-panel .box-content-panel .content-panel .category-form .btn-panel {
+    float: none;
+}
+
+.content .container-panel .box-content-panel .content-panel .categories-box {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.content .container-panel .box-content-panel .content-panel .categories-box ul {
+    justify-content: center;
+    margin: 10px 0;
+}
+/* ---- End Style category-form ---- */
+
+
+/* ---- Start Style form-new ---- */
+.content .container-panel .box-content-panel .content-panel :is(.form-new-post, .form-new-user) {
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.content .container-panel .box-content-panel .content-panel :is(.form-new-post, .form-new-user) label {
+    font-size: var(--f-size-primary);
+}
+
+.content .container-panel .box-content-panel .content-panel .form-new-post input[type="file"] {
+    padding: 10px 0;
+    margin: 0;
+}
+/* ---- End Style form-new ---- */
+
+
+
+/* ---------- End Content-Panel Style ----------- */
+
+/* ---------------- End Main Style ------------------ */

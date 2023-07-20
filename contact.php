@@ -1,23 +1,23 @@
 <?php 
+    include "inc/config.php";
     session_start();
+
     if(isset($_SESSION["login"])) {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role == "user") {
-                header("location: users/index.php");
-                exit();
-            } else {
-                header("location: admin/index.php");
-                exit();
-            }
+        if($_SESSION["login"]->role == "user") {
+            header("location: ".$BlogPathLien."users/index.php");
+            exit();
+        } else {
+            header("location: ".$BlogPathLien."admin/index.php");
+            exit();
         }
     }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "head.php" ?>
+    <?php include $BlogPathInclude."inc/head.php" ?>
     <body id="body">
-        <?php include "header.php" ?>
+        <?php include $BlogPathInclude."inc/header.php" ?>
         <main>
             <!-- ***** Contact Us ***** -->
             <section class="contact" id="contact">
@@ -52,8 +52,8 @@
                 </div>
             </section>
         </main>
-        <?php include "footer.php" ?>
+        <?php include $BlogPathInclude."inc/footer.php" ?>
 
-        <script src="assets/js/script.js"></script>
+        <script src="<?php echo $BlogPathLien?>assets/js/script.js"></script>
     </body>
 </html>

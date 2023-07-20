@@ -1,29 +1,26 @@
 <?php 
     session_start();
+    include "../inc/config.php";
     if(!isset($_SESSION["login"])) {
-        header("location: ../index.php");
+        header("location:".$BlogPathLien);
         exit();
     } else {
-        if(isset($_SESSION["login"]->role)) {
-            if($_SESSION["login"]->role != "user") {
-                header("location: ../admin");
-                exit();
-            } else {
-                if(isset($_GET["logout"])) {
-                    session_unset();
-                    session_destroy();
-                    header("location: ../index.php");
-                    exit();
-                }
-            }
+        if($_SESSION['login']->role != "user") {
+            header("location: ".$BlogPathLien."admin/index.php");
+            exit();
         }
     }
+    
+    if(isset($_GET["logout"])) {
+        require_once($BlogPathInclude."logout.php");
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <?php include "../head.php" ?>
+<?php include $BlogPathInclude."inc/head.php" ?>
     <body id="body">
-        <?php include "../header.php" ?>
+    <?php include $BlogPathInclude."inc/header.php" ?>
         <main>
             <!-- ***** Contact Us ***** -->
             <section class="contact" id="contact">
@@ -58,7 +55,7 @@
                 </div>
             </section>
         </main>
-        <?php include "../footer.php" ?>
-        <script src="../assets/js/script.js"></script>
+        <?php include  $BlogPathInclude."inc/footer.php"; ?>
+        <script src="<?php echo $BlogPathLien?>assets/js/script.js"></script>
     </body>
 </html>

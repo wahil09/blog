@@ -1,3 +1,4 @@
+<?php require_once("config.php")?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +9,10 @@
     </style>
 <?php if(isset($_SESSION["login"])) :?>
     <!-- pour les inscrits -->
-    <link rel="stylesheet" href="../assets/css/all.css">
+    <link rel="stylesheet" href="<?php echo $BlogPathLien?>assets/css/all.css">
     <style>
-        <?php include "../assets/css/style.css" ?>
-        <?php include "../assets/css/MQuiry.css" ?>
+        <?php include $BlogPathInclude."assets/css/style.css" ?>
+        <?php include $BlogPathInclude."assets/css/MQuiry.css" ?>
     </style>
     <title><?php echo $_SESSION['login']->role?></title>
 
@@ -19,7 +20,7 @@
     <?php if($_SESSION["login"]->role == "admin") :?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="../assets/js/jquery.cookie.js"></script>
+        <script src="<?php echo $BlogPathLien?>/assets/js/jquery.cookie.js"></script>
         <script type=text/javascript>
             function setScreenHWCookie() {
                 $.cookie('sw',window.innerWidth);
@@ -37,10 +38,10 @@
     <!-- Pour les visiteurs -->
     <?php else :?>
         <title>index</title>
-        <link rel="stylesheet" href="assets/css/all.css">
+        <link rel="stylesheet" href="<?php echo $BlogPathLien?>assets/css/all.css">
         <style>
-            <?php include "assets/css/style.css" ?>
-            <?php include "assets/css/MQuiry.css" ?>
+            <?php include $BlogPathInclude."assets/css/style.css" ?>
+            <?php include $BlogPathInclude."assets/css/MQuiry.css" ?>
         </style>
     <?php endif; ?>
 </head>

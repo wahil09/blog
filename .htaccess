@@ -1,0 +1,24 @@
+#Redirect /blog/admin/posts_manager/manage_posts.php /blog/admin/
+
+# avec l'options indexes on peux pas voire le contenu d'un dossier
+
+Options -Indexes 
+
+# pour afficher un message d'erreur quand la page rechercher se trouve pas
+ErrorDocument 404 "<h1>Nothing Here</h1><a href='/blog/index.php'>Acceuil</a>"
+
+ErrorDocument 403 "<h1>vous n'avez pas le chance !</h1><a href='/blog/index.php'>Acceuil</a>"
+
+# // pour casher ou afficher les pages chercher sans extentions mème si on tape que le nom #de la page sans son extention // removing extensions
+
+Options +MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+
+#pour éviter de savoir c'est quoi son extention
+#RewriteCond %{THE_REQUEST} "^[^ ]* .*?\.php[? ].*$"
+
+#redirect sur page 404 error si on entre une extention aprés le #nom de la page
+#RewriteRule .* - [L,R=404] 
